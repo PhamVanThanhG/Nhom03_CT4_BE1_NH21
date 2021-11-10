@@ -1,7 +1,5 @@
-
-
-  <!-- footer section -->
-  <footer class="footer_section">
+ <!-- footer section -->
+ <footer class="footer_section">
     <div class="container">
       <div class="row">
         <div class="col-md-4 footer-col">
