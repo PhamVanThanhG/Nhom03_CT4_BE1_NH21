@@ -13,11 +13,13 @@ class ProductFood extends Db
         return $items;
     }
 
-    //Get 9 Products of the top Products in database
-    public function getNineProducts()
+    //Get 6 Products of the top Products in database
+    public function getSixProducts($page, $perPage)
     {
         //Quyery
-        $sql = self::$connection->prepare("SELECT * FROM product WHERE id < 11");
+        $firstLink = ($page - 1) * $perPage;
+        $sql = self::$connection->prepare("SELECT * FROM product LIMIT ?,?");
+        $sql->bind_param("ii", $firstLink, $perPage);
         $sql->execute();
         $items = array();//Var array items
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
@@ -36,5 +38,23 @@ class ProductFood extends Db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
         return $items;
     }
+    function paginate($url, $total, $perPage)
+    {
+        $totalLinks = ceil($total/$perPage);
+ 	    $link ="";
+    	for($j=1; $j <= $totalLinks ; $j++)
+     	{
+            if(isset($_GET['page'])){
+                if($_GET['page'] == $j){
+                    $link = $link."<li class='active'><a href='$url?page=$j'> $j </a></li>";
+                }else{
+                    $link = $link."<li><a href='$url?page=$j'> $j </a></li>";
+                }
+            }else{
+                $link = $link."<li><a href='$url?page=$j'> $j </a></li>";
+            }
+     	}
+     	return $link;
+    } 
 }
 ?>

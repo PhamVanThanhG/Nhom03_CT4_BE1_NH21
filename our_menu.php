@@ -1,30 +1,41 @@
 <!-- food section -->
 
 <section class="food_section layout_padding-bottom">
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2>
-          Our Menu
-        </h2>
-      </div>
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>
+        Our Menu
+      </h2>
+    </div>
 
-      <ul class="filters_menu">
-        <li class="active" data-filter="*">All</li>
-        <li data-filter=".Burger">Burger</li>
-        <li data-filter=".Pizaa">Pizza</li>
-        <li data-filter=".Pasta">Pasta</li>
-        <li data-filter=".Fries">Fries</li>
-      </ul>
+    <ul class="filters_menu">
+      <li class="active" data-filter="*">All</li>
+      <li data-filter=".Burger">Burger</li>
+      <li data-filter=".Pizaa">Pizza</li>
+      <li data-filter=".Pasta">Pasta</li>
+      <li data-filter=".Fries">Fries</li>
+    </ul>
 
-      <div class="filters-content">
-        <div class="row grid">
-        <?php 
-          foreach ($getAllproducts as $value):
-            $id = $value['Type_Id'];
-            $getNameMenu = $menu->getNameMenuByID($id);
-            foreach($getNameMenu as $index):
-          ?>
-            <div class="col-sm-6 col-lg-4 all <?php echo $index['name']; endforeach;?>">
+    <div class="filters-content">
+      <div class="row grid">
+        <?php
+        $Product = new ProductFood;
+        $getAllproducts = $Product->getAllProducts();
+        //products  show in a page
+        $perPage = 6;
+        //get current page
+        $page = isset($_GET['page'])?$_GET['page']:1;
+        //total number of product
+        $total = count($getAllproducts);
+        //get link current
+        $url = $_SERVER['PHP_SELF'];
+        $getSixProducts = $Product->getSixProducts($page, $perPage);
+        foreach ($getSixProducts as $value) :
+          $id = $value['Type_Id'];
+          $getNameMenu = $menu->getNameMenuByID($id);
+          foreach ($getNameMenu as $index) :
+        ?>
+            <div class="col-sm-6 col-lg-4 all <?php echo $index['name']; endforeach; ?>">
               <div class="box">
                 <div>
                   <div class="img-box">
@@ -35,11 +46,11 @@
                       <?php echo $value['Name'] ?>
                     </h5>
                     <p>
-                      <?php echo substr($value['Decription'],0,50)?>... <a style="font-size: 8xp; font-style: italic; font-weight: 100; color: #3a7ead;" href="<?php echo 'detail.php?id='.$value['Id']?>">more</a>
+                      <?php echo substr($value['Decription'], 0, 50) ?>... <a style="font-size: 8xp; font-style: italic; font-weight: 100; color: #3a7ead;" href="<?php echo 'detail.php?id=' . $value['Id'] ?>">more</a>
                     </p>
                     <div class="options">
                       <h6>
-                        <?php echo number_format($value['Price']);?> VND
+                        <?php echo number_format($value['Price']); ?> VND
                       </h6>
                       <!-- khúc này là cái cart -->
                       <a class="product-of-sinh" href="">
@@ -102,14 +113,17 @@
               </div>
             </div>
           <?php endforeach; ?>
-        </div>
-      </div>
-      <div class="btn-box">
-        <a href="">
-          View More
-        </a>
       </div>
     </div>
-  </section>
+    <!-- store bottom filter -->
+    <div class="store-filter clearfix">
+      <ul class="store-pagination">
+        <?php
+        echo $Product->paginate($url, $total, $perPage);
+        ?>
+      </ul>
+    </div>
+  </div>
+</section>
 
-  <!-- end food section -->
+<!-- end food section -->

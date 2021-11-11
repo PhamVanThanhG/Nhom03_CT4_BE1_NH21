@@ -4,9 +4,6 @@ require "models/db.php";
 require "models/product.php";
 require "models/db_menu.php";
 $menu = new Menu();
-$Product = new ProductFood;
-$getAllproducts = $Product->getAllProducts();
-$getNineProducts = $Product->getNineProducts();
 // //get ID of Pizza in database
 // $name_Menu = "Pizaa";
 // $IDMenuByName = $menu->getIDMenuByNameMenu($name_Menu);

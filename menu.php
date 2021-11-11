@@ -4,9 +4,6 @@ require "models/db.php";
 require "models/product.php";
 require "models/db_menu.php";
 $menu = new Menu();
-$Product = new ProductFood;
-$getAllproducts = $Product->getAllProducts();
-$getNineProducts = $Product->getNineProducts();
 ?>
 <!DOCTYPE html>
 <html>
