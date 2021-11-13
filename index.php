@@ -1,7 +1,7 @@
 <?php
 require "config.php";
 require "models/db.php";
-require "models/product.php";
+require "models/db_product.php";
 require "models/db_menu.php";
 $menu = new Menu();
 // //get ID of Pizza in database

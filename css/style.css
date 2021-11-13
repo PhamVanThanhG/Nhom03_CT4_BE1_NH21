@@ -1004,4 +1004,41 @@ a:focus {
 .footer_section .footer-info p a {
   color: inherit;
 }
+
+.store-pagination {
+  text-align: center;
+}
+
+.store-pagination li {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background-color: #FFF;
+  border: 1px solid #E4E7ED;
+  -webkit-transition: 0.2s all;
+  transition: 0.2s all;
+}
+
+.store-pagination li+li {
+  margin-left: 5px;
+}
+
+.store-pagination li:hover {
+  background-color: #E4E7ED;
+  color: #D10024 !important;
+}
+
+.store-pagination li.active {
+  background-color: #ffbe33;
+  border-color: #ffbe33;
+  color: #FFF;
+  font-weight: 500;
+  cursor: default;
+}
+
+.store-pagination li a {
+  display: block;
+}
 /*# sourceMappingURL=style.css.map */

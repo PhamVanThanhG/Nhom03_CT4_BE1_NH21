@@ -7,35 +7,36 @@
         Our Menu
       </h2>
     </div>
-
+    <?php
+     $Menu = new Menu;
+     $getAllMenu = $Menu->getAllMenu();
+    ?>
     <ul class="filters_menu">
-      <li class="active" data-filter="*">All</li>
-      <li data-filter=".Burger">Burger</li>
-      <li data-filter=".Pizaa">Pizza</li>
-      <li data-filter=".Pasta">Pasta</li>
-      <li data-filter=".Fries">Fries</li>
+      <li class="active"><a href="#">All</a></li>
+      <?php foreach($getAllMenu as $menu):?>
+      <li><a href="index.php?type_id=<?php echo $menu['Type_Id']?>"><?php echo $menu['Name']?></a></li>
+      <?php endforeach;?>
     </ul>
 
     <div class="filters-content">
       <div class="row grid">
         <?php
-        $Product = new ProductFood;
-        $getAllproducts = $Product->getAllProducts();
-        //products  show in a page
-        $perPage = 6;
-        //get current page
-        $page = isset($_GET['page'])?$_GET['page']:1;
-        //total number of product
-        $total = count($getAllproducts);
-        //get link current
-        $url = $_SERVER['PHP_SELF'];
-        $getSixProducts = $Product->getSixProducts($page, $perPage);
-        foreach ($getSixProducts as $value) :
-          $id = $value['Type_Id'];
-          $getNameMenu = $menu->getNameMenuByID($id);
-          foreach ($getNameMenu as $index) :
+        if(isset($_GET['type_id'])):
+          $Product = new ProductFood;
+          $getAllproducts = $Product->getAllProducts();
+          $type_id = $_GET['type_id'];
+          //products  show in a page
+          $perPage = 6;
+          //get current page
+          $page = isset($_GET['page'])?$_GET['page']:1;
+          //total number of product
+          $total = count($getAllproducts);
+          //get link current
+          $url = $_SERVER['PHP_SELF']."?type_id=".$_GET['type_id'];
+          $getSixProductsByTypeID = $Product->getSixProductsByTypeID($type_id,$page, $perPage);
+          foreach ($getSixProductsByTypeID as $value) :
         ?>
-            <div class="col-sm-6 col-lg-4 all <?php echo $index['name']; endforeach; ?>">
+            <div class="col-sm-6 col-lg-4 all">
               <div class="box">
                 <div>
                   <div class="img-box">
@@ -46,14 +47,29 @@
                       <?php echo $value['Name'] ?>
                     </h5>
                     <p>
-                      <?php echo substr($value['Decription'], 0, 50) ?>... <a style="font-size: 8xp; font-style: italic; font-weight: 100; color: #3a7ead;" href="<?php echo 'detail.php?id=' . $value['Id'] ?>">more</a>
+                      <?php
+                      //split String
+                       $decr = str_split($value['Decription']);
+                       $t = 0;
+                       //print decript
+                       foreach($decr as $i){
+                         echo $i;
+                         $t++;
+                         //Condition to print continue or not
+                         if($t > 50){
+                           if($i == " "){
+                            break;
+                           }
+                         }
+                       }
+                       ?>...<a style="font-size: 8xp; font-style: italic; font-weight: 100; color: #3a7ead;" href="<?php echo 'detail.php?id=' . $value['Id'] ?>">see more</a>
                     </p>
                     <div class="options">
                       <h6>
                         <?php echo number_format($value['Price']); ?> VND
                       </h6>
                       <!-- khúc này là cái cart -->
-                      <a class="product-of-sinh" href="">
+                      <a href="">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                           <g>
                             <g>
@@ -112,14 +128,14 @@
                 </div>
               </div>
             </div>
-          <?php endforeach; ?>
+          <?php endforeach;?>
       </div>
     </div>
     <!-- store bottom filter -->
     <div class="store-filter clearfix">
       <ul class="store-pagination">
         <?php
-        echo $Product->paginate($url, $total, $perPage);
+        echo $Product->paginate($url, $total, $perPage); endif;
         ?>
       </ul>
     </div>
