@@ -12,7 +12,7 @@
      $getAllMenu = $Menu->getAllMenu();
     ?>
     <ul class="filters_menu">
-      <li class="active"><a href="#">All</a></li>
+      <li class="active"><a href="index.php?type_id=0">All</a></li>
       <?php foreach($getAllMenu as $menu):?>
       <li><a href="index.php?type_id=<?php echo $menu['Type_Id']?>"><?php echo $menu['Name']?></a></li>
       <?php endforeach;?>
@@ -33,8 +33,13 @@
           $total = count($getAllproducts);
           //get link current
           $url = $_SERVER['PHP_SELF']."?type_id=".$_GET['type_id'];
-          $getSixProductsByTypeID = $Product->getSixProductsByTypeID($type_id,$page, $perPage);
-          foreach ($getSixProductsByTypeID as $value) :
+          $arrProducts = array();
+          if($type_id == 0){
+            $arrProducts = $Product->getSixProducts($page, $perPage);
+          }else{
+            $arrProducts = $Product->getSixProductsByTypeID($type_id,$page, $perPage);
+          }
+          foreach ($arrProducts as $value) :
         ?>
             <div class="col-sm-6 col-lg-4 all">
               <div class="box">

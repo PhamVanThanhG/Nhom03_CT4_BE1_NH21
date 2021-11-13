@@ -14,6 +14,20 @@ class ProductFood extends Db
     }
 
     //Get 6 Products of the top Products in database
+    public function getSixProducts($page, $perPage)
+    {
+        //Quyery
+        $firstLink = ($page - 1) * $perPage;
+        $sql = self::$connection->prepare("SELECT * FROM product LIMIT ?,?");
+        $sql->bind_param("ii", $firstLink, $perPage);
+        $sql->execute();
+        $items = array();//Var array items
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
+        return $items;
+
+    }
+
+    //Get 6 Products of the top Products by ID in database
     public function getSixProductsByTypeID($type_id,$page, $perPage)
     {
         //Quyery
