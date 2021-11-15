@@ -12,9 +12,9 @@
      $getAllMenu = $Menu->getAllMenu();
     ?>
     <ul class="filters_menu">
-      <li class="active"><a href="index.php?type_id=0">All</a></li>
+      <li <?php if(!isset($_GET['type_id']) || (isset($_GET['type_id']) && $_GET['type_id'] == 0)){echo "class='active'";}?>><a href="index.php?type_id=0">All</a></li>
       <?php foreach($getAllMenu as $menu):?>
-      <li><a href="index.php?type_id=<?php echo $menu['Type_Id']?>"><?php echo $menu['Name']?></a></li>
+      <li <?php if(isset($_GET['type_id']) && $_GET['type_id'] == $menu['Type_Id']){echo "class='active'";} ?>><a href="index.php?type_id=<?php echo $menu['Type_Id']?>"><?php echo $menu['Name']?></a></li>
       <?php endforeach;?>
     </ul>
 
@@ -161,7 +161,9 @@
     <div class="store-filter clearfix">
       <ul class="store-pagination">
         <?php
-        echo $Product->paginate($url, $total, $perPage);
+        if($total > 6){
+          echo $Product->paginate($url, $total, $perPage);
+        }
         ?>
       </ul>
     </div>
