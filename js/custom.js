@@ -1,3 +1,13 @@
+//My javascript
+$( "#opener" ).on("click", "tr", function() {
+    var id = $(this).attr('id');
+    var dataString = 'id=' + id;
+
+    alert(id);
+});
+
+
+
 // to get current year
 function getYear() {
     var currentDate = new Date();

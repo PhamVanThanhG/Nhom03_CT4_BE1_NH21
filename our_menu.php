@@ -21,25 +21,46 @@
     <div class="filters-content">
       <div class="row grid">
         <?php
-        if(isset($_GET['type_id'])):
-          $Product = new ProductFood;
+        //var
+        $Product = new ProductFood;
+        $arrProducts = array();
+        $total = 0;
+        $url = "";
+
+        //products show in a page
+        $perPage = 6;
+
+        //get current page
+        $page = isset($_GET['page'])?$_GET['page']:1;
+
+        //Function: process when get type or not
+        if(!isset($_GET['type_id']) || $_GET['type_id'] == 0){
           $getAllproducts = $Product->getAllProducts();
-          $type_id = $_GET['type_id'];
-          //products  show in a page
-          $perPage = 6;
-          //get current page
-          $page = isset($_GET['page'])?$_GET['page']:1;
-          //total number of product
+
+          //total:  size of product
           $total = count($getAllproducts);
+
+          //set link current
+          $url = $_SERVER['PHP_SELF']."?type_id=0";
+
+          //get array product
+          $arrProducts = $Product->getSixProducts($page, $perPage);
+        }else{
+          $type_id = $_GET['type_id'];
+          $getProductsByType = $Product->getProductsByType($type_id);
+
+          //total number of product
+          $total = count($getProductsByType);
+
           //get link current
           $url = $_SERVER['PHP_SELF']."?type_id=".$_GET['type_id'];
-          $arrProducts = array();
-          if($type_id == 0){
-            $arrProducts = $Product->getSixProducts($page, $perPage);
-          }else{
-            $arrProducts = $Product->getSixProductsByTypeID($type_id,$page, $perPage);
-          }
-          foreach ($arrProducts as $value) :
+
+          //get array product
+          $arrProducts = $Product->getSixProductsByTypeID($type_id,$page, $perPage);
+        }
+
+        //run elements of array
+        foreach ($arrProducts as $value) :
         ?>
             <div class="col-sm-6 col-lg-4 all">
               <div class="box">
@@ -67,7 +88,7 @@
                            }
                          }
                        }
-                       ?>...<a style="font-size: 8xp; font-style: italic; font-weight: 100; color: #3a7ead;" href="<?php echo 'detail.php?id=' . $value['Id'] ?>">see more</a>
+                       ?>...<a style="font-size: 8xp; font-style: italic; font-weight: 100; color: #3a7ead;" href="<?php echo 'product.php?id=' . $value['Id'] ?>">see more</a>
                     </p>
                     <div class="options">
                       <h6>
@@ -140,7 +161,7 @@
     <div class="store-filter clearfix">
       <ul class="store-pagination">
         <?php
-        echo $Product->paginate($url, $total, $perPage); endif;
+        echo $Product->paginate($url, $total, $perPage);
         ?>
       </ul>
     </div>

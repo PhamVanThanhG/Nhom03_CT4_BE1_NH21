@@ -44,8 +44,7 @@ class ProductFood extends Db
     public function getProductsByType($type_id)
     {
         //Quyery
-        $sql = self::$connection->prepare("SELECT product.Name, product.image, product.Decription,
-        product.Price FROM product WHERE product.Type_Id = ?");
+        $sql = self::$connection->prepare("SELECT * FROM product WHERE product.Type_Id = ?");
         $sql->bind_param("i", $type_id);
         $sql->execute();
         $items = array();//Var array items
