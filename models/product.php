@@ -23,6 +23,7 @@ class ProductFood extends Db
         $items = array();//Var array items
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
         return $items;
+
     }
 }
 ?>

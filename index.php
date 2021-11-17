@@ -1,21 +1,12 @@
 <?php
-session_start();
-?>
-<?php
 	require "config.php";
 	require "models/db.php";
 	require "models/product.php";
 	$Product = new ProductFood;
 	$getAllproducts = $Product->getAllProducts();
-  $getNineProducts = $Product->getNineProducts();
-  if(isset($_SESSION['username'])){
-    if (isset($_GET['dn'])) {
-      echo("<script>
-      alert(\"Account ".$_SESSION['username'] ." is login succesfully\");
-      </script>");
-    }
-  }
+  $getNineProducts = $Product->getNineProducts(); 
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -31,7 +22,7 @@ session_start();
   <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="">
 
-  <title> Feane  </title>
+  <title> Feane </title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -145,11 +136,8 @@ session_start();
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
               </form>
-              <a href="login.php" class="order_online">
-                Đăng nhập
-              </a>
-              <a href="logout.php" class="order_online" style="background-color: #33ff99; color: black">
-                Đăng xuất
+              <a href="" class="order_online">
+                Order Online
               </a>
             </div>
           </div>
