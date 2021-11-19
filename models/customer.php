@@ -14,9 +14,9 @@ class Customer extends Db{
         return $items;
     }
 
-    public function getAccount($gmail, $password){
-        $sql = self::$connection->prepare("SELECT `Cus_Id`, `Username` FROM `customer` WHERE `Email` = ? AND `Password` = ?");
-        $sql->bind_param("ss", $gmail, $password);
+    public function getAccount($gmail){
+        $sql = self::$connection->prepare("SELECT * FROM `customer` WHERE `Email` = ?");
+        $sql->bind_param("s", $gmail);
         $sql->execute();
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);

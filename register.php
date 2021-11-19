@@ -2,25 +2,6 @@
 require("config.php");
 require("models/db.php");
 include("models/customer.php");
-$cus = new Customer();
-$getEmail = $cus->getEmail();
-$user = $_POST['username'];
-$gmail = $_POST['gmail'];
-$pass = $_POST['password'];
-$xet = true;
-foreach ($getEmail as $value) {
-    if($value['Email'] == $gmail){
-        $xet = false;
-    }
-}
-
-if($xet){
-    if (isset($_POST['submit'])) {
-        $cus->insertAccountCustomer($user, $gmail, $pass);
-    }
-}else{
-    header("Location: http://localhost/Nhom03/GmailIsRegisted.php?gmail=". $gmail);
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +29,7 @@ if($xet){
          <p style="text-align: center;"><img src="images/success.png" alt="">
          <br>
          <h1 style="text-align: center;">REGISTRATION SUCCESSFUL</h1>
-         <h1 style="color: darkred; text-align: center;">THANK <?php echo($user) ?></h1>
+         <h1 style="color: darkred; text-align: center;">THANK <?php echo $_GET['user'] ?></h1>
          <br>
          <h2 style="text-align: center;"><a href="login.php">Login</a> to order food now</h2>
         </p>

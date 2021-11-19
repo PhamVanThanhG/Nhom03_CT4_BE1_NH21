@@ -36,9 +36,15 @@
 
 
 /*-- Index-Page-Styling --*/
+html{
+
+}
 
 body {
-	background: url("../images/b21.jpg");
+	background:
+	linear-gradient(rgba(0, 0, 0, 0.1), 
+	rgba(0, 0, 0, 0.1)),
+	 url("../images/b21.jpg");
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center;
@@ -79,7 +85,7 @@ h1 {
 .w3layoutscontaineragileits {
     width: 30%;
     margin: 0 auto;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.8);
     padding: 30px;
 }
 
