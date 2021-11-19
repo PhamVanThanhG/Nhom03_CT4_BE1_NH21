@@ -1,3 +1,4 @@
+
   <!-- footer section -->
   <footer class="footer_section">
     <div class="container">
@@ -5,52 +6,50 @@
         <div class="col-md-4 footer-col">
           <div class="footer_contact">
             <h4>
-              Contact Us
+            Contact Us
             </h4>
+            <?php foreach($getALLstore as $value):?>
             <div class="contact_link_box">
-              <a href="">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
-                  Location
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                  Call +01 1234567890
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>
-                  demo@gmail.com
-                </span>
-              </a>
+                <p style="text-align:left ;"> 
+                 Name: <?php echo $value ['Name'] ?><br>
+               </p>
+                <p style="text-align:left ;">
+                Location: <?php echo $value ['Location'] ?><br>
+               </p>
+                <p style="text-align:left ;"> 
+                 <?php echo $value ['Phone_Number'] ?><br>
+               </p>
+                <p style="text-align:left ;" > 
+                  <?php echo $value ['Email'] ?><br>
+               </p>
+                 <?php endforeach ?>
             </div>
           </div>
         </div>
         <div class="col-md-4 footer-col">
           <div class="footer_detail">
+          <?php foreach($getALLstore as $value):?>
             <a href="" class="footer-logo">
               Feane
             </a>
-            <p>
-              Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
+            <p style="text-align:left;">
+              <?php echo $value['Short description'] ?><br><br>
             </p>
-            <div class="footer_social">
-              <a href="">
+            <div class="footer_social"><br><br>
+            <a href="<?php echo $value ['Facebook'] ?>">
                 <i class="fa fa-facebook" aria-hidden="true"></i>
               </a>
-              <a href="">
+              <a href="<?php echo $value ['Twitter'] ?>">
                 <i class="fa fa-twitter" aria-hidden="true"></i>
+            <link rel="stylesheet" href="facebook.com">
               </a>
-              <a href="">
+              <a href="<?php echo $value ['Linkedin'] ?>">
                 <i class="fa fa-linkedin" aria-hidden="true"></i>
               </a>
-              <a href="">
+              <a href="<?php echo $value ['Instagram'] ?>">
                 <i class="fa fa-instagram" aria-hidden="true"></i>
               </a>
-              <a href="">
+              <a href="<?php echo $value ['Pinterest'] ?>">
                 <i class="fa fa-pinterest" aria-hidden="true"></i>
               </a>
             </div>
@@ -61,20 +60,14 @@
             Opening Hours
           </h4>
           <p>
-            Everyday
+          <?php echo $value ['Opening day'] ?><br>
           </p>
           <p>
-            10.00 Am -10.00 Pm
+          <?php echo $value ['Open time'] ?><br>
           </p>
+          <p>
         </div>
-      </div>
-      <div class="footer-info">
-        <p>
-          &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Free Html Templates</a><br><br>
-          &copy; <span id="displayYear"></span> Distributed By
-          <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-        </p>
+        <?php endforeach ?>
       </div>
     </div>
   </footer>
@@ -102,5 +95,4 @@
   <!-- End Google Map -->
 
 </body>
-
 </html>

@@ -1,10 +1,14 @@
 <?php
 	require "config.php";
 	require "models/db.php";
-	require "models/product.php";
+  require "models/store.php";
+  require "models/product.php";
 	$Product = new ProductFood;
 	$getAllproducts = $Product->getAllProducts();
   $getNineProducts = $Product->getNineProducts(); 
+  $Store = new Store;
+  $getALLstore = $Store->getALLStore();
+
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +55,7 @@
     <header class="header_section">
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="index.php">
             <span>
               Feane
             </span>
@@ -64,16 +68,16 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  mx-auto ">
               <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="menu.html">Menu</a>
+                <a class="nav-link" href="menu.php">Menu</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about.html">About</a>
+                <a class="nav-link" href="about.php">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="book.html">Book Table</a>
+                <a class="nav-link" href="book.php">Book Table</a>
               </li>
             </ul>
             <div class="user_option">
@@ -507,13 +511,10 @@
                 We Are Feane
               </h2>
             </div>
-            <p>
-              There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-              in some form, by injected humour, or randomised words which don't look even slightly believable. If you
-              are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in
-              the middle of text. All
-            </p>
-            <a href="">
+            <?php
+              echo substr ("The chain's online food store has also been warmly welcomed by users and gradually spread to other provinces and cities across the country. The strength of the online food chain is that it has an extremely rich source of goods, the quality is thoroughly checked, the after-sales service is similar to that of an online grocery store, and especially the convenient location. ",0,220)."<br>";
+                 ?>
+            <a href="about.php">
               Read More
             </a>
           </div>
