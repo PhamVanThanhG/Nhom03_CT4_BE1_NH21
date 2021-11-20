@@ -29,7 +29,7 @@ include("models/customer.php");
          <p style="text-align: center;"><img src="images/success.png" alt="">
          <br>
          <h1 style="text-align: center;">REGISTRATION SUCCESSFUL</h1>
-         <h1 style="color: darkred; text-align: center;">THANK <?php echo $_GET['user'] ?></h1>
+         <h1 style="color: darkred; text-align: center;">Thank <?php echo $_GET['user'] ?> used our service!</h1>
          <br>
          <h2 style="text-align: center;"><a href="login.php">Login</a> to order food now</h2>
         </p>

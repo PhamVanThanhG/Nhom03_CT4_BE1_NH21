@@ -8,14 +8,6 @@ require "models/product.php";
 $Product = new ProductFood;
 $getAllproducts = $Product->getAllProducts();
 $getNineProducts = $Product->getNineProducts();
-if (isset($_SESSION['username'])) {
-  if (isset($_SESSION['xet'])) {
-    echo ("<script>
-      alert(\"Account " . $_SESSION['username'] . " is login succesfully\");
-      </script>");
-    unset($_SESSION['xet']);
-  }
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,9 +42,7 @@ if (isset($_SESSION['username'])) {
   <link href="css/responsive.css" rel="stylesheet" />
 
 </head>
-
 <body>
-
   <div class="hero_area">
     <div class="bg-box">
       <img src="images/hero-bg.jpg" alt="">
@@ -82,7 +72,7 @@ if (isset($_SESSION['username'])) {
               <li class="nav-item">
                 <a class="nav-link" href="about.html">About</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" id="admin">
                 <a class="nav-link" href="book.html">Admin</a>
               </li>
             </ul>
@@ -659,5 +649,32 @@ if (isset($_SESSION['username'])) {
       document.getElementById("login").style.display = 'none';
     </script>
   <?php
+  }
+  ?>
+  <?php
+  //Khi tai khoan la admin thi moi duoc vao trang admin
+  if (!$_SESSION['admin']) :
+  ?>
+      <script>
+      document.getElementById("admin").style.display = 'none';
+    </script>
+  <?php
+  endif;
+  ?>
+    <?php
+  //XU ly khi dang nhap thanh cong
+  if (isset($_SESSION['username'])) {
+    if (isset($_SESSION['xet'])) {
+      //Xet quyen
+      if ($_SESSION['admin']) {
+        $per = "admin ";
+      } else {
+        $per = "customer ";
+      }
+      echo ("<script>
+        alert(\"Account " . $per . $_SESSION['username'] . " is login succesfully\");
+        </script>");
+      unset($_SESSION['xet']);
+    }
   }
   ?>

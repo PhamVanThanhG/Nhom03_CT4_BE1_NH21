@@ -9,6 +9,8 @@ if (isset($_POST['username'])) {
 	$user = $_POST['username'];
 	$gmail = $_POST['gmail'];
 	$pass = $_POST['password'];
+	$phone = $_POST['phonenumber'];
+	$birthday = $_POST['birthday'];
 	$xet = true;
 	//Kiem tra gmail da duoc tao tai khoan chua
 	foreach ($getEmail as $value) {
@@ -18,7 +20,7 @@ if (isset($_POST['username'])) {
 	}
 	//Xu ly thong bao khi gmail da duoc tao tai khoan roi
 	if ($xet) {
-		$cus->insertAccountCustomer($user, $gmail, $pass);
+		$cus->insertAccountCustomer($user, $gmail, $pass, $phone, $birthday);
 		header("Location: http://localhost/Nhom03/register.php?user=" . $user);
 	} else {
 		//Xuat form thong bao gmail da tao tai khoan roi
@@ -74,6 +76,12 @@ if (isset($_POST['sub'])) {
 		if ($getAccount[0]['Password'] == $_POST['passwordL']) {
 			$_SESSION['username'] = $getAccount[0]['Username'];
 			$_SESSION['cus_id'] = $getAccount[0]['Cus_Id'];
+			//Luu permission
+			if($getAccount[0]['Permission'] == "Admin"){
+				$_SESSION['admin'] = true;
+			}else{
+				$_SESSION['admin'] = false;
+			}
 			$_SESSION['xet'] = 1;
 			header("Location: http://localhost/Nhom03/index.php");
 		} else {
@@ -84,7 +92,7 @@ if (isset($_POST['sub'])) {
 				<h1 style="text-transform: uppercase; color: #d30f0f; font-weight: 700;">Wrong password!</h1>
 				<div class="noidung" style="font-size: larger;">
 					<span>Please use another password</span>
-					<p style="text-align: left; margin-left: 170px;"><a href="#">forgot password?</a></p>
+					<p style="text-align: left; margin-left: 170px;"><a href="resetpassword.php">forgot password?</a></p>
 					<br>
 					<br>
 					<button id="close2" style="cursor: pointer; padding: 10px 10px;"><span style="font-size: 20px;">Close</span></button>
@@ -134,7 +142,7 @@ if (isset($_POST['sub'])) {
 	</script>
 	<!-- //Meta-Tags -->
 
-	<link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/box.css" rel="stylesheet" type="text/css" media="all" />
 
 	<!-- Style -->
 	<link rel="stylesheet" href="css/stylelogin.css" type="text/css" media="all">
@@ -201,6 +209,16 @@ if (isset($_POST['sub'])) {
 							<i class="fa fa-unlock-alt" aria-hidden="true"></i>
 						</div>
 					</div>
+					<div class="form-sub-w3ls">
+						<input placeholder="Phone number" type="text" required="" name="phonenumber">
+						<div class="icon-agile">
+							<i class="fa fa-unlock-alt" aria-hidden="true"></i>
+						</div>
+					</div>
+					<div>
+						<label for="birthday" style="color: white; font-weight: bolder;">Birthday:</label>
+						<input placeholder="Birthday" type="date" required="" name="birthday" style="width: 338px; height: 35px;padding-left: 10px;">
+					</div>
 					<div class="login-check">
 						<label class="checkbox"><input type="checkbox" id="checkbox1" name="checkbox" checked="">I Accept <a style="color: yellow; text-decoration: underline" href="term&Condition.html">Terms & Conditions</a></label>
 					</div>
@@ -244,7 +262,6 @@ if (isset($_POST['sub'])) {
 
 		});
 	</script>
-
 </body>
 <!-- //Body -->
 
