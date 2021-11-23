@@ -216,8 +216,8 @@ if (isset($_POST['sub'])) {
 						</div>
 					</div>
 					<div>
-						<label for="birthday" style="color: white; font-weight: bolder;">Birthday:</label>
-						<input placeholder="Birthday" type="date" required="" name="birthday" style="width: 338px; height: 35px;padding-left: 10px;">
+						<p style="font-weight: bolder; text-align: left; padding-left: 30px;">   Birthday:</p>
+						 <input style="background-color: white;color: black;" placeholder="Birthday" type="date" required="" name="birthday" style="width: 10px; height: 35px;">
 					</div>
 					<div class="login-check">
 						<label class="checkbox"><input type="checkbox" id="checkbox1" name="checkbox" checked="">I Accept <a style="color: yellow; text-decoration: underline" href="term&Condition.html">Terms & Conditions</a></label>
