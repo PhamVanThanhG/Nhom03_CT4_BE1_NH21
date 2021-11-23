@@ -2,6 +2,8 @@
 require("config.php");
 require("models/db.php");
 require("models/product.php");
+require("models/Product_type.php");
+$product_type = new ProductType();
 $product = new ProductFood();
 ?>
 <!DOCTYPE html>
@@ -226,7 +228,7 @@ $product = new ProductFood();
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="product_type.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Product_Type</p>
                 </a>
