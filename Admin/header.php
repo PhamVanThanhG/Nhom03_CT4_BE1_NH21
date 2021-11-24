@@ -11,7 +11,7 @@ $product = new ProductFood();
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin | Dashboard</title>
+  <title>Admin | <?php echo($title)?></title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -214,35 +214,35 @@ $product = new ProductFood();
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="index.php" class="nav-link active">
+            <a id="dashboard" href="index.php" class="nav-link active" id="Dashboard">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="product.php" class="nav-link">
+              <li class="nav-item" id="products">
+                <a href="products.php" class="nav-link" id="Products">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Product</p>
+                  <p>Products</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="product_type.php" class="nav-link">
+                <a href="product_types.php" class="nav-link" id="ProductTypes">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Product_Type</p>
+                  <p>Product_Types</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="./index.html" class="nav-link" id="store">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Store</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="./index.html" class="nav-link" id="customers">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Customer</p>
+                  <p>Customers</p>
                 </a>
               </li>
             </ul>

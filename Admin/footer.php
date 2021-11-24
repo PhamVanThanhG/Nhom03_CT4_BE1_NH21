@@ -49,5 +49,11 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+<script>
+    const dss = document.getElementById('#Dashboard');
+    const products = document.getElementById('Products');
+    const type = document.getElementById('ProductTypes');
+    dss.classList.remove('active');
+</script>
 </body>
 </html>

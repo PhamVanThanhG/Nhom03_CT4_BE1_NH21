@@ -1,5 +1,6 @@
 
 <?php 
+$title = "Home";
 include("header.php");
 ?>
   <!-- Content Wrapper. Contains page content -->
@@ -609,3 +610,4 @@ include("header.php");
   <?php 
 include("footer.php");
 ?>
+

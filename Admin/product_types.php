@@ -1,5 +1,6 @@
 
 <?php 
+$title = "ProductTypes";  
 include("header.php");
 ?>
 
@@ -10,12 +11,12 @@ include("header.php");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Projects</h1>
+            <h1>PRODUCT TYPES</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Projects</li>
+              <li class="breadcrumb-item active">Product Type</li>
             </ol>
           </div>
         </div>
@@ -28,9 +29,12 @@ include("header.php");
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Projects</h3>
+          <h3 class="card-title">Product types</h3>
 
           <div class="card-tools">
+          <button type="button" class="btn btn-tool" title="add" style="background-color: green;">
+            <a href="addproduct.php" style="color: white;font-weight: bolder;">Add type</a>
+          </button>
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
               <i class="fas fa-minus"></i>
             </button>
@@ -92,5 +96,8 @@ include("header.php");
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+ 
 <?php 
 include("footer.php");
+?>
+
