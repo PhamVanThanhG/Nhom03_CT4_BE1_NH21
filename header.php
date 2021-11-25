@@ -8,6 +8,7 @@ require "models/db_rating.php";
 require "models/db_size.php";
 require "models/db_product_type.php";
 require "models/db_topping.php";
+require "models/db_cart.php";
 $menu = new Menu();
 ?>
 <!DOCTYPE html>
@@ -79,8 +80,9 @@ $menu = new Menu();
                 <a class="nav-link" href="book.php">Book Table</a>
               </li>
             </ul>
+            <!-- cart  -->
             <div class="user_option">
-              <a class="cart_link" href="#">
+              <a class="cart_link" href="cart.php?id=">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                   <g>
                     <g>
