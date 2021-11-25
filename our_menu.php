@@ -56,7 +56,7 @@
           $url = $_SERVER['PHP_SELF']."?type_id=".$_GET['type_id'];
 
           //get array product
-          $arrProducts = $Product->getSixProductsByTypeID($type_id,$page, $perPage);
+          $arrProducts = $Product->getProductsForPage($type_id,$page, $perPage);
         }
 
         //run elements of array
@@ -88,7 +88,7 @@
                            }
                          }
                        }
-                       ?>...<a style="font-size: 8xp; font-style: italic; font-weight: 100; color: #3a7ead;" href="<?php echo 'product.php?id=' . $value['Id'] ?>">see more</a>
+                      ?>...<a style="font-size: 8xp; font-style: italic; font-weight: 100; color: #3a7ead;" href="<?php echo 'detail.php?id=' . $value['Id'] ?>">see more</a>
                     </p>
                     <div class="options">
                       <h6>
@@ -162,7 +162,7 @@
       <ul class="store-pagination">
         <?php
         if($total > 6){
-          echo $Product->paginate($url, $total, $perPage);
+          echo $Product->paginateForMenu($url, $total, $perPage);
         }
         ?>
       </ul>
