@@ -74,19 +74,19 @@
                     <td data-th="Topping"><?php echo $topping['toping']; endforeach;?></td>
                     <td data-th="Quantity"><input class="form-control text-center" value=<?php echo $value['quantity']?> type="number">
                     </td>
-                    <td data-th="Subtotal" class="text-center"><?php echo $total?> đ</td>
+                    <td data-th="Subtotal" class="text-center"><?php echo ($total * $value['quantity'])?> đ</td>
                     <td class="actions" data-th="">
                         <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i>
                         </button>
-                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i>
-                        </button>
+                        <a href="remove_cart.php?id_product=<?php echo $value['id_product']?>"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i>
+                        </button></a>
                     </td>
                 </tr>
                 <?php endforeach;?>
             </tbody>
             <tfoot>
                 <tr>
-                    <td><a href="http://hocwebgiare.com/" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
+                    <td><a href="index.php" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
                     </td>
                     <td colspan="4" class="hidden-xs"> </td>
                     <td class="hidden-xs text-center"><strong>Tổng tiền 500.000 đ</strong>

@@ -13,11 +13,19 @@ class Cart extends Db
         return $items;
     }
     //Insert data to table cart in database
-    public function addProducts($id,$name,$desc,$size,$topping,$quantity, $image)
+    public function addProduct($id_product,$id_size,$id_topping,$quantity)
     {
         //Quyery
-        $sql = self::$connection->prepare("INSERT INTO `cart` (`id_product`, `name`, `descript`, `size`, `topping`, `quantity`, `image`) VALUES (?,?,?,?,?,?,?)");
-        $sql->bind_param("issssis", $id,$name,$desc,$size,$topping,$quantity, $image);
+        $sql = self::$connection->prepare("INSERT INTO `cart` (`id_product`, `id_size`, `id_topping`, `quantity`) VALUES (?,?,?,?)");
+        $sql->bind_param("iiii", $id_product,$id_size,$id_topping,$quantity);
+        return $sql->execute();
+    }
+    //Insert data to table cart in database
+    public function removeProduct($id_product)
+    {
+        //Quyery
+        $sql = self::$connection->prepare("DELETE FROM `cart` WHERE id_product =?");
+        $sql->bind_param("i", $id_product);
         return $sql->execute();
     }
 }

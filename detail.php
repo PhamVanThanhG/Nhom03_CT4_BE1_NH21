@@ -80,7 +80,10 @@ include "header.php"
 					$Topping = new Topping;
 					$id = $_GET['id'];
 					$getAllSize = $Size->getAllSize();
+					$id_size = 1;
 					$getAllTopping = $Topping->getAllTopping();
+					$id_topping = 5;
+					$quantity = 1;
 					$countRating = $Rating->countRatingByID($id);
 					$getImageArray = $ImageArray->getImageArrayByID($id);
 					foreach ($getProductByID as $value) :
@@ -142,19 +145,17 @@ include "header.php"
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star-o"></i>
 									</div>
-									<a class="review-link" href="#"><?php foreach ($countRating as $rating) {
-																		echo $rating['COUNT(id)'];
-																	} ?> Review(s) | Add your review</a>
+									<a class="review-link" href="#"><?php foreach ($countRating as $rating){echo $rating['COUNT(id)'];} ?> Review(s) | Add your review</a>
 								</div>
 								<div>
-									<h3 class="product-price"><?php echo number_format($value['Price']) ?> VND <?php if ($value['Sale'] > 0) : ?><del class="product-old-price">$990.00 VND</del><?php endif; ?></h3>
+									<h3 class="product-price"><?php echo number_format($value['Price']) ?> đ <?php if ($value['Sale'] > 0) : ?><del class="product-old-price">$990.00 VND</del><?php endif; ?></h3>
 								</div>
 								<p><?php echo $value['Decription'] ?></p>
 								<div class="product-options">
 									<label>
 										Size</label>
 									<select class="input-select">
-										<?php foreach ($getAllSize as $size) : ?>
+										<?php foreach ($getAllSize as $size) : $id_size = $size['id'];?>
 											<option value=<?php echo $size['id'] ?>><?php echo $size['size'] ?></option>
 										<?php endforeach; ?>
 									</select>
@@ -162,7 +163,7 @@ include "header.php"
 									<label>
 										Topping</label>
 									<select class="input-select">
-										<?php foreach ($getAllTopping as $topping) : ?>
+										<?php foreach ($getAllTopping as $topping) : $id_topping = $topping['id'];?>
 											<option value=<?php echo $topping['id'] ?>><?php echo $topping['toping'] ?></option>
 										<?php endforeach; ?>
 									</select>
@@ -173,12 +174,12 @@ include "header.php"
 									<div class="qty-label">
 										Qty
 										<div class="input-number">
-											<input type="number">
+											<input type="number" value="1">
 											<span class="qty-up">+</span>
 											<span class="qty-down">-</span>
 										</div>
 									</div>
-									<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+									<a href="add_cart.php?id_product=<?php echo $value['Id']?>&id_size=<?php echo $id_size?>&id_topping=<?php echo $id_topping?>&quantity=<?php echo $quantity?>"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button></a>
 								</div>
 
 								<ul class="product-btns">
