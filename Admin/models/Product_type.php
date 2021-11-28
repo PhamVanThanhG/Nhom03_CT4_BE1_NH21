@@ -12,5 +12,19 @@ class ProductType extends Db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
         return $items;
     }
+    //Them product type
+    public function addTypes($name)
+    {
+        //Quyery
+        $sql = self::$connection->prepare("INSERT INTO `product_type`( `Type_Name`) VALUES (?)");
+        $sql->bind_param("s", $name);
+        return $sql->execute();
+    }
+
+    public function delType($id){
+        $sql = self::$connection->prepare("DELETE FROM `product_type` WHERE `Type_Id` = ?");
+        $sql->bind_param("i", $id);
+        return $sql->execute();
+    }
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-$title = "AddProduct";
+$title = "Products";
 include("header.php");
 ?>
 

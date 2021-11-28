@@ -50,10 +50,14 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
 <script>
-    const dss = document.getElementById('#Dashboard');
-    const products = document.getElementById('Products');
-    const type = document.getElementById('ProductTypes');
+    var dss = document.getElementById('Dashboard');
+    var products = document.getElementById('Products');
+    var type = document.getElementById('ProductTypes');
     dss.classList.remove('active');
+    products.classList.remove('active');
+    type.classList.remove('active');
+    var hientai = document.getElementById('<?php echo $title ?>');
+    hientai.classList.toggle('active');
 </script>
 </body>
 </html>

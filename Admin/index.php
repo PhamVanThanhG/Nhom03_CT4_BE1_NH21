@@ -1,6 +1,6 @@
 
-<?php 
-$title = "Home";
+<?php
+$title = "Dashboard";
 include("header.php");
 ?>
   <!-- Content Wrapper. Contains page content -->
