@@ -72,8 +72,8 @@ $getNineProducts = $Product->getNineProducts();
               <li class="nav-item">
                 <a class="nav-link" href="about.html">About</a>
               </li>
-              <li class="nav-item" id="admin">
-                <a class="nav-link" href="book.html">Admin</a>
+              <li class="nav-item">
+                <a class="nav-link" href="about.html">Search</a>
               </li>
             </ul>
             <div class="user_option">
@@ -134,11 +134,10 @@ $getNineProducts = $Product->getNineProducts();
                   </g>
                 </svg>
               </a>
-              <a href=""><i style="color: white;" class="fa fa-search" aria-hidden="true"></i></a>
               <a href="login.php" class="order_online" id="login">
                 Login
               </a>
-              <a href="logout.php" class="order_online" style="background-color: #33ff99; color: black">
+              <a href="logout.php" class="order_online" id="logout" style="background-color: #33ff99; color: black; display: none;">
                 Logout
               </a>
             </div>
@@ -647,19 +646,10 @@ $getNineProducts = $Product->getNineProducts();
   ?>
     <script>
       document.getElementById("login").style.display = 'none';
+      document.getElementById("logout").style.display = 'inline';
     </script>
   <?php
   }
-  ?>
-  <?php
-  //Khi tai khoan la admin thi moi duoc vao trang admin
-  if (!$_SESSION['admin']) :
-  ?>
-      <script>
-      document.getElementById("admin").style.display = 'none';
-    </script>
-  <?php
-  endif;
   ?>
     <?php
   //XU ly khi dang nhap thanh cong

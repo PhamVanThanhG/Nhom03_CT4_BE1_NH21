@@ -83,7 +83,11 @@ if (isset($_POST['sub'])) {
 				$_SESSION['admin'] = false;
 			}
 			$_SESSION['xet'] = 1;
-			header("Location: http://localhost/Nhom03/index.php");
+			if($_SESSION['admin']){
+				header("Location: http://localhost/Nhom03/Admin/index.php");
+			}else{
+				header("Location: http://localhost/Nhom03/index.php");
+			}
 		} else {
 		?>
 			<html>
