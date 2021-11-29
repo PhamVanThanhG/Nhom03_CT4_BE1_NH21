@@ -3,8 +3,10 @@ require("config.php");
 require("models/db.php");
 require("models/product.php");
 require("models/Product_type.php");
+require("models/customer.php");
 $product_type = new ProductType();
 $product = new ProductFood();
+$customer = new Customer();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -227,26 +229,17 @@ $product = new ProductFood();
                 </li>
                 <li class="nav-item">
                   <a href="products.php" class="nav-link" id="Products">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Products</p>
+                    <p style="padding-left: 35px;">Products</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="product_types.php" class="nav-link" id="ProductTypes">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Product_Types</p>
+                    <p style="padding-left: 35px;">Product_Types</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="./index.html" class="nav-link" id="store">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Store</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="./index.html" class="nav-link" id="customers">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Customers</p>
+                  <a href="customers.php" class="nav-link" id="Customers">
+                    <p style="padding-left: 35px;">Customers</p>
                   </a>
                 </li>
               </ul>

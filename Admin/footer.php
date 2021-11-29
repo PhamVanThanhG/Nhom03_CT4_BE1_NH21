@@ -53,9 +53,11 @@
     var dss = document.getElementById('Dashboard');
     var products = document.getElementById('Products');
     var type = document.getElementById('ProductTypes');
+    var cus = document.getElementById('Customers');
     dss.classList.remove('active');
     products.classList.remove('active');
     type.classList.remove('active');
+    cus.classList.remove('active');
     var hientai = document.getElementById('<?php echo $title ?>');
     hientai.classList.toggle('active');
 </script>

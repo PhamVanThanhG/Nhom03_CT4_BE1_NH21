@@ -22,4 +22,29 @@ class Customer extends Db{
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items;
     }
+
+    public function getAllCustomer(){
+        $sql = self::$connection->prepare("SELECT * FROM `customer` WHERE `Permission` = 'customer'");
+        $sql->execute();
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items;
+    }
+
+    public function addCustomer($username,$email,$password,$image,$birthday, $phone, $city, $district, $wards, $addAd)
+    {
+        //Quyery
+        $sql = self::$connection->prepare("INSERT INTO `customer`(`Username`, `Email`, `Password`, `cus_img`, `Birthday`, `Phone`, `province/city`, `district`, `wards`, `add_Address`) VALUES (?,?,?,?,?,?,?,?,?,?)");
+        $sql->bind_param("ssssssssss", $username,$email,$password,$image,$birthday, $phone, $city, $district, $wards, $addAd);
+        return $sql->execute();
+    }
+
+    public function getCustomerById($Cus_Id){
+        $sql = self::$connection->prepare("SELECT * FROM `customer` WHERE `Cus_Id` = ?");
+        $sql->bind_param("i", $Cus_Id);
+        $sql->execute();
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items;
+    }
 }

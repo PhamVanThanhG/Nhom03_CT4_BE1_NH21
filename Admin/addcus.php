@@ -1,18 +1,22 @@
 <?php
 require("config.php");
 require("models/db.php");
-require("models/product.php");
-$product = new ProductFood();
+require("models/customer.php");
+$customer = new Customer();
 if (isset($_POST['submit'])) {
-    $name = $_POST['name'];
-    $type_id = $_POST['type_id'];
-    $desc = $_POST['desc'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
     $image = $_FILES['image']['name'];
-    $price = $_POST['price'];
-    $feature = $_POST['feature'];
-    //Them product
-    $addproduct = $product->addProducts($name, $type_id, $desc, $image, $price, $feature);
-    //upload hinh
+    $birthday = $_POST['birthday'];
+    $phone = $_POST['phone'];
+    $city = $_POST['city'];
+    $district = $_POST['district'];
+    $wards = $_POST['wards'];
+    $addAd = $_POST['addAd'];
+    //Them customer
+    $customer->addCustomer($username, $email, $password, $image, $birthday, $phone, $city, $district, $wards, $addAd);
+    //Upload hình
     $target_dir = "../images/";
     $target_file = $target_dir . basename($_FILES["image"]["name"]);
     $uploadOk = 1;
@@ -58,9 +62,10 @@ if (isset($_POST['submit'])) {
     } else {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
             echo "The file " . htmlspecialchars(basename($_FILES["image"]["name"])) . " has been uploaded.";
-            header("location: products.php");
+            header("location: customers.php");
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
     }
 }
+

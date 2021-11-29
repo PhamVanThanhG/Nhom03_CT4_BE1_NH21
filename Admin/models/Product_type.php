@@ -22,7 +22,7 @@ class ProductType extends Db
     }
 
     public function delType($id){
-        $sql = self::$connection->prepare("DELETE FROM `product_type` WHERE `Type_Id` = ?");
+        $sql = self::$connection->prepare("DELETE FROM `product_type`  WHERE `Type_Id` = ?");
         $sql->bind_param("i", $id);
         return $sql->execute();
     }
