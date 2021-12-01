@@ -109,7 +109,7 @@ include("header.php");
                   ?>
                 </td>
                 <td class="project-actions text-right">
-                  <a class="btn btn-info btn-sm" href="#" style="height: 30px; width: 80px;">
+                  <a class="btn btn-info btn-sm" href="editproduct.php?id=<?php echo $value['Id'] ?>" style="height: 30px; width: 80px;">
                     <i class="fas fa-pencil-alt">
                     </i>
                     Edit

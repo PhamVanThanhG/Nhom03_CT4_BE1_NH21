@@ -57,5 +57,11 @@ class ProductFood extends Db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
         return $items;
     }
+
+    public function editProductsById($id,$name,$type_id,$desc,$image,$price, $sale, $feature){
+        $sql = self::$connection->prepare("UPDATE `product` SET `Name`=?,`Type_Id`=?,`Decription`=?,`image`=?,`Price`=?,`Sale`=?,`Feature`=? WHERE `Id`= ?");
+        $sql->bind_param("sissiiii", $name,$type_id,$desc,$image,$price, $sale, $feature, $id);
+        return $sql->execute();
+    }
 }
 ?>

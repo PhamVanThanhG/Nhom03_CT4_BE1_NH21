@@ -39,7 +39,7 @@ include("header.php");
             <div class="card-body">
               <div class="form-group">
                 <label for="inputName">Type name</label>
-                <input type="text" id="inputName" class="form-control" name="name">
+                <input type="text" id="inputName" class="form-control" name="name" required>
               </div>
             </div>
             <!-- /.card-body -->

@@ -4,9 +4,11 @@ require("models/db.php");
 require("models/product.php");
 require("models/Product_type.php");
 require("models/customer.php");
+require("models/store.php");
 $product_type = new ProductType();
 $product = new ProductFood();
 $customer = new Customer();
+$store = new Store();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +38,14 @@ $customer = new Customer();
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+  <style>
+    .form-input img {
+      width: 150px;
+      display: none;
+      margin-bottom: 30px;
+      height: 150px;
+    }
+  </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
