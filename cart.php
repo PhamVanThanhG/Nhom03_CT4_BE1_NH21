@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <h1 class="text-center" style="margin: 40px 0px 80px 0px;">Your cart</h1>
+    <h1 class="text-center" style="margin: 40px 0px 80px 0px;">My cart</h1>
     <div class="container">
         <table id="cart" class="table table-hover table-condensed">
             <thead>
@@ -33,8 +33,22 @@
             <tbody>
                 <?php
                     $Cart = new Cart;
-                    $getAllCart = $Cart->getAllCart();
+                    $getAllCart = $Cart->getCartByIIDUser(1);
+                    $CountCart = 0;
+                    $idProduct = 0;
+                    $idSize;
+                    $idTopping;
+                    $Quantity;
+                    $Price;
+                    foreach($Cart->countCart() as $count){
+                        $CountCart = $count['COUNT(*)'];
+                    }
                     foreach($getAllCart as $value):
+                        $idProduct = $value['id_product'];
+                        $idSize = $value['id_size'];
+                        $idTopping = $value['id_topping'];
+                        $Quantity = 0;
+                        
                 ?>
                 <tr>
                     <td data-th="ID"><?php echo $value['id_product']?></td>
@@ -42,39 +56,48 @@
                         $product = new ProductFood;
                         $total = 0;
                         $getProductByID = $product->getProductByID($value['id_product']);
-                        foreach($getProductByID as $prod):
-                            $total = $prod['Price'];
+                        $total = $getProductByID[0]['Price'];
                     ?>
                     <td data-th="Product">
                         <div class="row">
-                            <div class="col-sm-2 hidden-xs"><img src="./images/<?php echo $prod['image']?>" alt="Sản phẩm 1" class="img-responsive" width="100">
+                            <div class="col-sm-2 hidden-xs"><img src="./images/<?php echo $getProductByID[0]['image']?>" alt="Sản phẩm 1" class="img-responsive" width="100">
                             </div>
                             <div class="col-sm-10">
-                                <h4 class="nomargin"><?php echo $prod['Name']?></h4>
-                                <p><?php echo $prod['Decription']?></p>
+                                <h4 class="nomargin"><?php echo $getProductByID[0]['Name']?></h4>
+                                <p><?php echo $getProductByID[0]['Decription']?></p>
                             </div>
                         </div>
                     </td>
                     <?php 
-                        endforeach;
                         $size = new Size;
                         $getSizeByID = $size->getSizeByID($value['id_size']);
-                        foreach($getSizeByID as $size):
-                            $total = $total + $size['price'];
-
+                        $getAllSize = $size->getAllSize();
+                        $total = $total + $getSizeByID[0]['price'];
                     ?>
-                    <td data-th="Size"><?php echo $size['size']?></td>
+                    <td data-th="Size">
+                        <select id="size" name="size" disabled="disabled">
+                        <?php foreach($getAllSize as $allSize):?>
+                            <option value="<?php $allSize['id']?>" <?php if($allSize['id'] == $getSizeByID[0]['id']){echo "selected";}?>><?php echo $allSize['size']?></option>
+                        <?php endforeach;?>
+                        </select>
+                    </td>
                     <?php
-                        endforeach;
                         $topping = new Topping;
                         $getToppingByID = $topping->getToppingByID($value['id_topping']);
-                        foreach($getToppingByID as $topping):
-                            $total = $total + $topping['price'];
+                        $getAllTopping = $topping->getAllTopping();
+                        $total = $total + $getToppingByID[0]['price'];
                     ?>
-                    <td data-th="Topping"><?php echo $topping['toping']; endforeach;?></td>
-                    <td data-th="Quantity"><input class="form-control text-center" value=<?php echo $value['quantity']?> type="number">
+                    <td data-th="Topping">
+                        <select id="topping" name="topping" disabled="disabled">
+                        <?php foreach($getAllTopping as $allTopping):?>
+                            <option value="<?php $allTopping['id']?>" <?php if($allTopping['id'] == $getToppingByID[0]['id']){echo "selected";}?>><?php echo $allTopping['toping']?></option>
+                        <?php endforeach;?>
+                        </select>
                     </td>
-                    <td data-th="Subtotal" class="text-center"><?php echo ($total * $value['quantity'])?> đ</td>
+                    <td data-th="Quantity">
+                        <input class="form-control text-center" value=<?php echo $value['quantity']?> type="number" disabled="disabled">
+                    </td>
+                    <td data-th="Subtotal" class="text-center"><?php echo ($total * $value['quantity']); $Price = $total * $value['quantity'];?> đ</td>
                     <td class="actions" data-th="">
                         <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i>
                         </button>
@@ -91,7 +114,11 @@
                     <td colspan="4" class="hidden-xs"> </td>
                     <td class="hidden-xs text-center"><strong>Tổng tiền 500.000 đ</strong>
                     </td>
-                    <td><a href="http://hocwebgiare.com/" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a>
+                    <?php
+                        $array = json_encode($getAllCart);//encode to json
+                        $RequestArray = urlencode($array);
+                    ?>
+                    <td><a href="add_bill.php?id_user=1&array=<?php echo $RequestArray?>&price=<?php echo $Price?>" class="btn btn-success btn-block" style="<?php if($CountCart == 0){echo "pointer-events: none ; cursor: default;";}?>">Thanh toán <i class="fa fa-angle-right"></i></a>
                     </td>
                 </tr>
             </tfoot>

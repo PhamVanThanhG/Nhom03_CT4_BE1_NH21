@@ -79,10 +79,6 @@ include "header.php"
 					$Size = new Size;
 					$Topping = new Topping;
 					$id = $_GET['id'];
-					$getAllSize = $Size->getAllSize();
-					$id_size = 1;
-					$getAllTopping = $Topping->getAllTopping();
-					$id_topping = 5;
 					$quantity = 1;
 					$countRating = $Rating->countRatingByID($id);
 					$getImageArray = $ImageArray->getImageArrayByID($id);
@@ -152,21 +148,6 @@ include "header.php"
 								</div>
 								<p><?php echo $value['Decription'] ?></p>
 								<div class="product-options">
-									<label>
-										Size</label>
-									<select class="input-select">
-										<?php foreach ($getAllSize as $size) : $id_size = $size['id'];?>
-											<option value=<?php echo $size['id'] ?>><?php echo $size['size'] ?></option>
-										<?php endforeach; ?>
-									</select>
-
-									<label>
-										Topping</label>
-									<select class="input-select">
-										<?php foreach ($getAllTopping as $topping) : $id_topping = $topping['id'];?>
-											<option value=<?php echo $topping['id'] ?>><?php echo $topping['toping'] ?></option>
-										<?php endforeach; ?>
-									</select>
 
 								</div>
 
@@ -179,7 +160,7 @@ include "header.php"
 											<span class="qty-down">-</span>
 										</div>
 									</div>
-									<a href="add_cart.php?id_product=<?php echo $value['Id']?>&id_size=<?php echo $id_size?>&id_topping=<?php echo $id_topping?>&quantity=<?php echo $quantity?>"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button></a>
+									<a href="add_cart.php?id_product=<?php echo $value['Id']?>&quantity=<?php echo $quantity?>"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button></a>
 								</div>
 
 								<ul class="product-btns">

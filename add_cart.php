@@ -12,12 +12,11 @@
 
     if(isset($_GET['id_product'])){
         $Cart = new Cart;
-        if(isset($_GET['id_size']) && isset($_GET['id_topping']) && isset($_GET['quantity'])){
-            $addCart = $Cart->addProduct($_GET['id_product'],$_GET['id_size'],$_GET['id_topping'],$_GET['quantity']);
-            header('location:http://localhost:89/Nhom03_CT4_BE1_NH21/detail.php?id='.$_GET['id_product']);
-        }else{
-            $addCart = $Cart->addProduct($_GET['id_product'],1,5,1);
-            header('location:http://localhost:89/Nhom03_CT4_BE1_NH21/index.php');
+        if(isset($_GET['quantity'])){
+            
         }
+        $addCart = $Cart->addProduct($_GET['id_product'],1,5,1,1);
+        header('location:http://localhost:89/Nhom03_CT4_BE1_NH21/index.php');
+
     }
 ?>

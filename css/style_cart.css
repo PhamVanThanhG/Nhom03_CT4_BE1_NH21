@@ -49,4 +49,8 @@ td {
   table#cart tfoot td .btn {
   display:block;
   }
+  a.disabled {
+    pointer-events: none;
+    cursor: default;
+  }
   }
