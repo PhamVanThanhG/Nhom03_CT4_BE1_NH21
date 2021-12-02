@@ -27,8 +27,8 @@ class ProductFood extends Db
 
     }
 
-    //Get 6 Products of the top Products by ID in database
-    public function getSixProductsByTypeID($type_id,$page, $perPage)
+    //Get 6 Products of the top Products by typeID in database
+    public function getProductsForPage($type_id,$page, $perPage)
     {
         //Quyery
         $firstLink = ($page - 1) * $perPage;
@@ -40,7 +40,8 @@ class ProductFood extends Db
         return $items;
 
     }
-    //Get Products by type in database: returns name, img, decr, price of product.
+    
+    //Get Products by type: returns name, img, decr, price of product.
     public function getProductsByType($type_id)
     {
         //Quyery
@@ -51,7 +52,62 @@ class ProductFood extends Db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
         return $items;
     }
-    function paginate($url, $total, $perPage)
+
+    //Get Products by id
+    public function getProductByID($id)
+    {
+        //Quyery
+        $sql = self::$connection->prepare("SELECT * FROM product WHERE Id = ?");
+        $sql->bind_param("i", $id);
+        $sql->execute();
+        $items = array();//Var array items
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
+        return $items;
+    }
+    
+    //paginate for menu
+    function paginateForMenu($url, $total, $perPage)
+    {
+        $totalLinks = ceil($total/$perPage);
+ 	    $link ="";
+    	for($j=1; $j <= $totalLinks ; $j++)
+     	{
+            if(isset($_GET['page'])){
+                if($_GET['page'] == $j){
+                    $link = $link."<li class='active'><a href='$url&page=$j'> $j </a></li>";
+                }else{
+                    $link = $link."<li><a href='$url&page=$j'> $j </a></li>";
+                }
+            }else{
+                $link = $link."<li><a href='$url&page=$j'> $j </a></li>";
+            }
+     	}
+        $arrayLink = explode("'",$link);
+        $i = 0;
+        foreach($arrayLink as $item){
+            if($item == 'active'){
+                $i++;
+            }
+        }
+        if($i == 0){
+            $link=""."<li class='active'><a href='$url&page=1'> 1 </a></li>";
+            for($j=2; $j <= $totalLinks ; $j++)
+     	    {
+                if(isset($_GET['page'])){
+                    if($_GET['page'] == $j){
+                        $link = $link."<li class='active'><a href='$url&page=$j'> $j </a></li>";
+                    }else{
+                        $link = $link."<li><a href='$url&page=$j'> $j </a></li>";
+                    }
+                }else{
+                    $link = $link."<li><a href='$url&page=$j'> $j </a></li>";
+                }
+     	    }
+        }
+     	return $link;
+    }
+    //paginate for related product
+    function paginateForRelatedProducts($url, $total, $perPage)
     {
         $totalLinks = ceil($total/$perPage);
  	    $link ="";
@@ -92,4 +148,3 @@ class ProductFood extends Db
      	return $link;
     } 
 }
-?>

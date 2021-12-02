@@ -56,7 +56,7 @@
           $url = $_SERVER['PHP_SELF']."?type_id=".$_GET['type_id'];
 
           //get array product
-          $arrProducts = $Product->getSixProductsByTypeID($type_id,$page, $perPage);
+          $arrProducts = $Product->getProductsForPage($type_id,$page, $perPage);
         }
 
         //run elements of array
@@ -88,14 +88,14 @@
                            }
                          }
                        }
-                       ?>...<a style="font-size: 8xp; font-style: italic; font-weight: 100; color: #3a7ead;" href="<?php echo 'product.php?id=' . $value['Id'] ?>">see more</a>
+                      ?>...<a style="font-size: 8xp; font-style: italic; font-weight: 100; color: #3a7ead;" href="<?php echo 'detail.php?id=' . $value['Id'] ?>">see more</a>
                     </p>
                     <div class="options">
                       <h6>
                         <?php echo number_format($value['Price']); ?> VND
                       </h6>
                       <!-- khúc này là cái cart -->
-                      <a href="">
+                      <a href="add_cart.php?id_product=<?php echo $value['Id']?>">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                           <g>
                             <g>
@@ -162,7 +162,7 @@
       <ul class="store-pagination">
         <?php
         if($total > 6){
-          echo $Product->paginate($url, $total, $perPage);
+          echo $Product->paginateForMenu($url, $total, $perPage);
         }
         ?>
       </ul>
