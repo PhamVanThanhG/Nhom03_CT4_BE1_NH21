@@ -83,6 +83,9 @@ $menu = new Menu();
               </li>
             </ul>
             <div class="user_option">
+              <a href="" class="user_link">
+                <i class="fa fa-user" aria-hidden="true"></i>
+              </a>
               <a class="cart_link" href="#">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                   <g>
@@ -383,7 +386,7 @@ $menu = new Menu();
 
   <!-- end offer section -->
 
-  <?php require "our_menu.php";?>
+  <?php require "our_menu.php"; ?>
 
   <!-- about section -->
 
