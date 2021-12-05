@@ -18,10 +18,11 @@
 <body>
     <h1 class="text-center">My Bill</h1>
     <?php 
-            $Bill = new Bill;
-            $getBillByIdUser = $Bill->getBillByIDUser(1);
-            foreach($getBillByIdUser as $bill):
-        ?>
+    //show all item of bill
+        $Bill = new Bill;
+        $getBillByIdUser = $Bill->getBillByIDUser(1);//get all bill by id user
+        foreach($getBillByIdUser as $bill):
+    ?>
     <div class="container border rounded border-primary" style="margin-bottom: 60px; margin-top: 60px;">
         <h2 class="text-center">Bill <?php echo $bill['id']?></h2>
         <p style="display: inline-block;">Create date: <?php echo $bill['date_create']?></p>
@@ -39,15 +40,18 @@
             </thead>
             <tbody>
                 <?php
+                //process bill
                     $BillProduct = new BillProduct;
                     $NO = 0;
-                    $getAllBill = $BillProduct->getAllBill($bill['id']);
+                    $totalPrice = 0;
+                    $getAllBill = $BillProduct->getAllBill($bill['id']);//get all product of bill
                     foreach($getAllBill as $item):
                         $NO++;
                 ?>
                 <tr>
                     <td colspan="2" data-th="NO"><?php echo $NO?></td>
                     <?php
+                    //show info product
                         $product = new ProductFood;
                         $total = 0;
                         $getProductByID = $product->getProductByID($item['id_product']);
@@ -82,7 +86,7 @@
                     ?>
                     <td data-th="Topping" class="text-center"><?php echo $topping['toping']; endforeach;?></td>
                     <td data-th="Quantity" class="text-center"><?php echo $item['quantity']?></td>
-                    <td data-th="Subtotal" class="text-center"><?php echo ($total * $item['quantity'])?> đ</td>
+                    <td data-th="Subtotal" class="text-center"><?php echo number_format($total * $item['quantity']); $totalPrice += ($total * $item['quantity']);?> đ</td>
                 </tr>
                 <?php endforeach;?>
             </tbody>
@@ -92,9 +96,9 @@
                         <a href="cart.php" class="btn btn-warning btn-block"><i class="fa fa-angle-left"></i> Back</a>
                     </td>
                     <td class="hidden-xs"></td>
-                    <td colspan="2" class="hidden-xs text-center"><strong>Total price: 500.000 đ</strong></td>
+                    <td colspan="2" class="hidden-xs text-center"><strong>Total price: <?php echo number_format($totalPrice)?> đ</strong></td>
                     <td>
-                        <a href="#" class="btn btn-danger btn-block">Countermand <i class="fa fa-times"></i></a>
+                        <a href="#" class="btn btn-danger btn-block" onclick="notify()">Countermand <i class="fa fa-times"></i></a>
                     </td>
                     <td>
                         <a href="#" class="btn btn-success btn-block">Confirm <i class="fa fa-check"></i></a>
@@ -105,6 +109,9 @@
     </div>
     <?php endforeach;?>
     <script src="js/jquery-1.11.1.min.js"></script>
+<?php
+    echo "<script>function notify(){alert('huy');}</script>";
+?>
 </body>
 
 </html>
