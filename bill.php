@@ -22,18 +22,18 @@
             $getBillByIdUser = $Bill->getBillByIDUser(1);
             foreach($getBillByIdUser as $bill):
         ?>
-    <div class="container" style="margin-bottom: 60px;">
-        <h3>ID bill : <?php echo $bill['id']?></h3>
+    <div class="container border rounded border-primary" style="margin-bottom: 60px; margin-top: 60px;">
+        <h2 class="text-center">Bill <?php echo $bill['id']?></h2>
         <p style="display: inline-block;">Create date: <?php echo $bill['date_create']?></p>
         <p style="display: inline-block; margin-left: 800px;">State: <?php echo $bill['state']?></p>
         <table id="cart" class="table table-hover table-condensed">
             <thead>
                 <tr>
-                    <th style="width:0%">NO.</th>
-                    <th style="width:56%">Product Name</th>
-                    <th style="width:8%">Size</th>
-                    <th style="width:15%">Topping</th>
-                    <th style="width:8%">Quantity</th>
+                    <th colspan="2" style="width:0%">NO.</th>
+                    <th style="width:56%;">Product Name</th>
+                    <th style="width:8%" class="text-center">Size</th>
+                    <th style="width:15%" class="text-center">Topping</th>
+                    <th style="width:8%" class="text-center">Quantity</th>
                     <th style="width:20%" class="text-center">Price(đ)</th>
                 </tr>
             </thead>
@@ -46,7 +46,7 @@
                         $NO++;
                 ?>
                 <tr>
-                    <td data-th="NO"><?php echo $NO?></td>
+                    <td colspan="2" data-th="NO"><?php echo $NO?></td>
                     <?php
                         $product = new ProductFood;
                         $total = 0;
@@ -72,7 +72,7 @@
                             $total = $total + $size['price'];
 
                     ?>
-                    <td data-th="Size"><?php echo $size['size']?></td>
+                    <td data-th="Size" class="text-center"><?php echo $size['size']?></td>
                     <?php
                         endforeach;
                         $topping = new Topping;
@@ -80,20 +80,24 @@
                         foreach($getToppingByID as $topping):
                             $total = $total + $topping['price'];
                     ?>
-                    <td data-th="Topping"><?php echo $topping['toping']; endforeach;?></td>
-                    <td data-th="Quantity"><?php echo $item['quantity']?></td>
+                    <td data-th="Topping" class="text-center"><?php echo $topping['toping']; endforeach;?></td>
+                    <td data-th="Quantity" class="text-center"><?php echo $item['quantity']?></td>
                     <td data-th="Subtotal" class="text-center"><?php echo ($total * $item['quantity'])?> đ</td>
                 </tr>
                 <?php endforeach;?>
             </tbody>
             <tfoot>
                 <tr>
-                    <td><a href="cart.php" class="btn btn-warning"><i class="fa fa-angle-left"></i> Quay về</a>
+                    <td colspan="2">
+                        <a href="cart.php" class="btn btn-warning btn-block"><i class="fa fa-angle-left"></i> Back</a>
                     </td>
-                    <td colspan="3" class="hidden-xs"> </td>
-                    <td class="hidden-xs text-center"><strong>Tổng tiền 500.000 đ</strong>
+                    <td class="hidden-xs"></td>
+                    <td colspan="2" class="hidden-xs text-center"><strong>Total price: 500.000 đ</strong></td>
+                    <td>
+                        <a href="#" class="btn btn-danger btn-block">Countermand <i class="fa fa-times"></i></a>
                     </td>
-                    <td><a href="#" class="btn btn-success btn-block">Xác nhận <i class="fa fa-angle-right"></i></a>
+                    <td>
+                        <a href="#" class="btn btn-success btn-block">Confirm <i class="fa fa-check"></i></a>
                     </td>
                 </tr>
             </tfoot>

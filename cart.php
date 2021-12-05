@@ -99,6 +99,7 @@
                             <td data-th="Quantity">
                                 <input name="quantity<?php echo $value['id_product'] ?>" class="<?php echo $value['id_product'] ?> form-control text-center" value=<?php echo $value['quantity'] ?> type="number" disabled="disabled">
                             </td>
+                            <?php //Price?>
                             <td data-th="TotalPrice" class="text-center"><?php echo number_format($total * $value['quantity']);$priceCart = $priceCart + ($total * $value['quantity']); ?> đ</td>
                             <td class="actions" data-th="Action">
                                 <button id="save<?php echo $value['id_product'] ?>" type="submit" class="btn btn-warning" hidden>Save</button>
