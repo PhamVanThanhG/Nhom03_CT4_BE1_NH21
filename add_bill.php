@@ -10,6 +10,7 @@
     require "models/db_topping.php";
     require "models/db_bill_products.php";
     require "models/db_bill.php";
+    require "models/db_cart.php";
     
     if(isset($_GET['id_user'])){
         #add new bill
@@ -36,6 +37,8 @@
         foreach($getAllCart as $cart){
             $addProduct = $BillProduct->addItem($id, $cart['id_product'], $cart['id_size'], $cart['id_topping'], $cart['quantity']);
         }
+        //remove all products of cart
+        $removeAllCart = $Cart->removeAllProducts();
         header('location:http://localhost:89/Nhom03_CT4_BE1_NH21/bill.php');
     }else{
         echo "nothing!";
