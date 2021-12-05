@@ -33,12 +33,21 @@ class Cart extends Db
         $sql->bind_param("iiiii", $id_product,$id_size,$id_topping,$quantity, $id_user);
         return $sql->execute();
     }
-    //Insert data to table cart in database
+    //Remove data from table cart in database
     public function removeProduct($id_product)
     {
         //Quyery
         $sql = self::$connection->prepare("DELETE FROM `cart` WHERE id_product =?");
         $sql->bind_param("i", $id_product);
+        return $sql->execute();
+    }
+
+    //Update data from table cart in database
+    public function updateProduct($id_size, $id_topping, $quantity, $id_product)
+    {
+        //Quyery
+        $sql = self::$connection->prepare("UPDATE `cart` SET `id_size` = ?, `id_topping` = ?, `quantity` = ? WHERE `cart`.`id_product` = ?");
+        $sql->bind_param("iiii", $id_size, $id_topping, $quantity, $id_product);
         return $sql->execute();
     }
 }

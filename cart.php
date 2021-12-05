@@ -21,7 +21,7 @@
         <table id="cart" class="table table-hover table-condensed">
             <thead>
                 <tr>
-                    <th style="width:0%">ID</th>
+                    <th style="width:0%">NO.</th>
                     <th style="width:40%">Name</th>
                     <th style="width:8%">Size</th>
                     <th style="width:15%">Topping</th>
@@ -35,23 +35,16 @@
                     $Cart = new Cart;
                     $getAllCart = $Cart->getCartByIIDUser(1);
                     $CountCart = 0;
-                    $idProduct = 0;
-                    $idSize;
-                    $idTopping;
-                    $Quantity;
-                    $Price;
+                    $No = 0;
+                    // $check = "";
                     foreach($Cart->countCart() as $count){
                         $CountCart = $count['COUNT(*)'];
                     }
                     foreach($getAllCart as $value):
-                        $idProduct = $value['id_product'];
-                        $idSize = $value['id_size'];
-                        $idTopping = $value['id_topping'];
-                        $Quantity = 0;
-                        
+                        $No++;
                 ?>
                 <tr>
-                    <td data-th="ID"><?php echo $value['id_product']?></td>
+                    <td data-th="NO"><?php echo $No?></td>
                     <?php
                         $product = new ProductFood;
                         $total = 0;
@@ -74,10 +67,11 @@
                         $getAllSize = $size->getAllSize();
                         $total = $total + $getSizeByID[0]['price'];
                     ?>
+                    <form method="post" action="update_cart.php">
                     <td data-th="Size">
-                        <select id="size" name="size" disabled="disabled">
+                        <select name="size<?php echo $value['id_product']?>" id="size-<?php echo $value['id_product']?>" class="<?php echo $value['id_product']?>" disabled="disabled">
                         <?php foreach($getAllSize as $allSize):?>
-                            <option value="<?php $allSize['id']?>" <?php if($allSize['id'] == $getSizeByID[0]['id']){echo "selected";}?>><?php echo $allSize['size']?></option>
+                            <option value=<?php echo $allSize['id']?> <?php if($allSize['id'] == $getSizeByID[0]['id']){echo "selected";}?>><?php echo $allSize['size']?></option>
                         <?php endforeach;?>
                         </select>
                     </td>
@@ -88,21 +82,23 @@
                         $total = $total + $getToppingByID[0]['price'];
                     ?>
                     <td data-th="Topping">
-                        <select id="topping" name="topping" disabled="disabled">
+                        <select name="topping<?php echo $value['id_product']?>" class="<?php echo $value['id_product']?>" disabled="disabled">
                         <?php foreach($getAllTopping as $allTopping):?>
-                            <option value="<?php $allTopping['id']?>" <?php if($allTopping['id'] == $getToppingByID[0]['id']){echo "selected";}?>><?php echo $allTopping['toping']?></option>
+                            <option  value=<?php echo $allTopping['id']?> <?php if($allTopping['id'] == $getToppingByID[0]['id']){echo "selected";}?>><?php echo $allTopping['toping']?></option>
                         <?php endforeach;?>
                         </select>
                     </td>
-                    <td data-th="Quantity">
-                        <input class="form-control text-center" value=<?php echo $value['quantity']?> type="number" disabled="disabled">
+                    <td data-th="Quantity">   
+                        <input name="quantity<?php echo $value['id_product']?>" class="<?php echo $value['id_product']?> form-control text-center" value=<?php echo $value['quantity']?> type="number" disabled="disabled">
                     </td>
-                    <td data-th="Subtotal" class="text-center"><?php echo ($total * $value['quantity']); $Price = $total * $value['quantity'];?> đ</td>
-                    <td class="actions" data-th="">
-                        <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i>
-                        </button>
-                        <a href="remove_cart.php?id_product=<?php echo $value['id_product']?>"><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i>
-                        </button></a>
+                    <td data-th="TotalPrice" class="text-center"><?php echo ($total * $value['quantity']); $Price = $total * $value['quantity'];?> đ</td>
+                    <td class="actions" data-th="Action">
+                        <button id="save<?php echo $value['id_product']?>" type="submit" class="btn btn-primary" hidden>Save</button>
+                        </form>
+                        <button id="edit<?php echo $value['id_product']?>" class="btn btn-info btn-sm" onclick="removeClass(<?php echo $value['id_product']?>)"><i class="fa fa-edit"></i></button>
+                        <a id="remove<?php echo $value['id_product']?>" href="remove_cart.php?id_product=<?php echo $value['id_product']?>">
+                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                        </a>
                     </td>
                 </tr>
                 <?php endforeach;?>
@@ -115,16 +111,42 @@
                     <td class="hidden-xs text-center"><strong>Tổng tiền 500.000 đ</strong>
                     </td>
                     <?php
-                        $array = json_encode($getAllCart);//encode to json
-                        $RequestArray = urlencode($array);
+                        // $array = json_encode($getAllCart);//encode to json
+                        // $RequestArray = urlencode($array);
                     ?>
-                    <td><a href="add_bill.php?id_user=1&array=<?php echo $RequestArray?>&price=<?php echo $Price?>" class="btn btn-success btn-block" style="<?php if($CountCart == 0){echo "pointer-events: none ; cursor: default;";}?>">Thanh toán <i class="fa fa-angle-right"></i></a>
+                    <td>
+                        <a href="add_bill.php?id_user=1" class="btn btn-success btn-block" style="<?php if($CountCart == 0){echo "pointer-events: none ; cursor: default;";}?>">Thanh toán <i class="fa fa-angle-right"></i></a>
                     </td>
                 </tr>
             </tfoot>
         </table>
     </div>
     <script src="js/jquery-1.11.1.min.js"></script>
+    <script>
+        function removeClass(x) {
+            <?php foreach($getAllCart as $value):?>
+                if(<?php echo $value['id_product']?> === x){
+                    var s = document.getElementsByClassName("<?php echo $value['id_product']?>")[0].hasAttribute("disabled");
+                    if(s === false){
+                        //Update database
+                        document.getElementsByClassName("<?php echo $value['id_product']?>")[0].setAttribute("disabled", "disabled"); 
+                        document.getElementsByClassName("<?php echo $value['id_product']?>")[1].setAttribute("disabled", "disabled");
+                        document.getElementsByClassName("<?php echo $value['id_product']?>")[2].setAttribute("disabled", "disabled");
+                        document.getElementById('edit<?php echo $value['id_product']?>').style.visibility = 'visible';
+                        document.getElementById('remove<?php echo $value['id_product']?>').style.visibility = 'visible';
+                    }else{
+                        //remove disable
+                        document.getElementsByClassName("<?php echo $value['id_product']?>")[0].removeAttribute("disabled"); 
+                        document.getElementsByClassName("<?php echo $value['id_product']?>")[1].removeAttribute("disabled"); 
+                        document.getElementsByClassName("<?php echo $value['id_product']?>")[2].removeAttribute("disabled"); 
+                        document.getElementById('edit<?php echo $value['id_product']?>').style.visibility = 'hidden';
+                        document.getElementById('remove<?php echo $value['id_product']?>').style.visibility = 'hidden';
+                        document.getElementById('save<?php echo $value['id_product']?>').removeAttribute("hidden")
+                    }
+                }
+            <?php endforeach;?>
+        }
+    </script>
 </body>
 
 </html>
