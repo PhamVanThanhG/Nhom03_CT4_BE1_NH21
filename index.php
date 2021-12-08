@@ -83,9 +83,15 @@ $menu = new Menu();
               </li>
             </ul>
             <div class="user_option">
-              <a href="" class="user_link">
-                <i class="fa fa-user" aria-hidden="true"></i>
-              </a>
+              <div class="dropdown">
+                <i class="fa fa-user user_link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Profile</a>
+                  <a class="dropdown-item" href="bill.php">My bill</a>
+                  <a class="dropdown-item" href="buy_history.php">Buy history</a>
+                  <a class="dropdown-item" href="#">Logout</a>
+                </div>
+              </div>
               <a class="cart_link" href="cart.php">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                   <g>
@@ -149,6 +155,7 @@ $menu = new Menu();
                 Order Online
               </a>
             </div>
+
           </div>
         </nav>
       </div>

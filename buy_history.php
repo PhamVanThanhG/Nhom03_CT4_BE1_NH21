@@ -16,12 +16,11 @@
 </head>
 
 <body>
-    <h1 class="text-center">My Bill</h1>
+    <h1 class="text-center">History</h1>
     <?php 
     //show all item of bill
         $Bill = new Bill;
         $getBillByIdUser = $Bill->getBillByIDUser(1);//get all bill by id user
-        $idBill = 0;
         foreach($getBillByIdUser as $bill):
     ?>
     <div class="container border rounded border-primary" style="margin-bottom: 60px; margin-top: 60px;">
@@ -93,10 +92,13 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3" class="hidden-xs"></td>
+                    <td colspan="2">
+                        <a href="cart.php" class="btn btn-warning btn-block"><i class="fa fa-angle-left"></i> Back</a>
+                    </td>
+                    <td class="hidden-xs"></td>
                     <td colspan="2" class="hidden-xs text-center"><strong>Total price: <?php echo number_format($totalPrice)?> đ</strong></td>
                     <td>
-                        <a href="#" id="remove" class="btn btn-danger btn-block" onclick="notify(<?php echo $bill['id']; $idBill = $bill['id']?>)">Countermand <i class="fa fa-times"></i></a>
+                        <a href="#" class="btn btn-danger btn-block" onclick="notify()">Countermand <i class="fa fa-times"></i></a>
                     </td>
                     <td>
                         <a href="#" class="btn btn-success btn-block">Confirm <i class="fa fa-check"></i></a>
@@ -111,19 +113,12 @@
     // echo "<script>function notify(){alert('huy');}</script>";
 ?>
 <script>
-    var a = document.getElementById('remove');
-    function notify(x){
-        var state = "<?php foreach($getBillByIdUser as $bill){if($idBill == $bill['id']){echo $bill['state'];}}?>";
-        if(state === "Đang chờ duyệt"){
-            if(confirm("bạn đồng ý xóa bill " + x + " chứ?")){
-                a.href = "remove_bill.php?id_bill="+x;
-            }else{
-                a.href = "#";
-            }
+    function notify(){
+        if(!confirm("Cart can not save yet! Are you want to continue?")){
+            a.href = "";
         }else{
-            alert("Sản phẩm đang được giao đến! hãy chờ thêm ít phút!");
+            a.href = "add_bill.php?id_user=1";
         }
-        
     }
     
 </script>
