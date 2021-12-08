@@ -8,7 +8,7 @@ if (isset($_POST['username'])) {
 	$getEmail = $cus->getEmail();
 	$user = $_POST['username'];
 	$gmail = $_POST['gmail'];
-	$pass = $_POST['password'];
+	$pass = md5($_POST['password']);
 	$phone = $_POST['phonenumber'];
 	$birthday = $_POST['birthday'];
 	$xet = true;
@@ -73,7 +73,7 @@ if (isset($_POST['sub'])) {
 		<?php
 	} else {
 		//Kiem tra dung mat khau chua
-		if ($getAccount[0]['Password'] == $_POST['passwordL']) {
+		if ($getAccount[0]['Password'] == md5($_POST['passwordL'])) {
 			$_SESSION['username'] = $getAccount[0]['Username'];
 			$_SESSION['cus_id'] = $getAccount[0]['Cus_Id'];
 			//Luu permission
