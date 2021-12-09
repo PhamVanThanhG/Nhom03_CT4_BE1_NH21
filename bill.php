@@ -45,7 +45,7 @@
                     $BillProduct = new BillProduct;
                     $NO = 0;
                     $totalPrice = 0;
-                    $getAllBill = $BillProduct->getAllBill($bill['id']);//get all product of bill
+                    $getAllBill = $BillProduct->getByID($bill['id']);//get all product of bill
                     foreach($getAllBill as $item):
                         $NO++;
                 ?>
@@ -96,10 +96,10 @@
                     <td colspan="3" class="hidden-xs"></td>
                     <td colspan="2" class="hidden-xs text-center"><strong>Total price: <?php echo number_format($totalPrice)?> đ</strong></td>
                     <td>
-                        <a href="#" id="remove" class="btn btn-danger btn-block" onclick="notify(<?php echo $bill['id']; $idBill = $bill['id']?>)">Countermand <i class="fa fa-times"></i></a>
+                        <a href="#" id="remove<?php echo $bill['id']?>" class="btn btn-danger btn-block" onclick="notify<?php echo $bill['id']?>()">Countermand <i class="fa fa-times"></i></a>
                     </td>
                     <td>
-                        <a href="#" class="btn btn-success btn-block">Confirm <i class="fa fa-check"></i></a>
+                        <a href="#" id="confirm<?php echo $bill['id']?>" class="btn btn-success btn-block" onclick="confirmBill<?php echo $bill['id']?>()">Confirm <i class="fa fa-check"></i></a>
                     </td>
                 </tr>
             </tfoot>
@@ -107,24 +107,36 @@
     </div>
     <?php endforeach;?>
     <script src="js/jquery-1.11.1.min.js"></script>
-<?php
-    // echo "<script>function notify(){alert('huy');}</script>";
-?>
 <script>
-    var a = document.getElementById('remove');
-    function notify(x){
-        var state = "<?php foreach($getBillByIdUser as $bill){if($idBill == $bill['id']){echo $bill['state'];}}?>";
+    <?php foreach($getBillByIdUser as $bill):?>
+    function notify<?php echo $bill['id']?>(){
+        var a = document.getElementById('remove<?php echo $bill['id']?>');
+        var state = "<?php echo $bill['state']?>";
         if(state === "Đang chờ duyệt"){
-            if(confirm("bạn đồng ý xóa bill " + x + " chứ?")){
-                a.href = "remove_bill.php?id_bill="+x;
+            if(confirm("bạn đồng ý xóa bill <?php echo $bill['id']?> chứ?")){
+                a.href = "remove_bill.php?id_bill=<?php echo $bill['id']?>";
             }else{
                 a.href = "#";
             }
         }else{
             alert("Sản phẩm đang được giao đến! hãy chờ thêm ít phút!");
-        }
-        
+        }  
     }
+    
+    function confirmBill<?php echo $bill['id']?>(){
+        var a = document.getElementById('confirm<?php echo $bill['id'];?>');
+        var state = "<?php echo $bill['state'];?>";
+        if(state === "Đang giao hàng"){
+            if(confirm("bạn đồng ý xác nhận đơn hàng <?php echo $bill['id']?> chứ?")){
+                a.href = "add_history.php?id_bill=<?php echo $bill['id']?>";
+            }else{
+                a.href = "#";
+            }
+        }else{
+            alert("Sản phẩm đang chờ admin kiểm duyệt! không thể xác nhận!");
+        }  
+    }
+    <?php endforeach;?>
     
 </script>
 </body>

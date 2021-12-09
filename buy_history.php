@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
-<?php include "header.php"?>
+<?php 
+    include "header.php";
+    require "models/db_history.php";
+    require "models/db_history_products.php";
+?>
 </html>
 <html lang="en">
 
@@ -16,17 +20,17 @@
 </head>
 
 <body>
-    <h1 class="text-center">History</h1>
+    <h1 class="text-center">Purchase History</h1>
     <?php 
     //show all item of bill
-        $Bill = new Bill;
-        $getBillByIdUser = $Bill->getBillByIDUser(1);//get all bill by id user
-        foreach($getBillByIdUser as $bill):
+        $PurchaseHistory = new PurchaseHistory;
+        $getByIdUser = $PurchaseHistory->getByIDUser(1);//get all bill by id user
+        foreach($getByIdUser as $bill):
     ?>
     <div class="container border rounded border-primary" style="margin-bottom: 60px; margin-top: 60px;">
         <h2 class="text-center">Bill <?php echo $bill['id']?></h2>
         <p style="display: inline-block;">Create date: <?php echo $bill['date_create']?></p>
-        <p style="display: inline-block; margin-left: 800px;">State: <?php echo $bill['state']?></p>
+        <p style="display: inline-block; margin-left: 800px;">Confirm date: <?php echo $bill['date_confirm']?></p>
         <table id="cart" class="table table-hover table-condensed">
             <thead>
                 <tr>
@@ -41,11 +45,11 @@
             <tbody>
                 <?php
                 //process bill
-                    $BillProduct = new BillProduct;
+                    $ProdPurchaseHistory = new ProductPurchaseHistory;
                     $NO = 0;
                     $totalPrice = 0;
-                    $getAllBill = $BillProduct->getAllBill($bill['id']);//get all product of bill
-                    foreach($getAllBill as $item):
+                    $getAll = $ProdPurchaseHistory->getAll($bill['id']);//get all product of bill
+                    foreach($getAll as $item):
                         $NO++;
                 ?>
                 <tr>

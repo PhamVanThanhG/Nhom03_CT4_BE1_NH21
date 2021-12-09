@@ -3,7 +3,7 @@
 class BillProduct extends Db
 {
     //get products in billproduct table by id_bill
-    public function getAllBill($id_bill)
+    public function getByID($id_bill)
     {
         //Quyery
         $sql = self::$connection->prepare("SELECT * FROM bill_products WHERE id_bill = ?");

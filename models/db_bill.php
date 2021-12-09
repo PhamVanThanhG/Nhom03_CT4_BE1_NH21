@@ -13,6 +13,18 @@ class Bill extends Db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC); //Get array Products
         return $items;
     }
+
+    //get Bill by id
+    public function getBillByID($id)
+    {
+        //Quyery
+        $sql = self::$connection->prepare("SELECT * FROM bill WHERE id = ?");
+        $sql->bind_param("i", $id);
+        $sql->execute();
+        $items = array(); //Var array items
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC); //Get array Products
+        return $items;
+    }
     //count Element of bill
     public function count()
     {
