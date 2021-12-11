@@ -16,7 +16,7 @@ class PurchaseHistory extends Db
     public function count()
     {
         //Quyery
-        $sql = self::$connection->prepare("SELECT COUNT(*) FROM bill");
+        $sql = self::$connection->prepare("SELECT COUNT(*) FROM buy_history");
         $sql->execute();
         $items = array(); //Var array items
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC); //Get array Products

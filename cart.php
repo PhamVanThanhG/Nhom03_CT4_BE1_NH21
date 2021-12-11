@@ -167,6 +167,14 @@
                 a.href = "add_bill.php?id_user=1";
             }
         }
+        //process when user back to page
+        window.addEventListener( "pageshow", function ( event ) {
+            var historyTraversal = event.persisted || ( typeof window.performance != "undefined" && window.performance.navigation.type === 2 );
+            if ( historyTraversal ) {
+                // Handle page restore.
+                window.location.reload();
+            }
+        });
     </script>
 </body>
 
