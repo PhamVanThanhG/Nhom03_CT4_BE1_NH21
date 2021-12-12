@@ -83,6 +83,12 @@ $menu = new Menu();
               </li>
             </ul>
             <div class="user_option">
+              <form class="form-inline" method="get" action="menu.php">
+                <input type="search" name="key" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>
               <div class="dropdown">
                 <i class="fa fa-user user_link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -146,11 +152,6 @@ $menu = new Menu();
                   </g>
                 </svg>
               </a>
-              <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
               <a href="" class="order_online">
                 Order Online
               </a>

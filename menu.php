@@ -15,7 +15,7 @@
      $getAllMenu = $Menu->getAllMenu();
     ?>
     <ul class="filters_menu">
-      <li <?php if(!isset($_GET['type_id']) || (isset($_GET['type_id']) && $_GET['type_id'] == 0)){echo "class='active'";}?>><a href="menu.php?type_id=0">All</a></li>
+      <li <?php if(!isset($_GET['type_id']) || (isset($_GET['type_id']) && $_GET['type_id'] == 0)){echo "class='active'";}?>><a href="index.php?type_id=0">All</a></li>
       <?php foreach($getAllMenu as $menu):?>
       <li <?php if(isset($_GET['type_id']) && $_GET['type_id'] == $menu['Type_Id']){echo "class='active'";} ?>><a href="menu.php?type_id=<?php echo $menu['Type_Id']?>"><?php echo $menu['Name']?></a></li>
       <?php endforeach;?>
@@ -24,7 +24,6 @@
     <div class="filters-content">
       <div class="row grid">
         <?php
-        //var
         $Product = new ProductFood;
         $arrProducts = array();
         $total = 0;
@@ -37,7 +36,22 @@
         $page = isset($_GET['page'])?$_GET['page']:1;
 
         //Function: process when get type or not
-        if(!isset($_GET['type_id']) || $_GET['type_id'] == 0){
+        if(isset($_GET['key'])){
+          $ProductType = new TypeProduct;
+          $getType = $ProductType->search($_GET['key']);
+
+          $type_id = $getType[0]['Type_Id'];
+          $getProductsByType = $Product->getProductsByType($type_id);
+
+          //total number of product
+          $total = count($getProductsByType);
+
+          //get link current
+          $url = $_SERVER['PHP_SELF']."?type_id=".$getType[0]['Type_Id'];
+
+          //get array product
+          $arrProducts = $Product->getProductsForPage($type_id,$page, $perPage);
+        }else if(!isset($_GET['type_id']) || $_GET['type_id'] == 0){
           $getAllproducts = $Product->getAllProducts();
 
           //total:  size of product
@@ -59,7 +73,7 @@
           $url = $_SERVER['PHP_SELF']."?type_id=".$_GET['type_id'];
 
           //get array product
-          $arrProducts = $Product->getSixProductsByTypeID($type_id,$page, $perPage);
+          $arrProducts = $Product->getProductsForPage($type_id,$page, $perPage);
         }
 
         //run elements of array
@@ -91,14 +105,14 @@
                            }
                          }
                        }
-                       ?>...<a style="font-size: 8xp; font-style: italic; font-weight: 100; color: #3a7ead;" href="<?php echo 'product.php?id=' . $value['Id'] ?>">see more</a>
+                      ?>...<a style="font-size: 8xp; font-style: italic; font-weight: 100; color: #3a7ead;" href="<?php echo 'detail.php?id=' . $value['Id'] ?>">see more</a>
                     </p>
                     <div class="options">
                       <h6>
                         <?php echo number_format($value['Price']); ?> VND
                       </h6>
                       <!-- khúc này là cái cart -->
-                      <a href="">
+                      <a href="add_cart.php?id_product=<?php echo $value['Id']?>">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                           <g>
                             <g>
@@ -165,7 +179,7 @@
       <ul class="store-pagination">
         <?php
         if($total > 6){
-          echo $Product->paginate($url, $total, $perPage);
+          echo $Product->paginateForMenu($url, $total, $perPage);
         }
         ?>
       </ul>

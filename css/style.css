@@ -1525,14 +1525,16 @@ textarea.input {
   border-radius: 40px 0px 0px 40px;
 }
 
-.header-search form .input {
+.header-search form input {
   width: calc(100% - 260px);
   margin-right: -4px;
+  display: inline-block;
 }
 
-.header-search form .search-btn {
+.header-search form button {
   height: 40px;
   width: 100px;
+  display: inline-block;
   background: #D10024;
   color: #FFF;
   font-weight: 700;
