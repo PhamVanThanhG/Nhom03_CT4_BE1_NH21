@@ -5,10 +5,16 @@ require("models/product.php");
 require("models/Product_type.php");
 require("models/customer.php");
 require("models/store.php");
+require("models/sizes.php");
+require("models/toppings.php");
+require("models/bill.php");
 $product_type = new ProductType();
 $product = new ProductFood();
 $customer = new Customer();
 $store = new Store();
+$size = new Sizes();
+$toppings = new Topping();
+$bills = new Bill();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +66,7 @@ $store = new Store();
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="index3.html" class="nav-link">Home</a>
+          <a href="index.php" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
           <a href="#" class="nav-link">Contact</a>
@@ -250,6 +256,21 @@ $store = new Store();
                 <li class="nav-item">
                   <a href="customers.php" class="nav-link" id="Customers">
                     <p style="padding-left: 35px;">Customers</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="sizes.php" class="nav-link" id="Sizes">
+                    <p style="padding-left: 35px;">Sizes</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="toppings.php" class="nav-link" id="Toppings">
+                    <p style="padding-left: 35px;">Toppings</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="bills.php" class="nav-link" id="Bills">
+                    <p style="padding-left: 35px;">Bills</p>
                   </a>
                 </li>
               </ul>

@@ -54,10 +54,16 @@
     var products = document.getElementById('Products');
     var type = document.getElementById('ProductTypes');
     var cus = document.getElementById('Customers');
+    var size = document.getElementById('Sizes');
+    var topping = document.getElementById('Toppings');
+    var bills = document.getElementById('Bills');
     dss.classList.remove('active');
     products.classList.remove('active');
     type.classList.remove('active');
     cus.classList.remove('active');
+    size.classList.remove('active');
+    topping.classList.remove('active');
+    bills.classList.remove('active');
     var hientai = document.getElementById('<?php echo $title ?>');
     hientai.classList.toggle('active');
 </script>

@@ -1,5 +1,5 @@
 <?php
-$title = "Customers";
+$title = "Products";
 include("header.php");
 ?>
 
@@ -10,12 +10,12 @@ include("header.php");
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>CUSTOMERS</h1>
+          <h1>PRODUCTS</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Customers</li>
+            <li class="breadcrumb-item active">Products</li>
           </ol>
         </div>
       </div>
@@ -28,10 +28,10 @@ include("header.php");
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">CUSTOMER DETAILS</h3>
+        <h3 class="card-title">PRODUCTS</h3>
         <div class="card-tools">
           <button type="button" class="btn btn-tool" title="add" style="background-color: green;">
-            <a href="addcustomer.php" style="color: white;font-weight: bolder;">Add customer</a>
+            <a href="addproduct.php" style="color: white;font-weight: bolder;">Add product</a>
           </button>
           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
             <i class="fas fa-minus"></i>
@@ -45,77 +45,80 @@ include("header.php");
         <table class="table table-striped projects">
           <thead>
             <tr>
-              <th style="width: 10%">
-                Customer_id
-              </th>
-              <th style="width: 20%">
-                Username
+              <th style="width: 1%">
+                ID
               </th>
               <th style="width: 15%">
-                Customer image
+                Name
               </th>
-              <th style="width: 17%">
-                Email
+              <th style="width: 5%">
+                Type
               </th>
-              <th style="width: 13%">
-                Phone
+              <th style="width: 25%">
+                Description
+              </th>
+              <th style="width: 8%" class="text-center">
+                Images
               </th>
               <th style="width: 10%">
-                Rank
+                Price
               </th>
-              <th style="width: 10%" class="text-center">
+              <th style="width: 4%" class="text-center">
+                Sale
+              </th>
+              <th style="width: 3%" class="text-center">
+                Feature
+              </th>
+              <th style="width: 5%" class="text-center">
                 Action
               </th>
             </tr>
           </thead>
           <tbody>
             <?php
-            $getAllCustomer = $customer->getAllCustomer();
-            foreach ($getAllCustomer as $value) :
+            $getAllProduct = $product->getAllProducts();
+            foreach ($getAllProduct as $value) :
             ?>
               <tr>
-                <td>
-                  <?php echo ($value['Cus_Id']); ?>
+                <td><?php echo $value['Id'] ?>
                 </td>
                 <td>
-                  <?php echo ($value['Username']); ?>
+                  <?php echo $value['Name'] ?>
                 </td>
                 <td>
-                  <?php
-                  if ($value['cus_img'] == null) {
-                    echo ("Customer have not added any pictures yet!");
+                  <?php echo $value['Type_Name'] ?>
+                </td>
+                <td>
+                  <div style="width: 300px; height: 90px; overflow: scroll;"><?php echo $value['Decription'] ?></div>
+                </td>
+                <td>
+                  <img src="../images/<?php echo $value['image'] ?>" alt="" style="width: 150px;">
+                </td>
+                <td>
+                  <?php echo number_format($value['Price']) ?> VND
+                </td>
+                <td>
+                  <?php echo $value['Sale'] ?>%
+                </td>
+                <td>
+                  <?php if ($value['Feature'] == 0) {
+                    echo "None";
                   } else {
-                  ?>
-                    <img src="../images/<?php echo ($value['cus_img']); ?>" alt="Customer image" style="width: 170px; height: 150px;">
-                  <?php
+                    echo "Yes";
                   }
                   ?>
                 </td>
-                <td>
-                  <?php echo ($value['Email']); ?>
-                </td>
-                <td>
-                  <?php echo ($value['Phone']); ?>
-                </td>
-                <td>
-                  <?php echo ($value['rank']); ?>
-                </td>
                 <td class="project-actions text-right">
-                  <a class="btn btn-info btn-sm" href="detailCustomer.php?id=<?php echo($value['Cus_Id']) ?>" style="height: 30px; width: 80px;background-color: #353833;">
-                  <i class="fas fa-info"></i> 
-                    <span style="padding-left: 5px;">Info</span>
-                  </a>
-                  <br>
-                  <a class="btn btn-info btn-sm" href="editcustomer.php?id=<?php echo($value['Cus_Id']) ?>" style="height: 30px; width: 80px;">
+                  <a class="btn btn-info btn-sm" href="editproduct.php?id=<?php echo $value['Id'] ?>" style="height: 30px; width: 80px;">
                     <i class="fas fa-pencil-alt">
                     </i>
-                    <span style="padding-left: 5px;">Edit</span>
+                    Edit
                   </a>
                   <br>
-                  <a class="btn btn-danger btn-sm" href="deletecus.php?id=<?php echo $value['Cus_Id'] ?>" style="height: 30px; width: 80px;">
+                  <a class="btn btn-danger btn-sm" href="deletepro.php?id=<?php echo $value['Id'] ?>" style="height: 30px; width: 80px;">
                     <i class="fas fa-trash">
                     </i>
-                    <span style="padding-left: 5px;">Delete</span>
+                    Delete
                   </a>
                 </td>
               </tr>

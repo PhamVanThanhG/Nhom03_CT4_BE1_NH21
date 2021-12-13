@@ -47,4 +47,16 @@ class Customer extends Db{
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items;
     }
+
+    public function deleteCustomer($id){
+        $sql = self::$connection->prepare("DELETE FROM `customer` WHERE `Cus_Id` = ?");
+        $sql->bind_param("i", $id);
+        return $sql->execute();
+    }
+
+    public function editCustomerById($id,$username, $email, $cus_img, $birthday, $phone, $city, $district, $wards, $addAd, $rank, $comment, $daycreated){
+        $sql = self::$connection->prepare("UPDATE `customer` SET `Username`=?,`Email`=?,`cus_img`=?,`Birthday`=?,`Phone`=?,`province/city`=?,`district`=?,`wards`=?,`add_Address`=?,`rank`=?,`Comment`=?,`DayCreate`=? WHERE `Cus_Id`=?");
+        $sql->bind_param("ssssssssssssi", $username, $email, $cus_img, $birthday, $phone, $city, $district, $wards, $addAd, $rank, $comment, $daycreated, $id);
+        return $sql->execute();
+    }
 }

@@ -28,7 +28,7 @@ include("header.php");
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">PRODUCTS</h3>
+        <h3 class="card-title">PRODUCT DETAILS</h3>
         <div class="card-tools">
           <button type="button" class="btn btn-tool" title="add" style="background-color: green;">
             <a href="addproduct.php" style="color: white;font-weight: bolder;">Add product</a>

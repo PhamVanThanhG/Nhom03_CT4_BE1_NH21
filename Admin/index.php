@@ -1,4 +1,5 @@
 <?php
+session_start();
 $title = "Dashboard";
 include("header.php");
 $getStore = $store->getStore();
@@ -33,7 +34,7 @@ $getStore = $store->getStore();
           <div class="small-box bg-info">
             <div class="inner">
               <h3>150</h3>
-
+                
               <p>New Orders</p>
             </div>
             <div class="icon">
@@ -136,22 +137,22 @@ $getStore = $store->getStore();
               </div>
               <div class="form-group">
                 <label for="inputName">Opening day</label>
-                <input type="text" id="inputName" class="form-control" name="Opening day" value="<?php echo ($getStore[0]['Opening day']) ?>" required style="width: 300px;">
+                <input type="text" id="inputName" class="form-control" name="Open_day" value="<?php echo ($getStore[0]['Opening day']) ?>" required style="width: 300px;">
               </div>
               <div class="form-group">
                 <label for="inputName">Open time</label>
-                <input type="text" id="inputName" class="form-control" name="Open time" value="<?php echo ($getStore[0]['Open time']) ?>" required style="width: 300px;">
+                <input type="text" id="inputName" class="form-control" name="Open_time" value="<?php echo ($getStore[0]['Open time']) ?>" required style="width: 300px;">
               </div>
               <div class="form-group">
                 <label for="inputDescription">Short description</label>
-                <textarea id="inputDescription" class="form-control" name="Short description" rows="2" required><?php echo ($getStore[0]['Short description']) ?></textarea>
+                <textarea id="inputDescription" class="form-control" name="Short_Description" rows="2" required><?php echo ($getStore[0]['Short description']) ?></textarea>
               </div>
               <div class="form-group">
                 <label for="inputDescription">Long Description</label>
-                <textarea id="inputDescription" class="form-control" name="Long Description" rows="6" required><?php echo ($getStore[0]['Long Description']) ?></textarea>
+                <textarea id="inputDescription" class="form-control" name="Long_Description" rows="6" required><?php echo ($getStore[0]['Long Description']) ?></textarea>
               </div>
               <br>
-              <input type="submit" name="submit" value="Edit store" class="btn btn-success float-right">
+              <input type="submit" name="submitEdit" value="Edit store" class="btn btn-success float-right">
             </li>
           </ul>
         </form>
@@ -169,4 +170,14 @@ $getStore = $store->getStore();
 </div>
 <?php
 include("footer.php");
+?>
+<?php
+  if (isset($_SESSION['edit'])) {
+    unset($_SESSION['edit']);
+    ?>
+    <script>
+      alert("Thay đổi thông tin cửa hàng thành công!");
+    </script>
+    <?php
+  }
 ?>

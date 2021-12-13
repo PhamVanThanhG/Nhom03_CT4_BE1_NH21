@@ -17,3 +17,4 @@ if(isset($_GET['id'])){
         header("location: product_types.php");
     }
 }
+header("location: product_types.php");

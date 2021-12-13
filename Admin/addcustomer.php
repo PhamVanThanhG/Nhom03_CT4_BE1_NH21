@@ -51,7 +51,10 @@ include("header.php");
               </div>
               <div class="form-group">
                 <label for="image">Image</label>
-                <input type="file" id="image" class="form-control" name="image" required>
+                <div class="preview">
+                    <img id="file-ip-1-preview" style="width: 150px;">
+                  </div>
+                <input type="file" id="image" class="form-control" name="image" required onchange="showPreview(event)">
               </div>
               <div class="form-group">
                 <label for="birthday">Birthday</label>
@@ -97,3 +100,13 @@ include("header.php");
 <?php
 include("footer.php");
 ?>
+<script>
+  function showPreview(event) {
+    if (event.target.files.length > 0) {
+      var src = URL.createObjectURL(event.target.files[0]);
+      var preview = document.getElementById("file-ip-1-preview");
+      preview.src = src;
+      preview.style.display = "block";
+    }
+  }
+</script>

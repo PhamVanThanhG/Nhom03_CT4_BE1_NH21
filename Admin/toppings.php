@@ -1,6 +1,6 @@
 <?php
 session_start();
-$title = "ProductTypes";
+$title = "Toppings";
 include("header.php");
 ?>
 
@@ -11,12 +11,12 @@ include("header.php");
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>PRODUCT TYPES</h1>
+          <h1>Toppings</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Product Type</li>
+            <li class="breadcrumb-item active">Toppings</li>
           </ol>
         </div>
       </div>
@@ -29,11 +29,11 @@ include("header.php");
     <!-- Default box -->
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">Product type details</h3>
+        <h3 class="card-title">Topping details</h3>
 
         <div class="card-tools">
           <button type="button" class="btn btn-tool" title="add" style="background-color: green;">
-            <a href="addtype.php" style="color: white;font-weight: bolder;">Add type</a>
+            <a href="addTopping.php" style="color: white;font-weight: bolder;">Add topping</a>
           </button>
           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
             <i class="fas fa-minus"></i>
@@ -48,34 +48,40 @@ include("header.php");
           <thead>
             <tr>
               <th style="width: 20%">
-                ID_Type
+                ID_Topping
               </th>
-              <th style="width: 30%">
-                Name_Type
+              <th style="width: 20%">
+                Topping
               </th>
-              <th style="width: 50%" class="text-center">
+              <th style="width: 20%">
+                Price
+              </th>
+              <th style="width: 40%" class="text-center">
                 Action
               </th>
             </tr>
           </thead>
           <tbody>
             <?php
-            $getAllProductTypes = $product_type->getAllProductTypes();
-            foreach ($getAllProductTypes as $value) :
+            $getAllTopping = $toppings->getAllToppings();
+            foreach ($getAllTopping as $value) :
             ?>
               <tr>
-                <td><?php echo $value['Type_Id'] ?>
+                <td><?php echo $value['id'] ?>
                 </td>
                 <td>
-                  <?php echo $value['Type_Name'] ?>
+                  <?php echo $value['toping'] ?>
+                </td>
+                <td>
+                  <?php echo $value['price'] ?>
                 </td>
                 <td class="project-actions text-center">
-                  <a class="btn btn-info btn-sm" href="edittype.php?id=<?php echo $value['Type_Id'] ?>" style="height: 30px; width: 80px;">
+                  <a class="btn btn-info btn-sm" href="edittopping.php?id=<?php echo $value['id'] ?>" style="height: 30px; width: 80px;">
                     <i class="fas fa-pencil-alt">
                     </i>
                     Edit
                   </a>
-                  <a class="btn btn-danger btn-sm" href="deletetype.php?id=<?php echo $value['Type_Id'] ?>" style="height: 30px; width: 80px;">
+                  <a class="btn btn-danger btn-sm" href="deletetop.php?id=<?php echo $value['id'] ?>" style="height: 30px; width: 80px;">
                     <i class="fas fa-trash">
                     </i>
                     Delete

@@ -8,3 +8,4 @@ if(isset($_POST['submit'])){
     $type->addTypes($name);
     header("location: product_types.php");
 }
+header("location: product_types.php");
