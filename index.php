@@ -68,7 +68,7 @@ $menu = new Menu();
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  mx-auto ">
+            <ul class="navbar-nav  mx-auto " style="padding-left: 100px;">
               <li class="nav-item active">
                 <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
               </li>
@@ -166,19 +166,30 @@ $menu = new Menu();
     <section class="slider_section ">
       <div id="customCarousel1" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-          <div class="carousel-item active">
+          <?php 
+            $product = new ProductFood;
+            $getFeature = $product->getProductsByFeature();
+            $dem = 0;
+            foreach($getFeature as $prod):
+              $dem++;
+          ?>
+          <div class="carousel-item <?php if($dem == 1){echo "active";}?>">
             <div class="container ">
               <div class="row">
                 <div class="col-md-7 col-lg-6 ">
                   <div class="detail-box">
-                    <h1>
-                      Fast Food Restaurant
-                    </h1>
+                    <img src="images/<?php echo $prod['image']?>" alt="anh san pham" class="bd rounded" width="220px" style="margin-bottom: 20px; display: inline-block;">
+                    <div style="display: inline-block; margin-left: 16px;">
+                      <h2>
+                        <?php echo $prod['Name']?>
+                      </h2>
+                      <h5 style="display: inline-block; margin-right: 30px; color: white;"><?php echo number_format($prod['Price'])?> đ</h5>
+                    </div>
                     <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                      <?php echo $prod['Decription']?>
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
+                      <a href="add_cart.php?" class="btn1" style="display: inline-block;">
                         Order Now
                       </a>
                     </div>
@@ -187,48 +198,7 @@ $menu = new Menu();
               </div>
             </div>
           </div>
-          <div class="carousel-item ">
-            <div class="container ">
-              <div class="row">
-                <div class="col-md-7 col-lg-6 ">
-                  <div class="detail-box">
-                    <h1>
-                      Fast Food Restaurant
-                    </h1>
-                    <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">
-                        Order Now
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="container ">
-              <div class="row">
-                <div class="col-md-7 col-lg-6 ">
-                  <div class="detail-box">
-                    <h1>
-                      Fast Food Restaurant
-                    </h1>
-                    <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">
-                        Order Now
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            <?php endforeach;?>
         </div>
         <div class="container">
           <ol class="carousel-indicators">

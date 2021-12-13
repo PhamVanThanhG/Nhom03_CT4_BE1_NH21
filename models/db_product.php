@@ -12,6 +12,16 @@ class ProductFood extends Db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
         return $items;
     }
+    //get product by Feature
+    public function getProductsByFeature()
+    {
+        //Quyery
+        $sql = self::$connection->prepare("SELECT * FROM product WHERE Feature = 1");
+        $sql->execute();
+        $items = array();//Var array items
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
+        return $items;
+    }
 
     //Get 6 Products of the top Products in database
     public function getSixProducts($page, $perPage)
