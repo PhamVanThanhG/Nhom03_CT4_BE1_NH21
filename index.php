@@ -153,7 +153,7 @@ $menu = new Menu();
                 </svg>
               </a>
               <a href="" class="order_online">
-                Order Online
+                Order Online 
               </a>
             </div>
 
@@ -185,11 +185,11 @@ $menu = new Menu();
                       </h2>
                       <h5 style="display: inline-block; margin-right: 30px; color: white;"><?php echo number_format($prod['Price'])?> đ</h5>
                     </div>
-                    <p>
+                    <p style="height: 80px;">
                       <?php echo $prod['Decription']?>
                     </p>
                     <div class="btn-box">
-                      <a href="add_cart.php?" class="btn1" style="display: inline-block;">
+                      <a href="add_cart.php?id_product=<?php echo $prod['Id']?>" class="btn1" style="display: inline-block;">
                         Order Now
                       </a>
                     </div>

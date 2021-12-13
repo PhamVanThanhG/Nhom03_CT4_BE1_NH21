@@ -339,10 +339,10 @@ a:focus {
 
 .slider_section .detail-box {
   color: #ffffff;
-  margin-bottom: 145px;
+  margin-bottom: 48px;
 }
 
-.slider_section .detail-box h2 {
+.slider_section .detail-box h2{
   color: white !important;
   font-weight: bold;
   margin-bottom: 15px;
