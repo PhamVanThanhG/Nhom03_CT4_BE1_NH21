@@ -16,11 +16,11 @@
         foreach($_POST as $key=>$data){
             $k = $key;
         }
-        $arr_Str = str_split($k);
+        $arr_Str = explode("-",$k);
         $id = end($arr_Str);
         //update cart
         $Cart = new Cart;
-        $updateCart = $Cart->updateProduct($_POST['size'.$id], $_POST['topping'.$id], $_POST['quantity'.$id], $id);
+        $updateCart = $Cart->updateProduct($_POST['size-'.$id], $_POST['topping-'.$id], $_POST['quantity-'.$id], $id);
         header('location:http://localhost:89/Nhom03_CT4_BE1_NH21/cart.php');
     }else{
         echo "ERRO: CAN'T GET DATA!";

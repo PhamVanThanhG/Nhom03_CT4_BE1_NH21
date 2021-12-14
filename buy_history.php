@@ -96,36 +96,14 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="2">
-                        <a href="cart.php" class="btn btn-warning btn-block"><i class="fa fa-angle-left"></i> Back</a>
-                    </td>
-                    <td class="hidden-xs"></td>
+                    <td colspan="5" class="hidden-xs"></td>
                     <td colspan="2" class="hidden-xs text-center"><strong>Total price: <?php echo number_format($totalPrice)?> đ</strong></td>
-                    <td>
-                        <a href="#" class="btn btn-danger btn-block" onclick="notify()">Countermand <i class="fa fa-times"></i></a>
-                    </td>
-                    <td>
-                        <a href="#" class="btn btn-success btn-block">Confirm <i class="fa fa-check"></i></a>
-                    </td>
                 </tr>
             </tfoot>
         </table>
     </div>
     <?php endforeach;?>
     <script src="js/jquery-1.11.1.min.js"></script>
-<?php
-    // echo "<script>function notify(){alert('huy');}</script>";
-?>
-<script>
-    function notify(){
-        if(!confirm("Cart can not save yet! Are you want to continue?")){
-            a.href = "";
-        }else{
-            a.href = "add_bill.php?id_user=1";
-        }
-    }
-    
-</script>
 </body>
 
 </html>

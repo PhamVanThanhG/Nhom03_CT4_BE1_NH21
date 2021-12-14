@@ -75,7 +75,7 @@
                         ?>
                         <form method="post" action="update_cart.php">
                             <td data-th="Size">
-                                <select name="size<?php echo $value['id_product'] ?>" id="size-<?php echo $value['id_product'] ?>" class="<?php echo $value['id_product'] ?>" disabled="disabled">
+                                <select name="size-<?php echo $value['id_product'] ?>" id="size-<?php echo $value['id_product'] ?>" class="<?php echo $value['id_product'] ?>" disabled="disabled">
                                     <?php foreach ($getAllSize as $allSize) : ?>
                                         <option value=<?php echo $allSize['id'] ?> <?php if ($allSize['id'] == $getSizeByID[0]['id']) {echo "selected";} ?>><?php echo $allSize['size'] ?></option>
                                     <?php endforeach; ?>
@@ -89,7 +89,7 @@
                             $total = $total + $getToppingByID[0]['price'];
                             ?>
                             <td data-th="Topping">
-                                <select name="topping<?php echo $value['id_product'] ?>" class="<?php echo $value['id_product'] ?>" disabled="disabled">
+                                <select name="topping-<?php echo $value['id_product'] ?>" class="<?php echo $value['id_product'] ?>" disabled="disabled">
                                     <?php foreach ($getAllTopping as $allTopping) : ?>
                                         <option value=<?php echo $allTopping['id'] ?> <?php if ($allTopping['id'] == $getToppingByID[0]['id']) {echo "selected";} ?>><?php echo $allTopping['toping'] ?></option>
                                     <?php endforeach; ?>
@@ -97,15 +97,19 @@
                             </td>
                             <?php //quantity?>
                             <td data-th="Quantity">
-                                <input name="quantity<?php echo $value['id_product'] ?>" class="<?php echo $value['id_product'] ?> form-control text-center" value=<?php echo $value['quantity'] ?> type="number" disabled="disabled">
+                                <input name="quantity-<?php echo $value['id_product'] ?>" class="<?php echo $value['id_product'] ?> form-control text-center" value=<?php echo $value['quantity'] ?> type="number" disabled="disabled">
                             </td>
                             <?php //Price?>
                             <td data-th="TotalPrice" class="text-center"><?php echo number_format($total * $value['quantity']);$priceCart = $priceCart + ($total * $value['quantity']); ?> đ</td>
                             <td class="actions" data-th="Action">
+                                <?php //Button save?>
                                 <button id="save<?php echo $value['id_product'] ?>" type="submit" class="btn btn-warning" hidden>Save</button>
                         </form>
                         <?php //button edit product?>
-                        <button id="edit<?php echo $value['id_product'] ?>" class="btn btn-info btn-sm" onclick="removeClass(<?php echo $value['id_product'];?>)"><i class="fa fa-edit"></i></button>
+                        <button id="edit<?php echo $value['id_product'] ?>" 
+                        class="btn btn-info btn-sm" onclick="removeClass(<?php echo $value['id_product'];?>)">
+                            <i class="fa fa-edit"></i>
+                        </button>
                         <?php //Button remove product?>
                         <a id="remove<?php echo $value['id_product'] ?>" href="remove_cart.php?id_product=<?php echo $value['id_product'] ?>">
                             <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
@@ -122,6 +126,7 @@
                     <td class="hidden-xs text-center"><strong>Total: <?php echo number_format($priceCart) ?> đ</strong>
                     </td>
                     <?php
+                    //send object data
                     // $array = json_encode($getAllCart);//encode to json
                     // $RequestArray = urlencode($array);
                     ?>
@@ -133,7 +138,7 @@
             </tfoot>
         </table>
     </div>
-    <script src="js/jquery-1.11.1.min.js"></script>
+    <!-- <script src="js/jquery-1.11.1.min.js"></script> -->
     <script>
         var check = 0;//to process notify
         //remove attribute disabled
