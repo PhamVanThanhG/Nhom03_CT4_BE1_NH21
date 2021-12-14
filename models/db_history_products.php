@@ -24,11 +24,11 @@ class ProductPurchaseHistory extends Db
     }
 
     //Insert data to table cart in database
-    public function add($id_bill, $idproduct, $id_size, $id_topping, $quantity, $price)
+    public function add($id_bill, $idproduct, $id_size, $id_topping, $quantity)
     {
         //Quyery
-        $sql = self::$connection->prepare("INSERT INTO `buy_products_history` (`id_bill`, `id_product`, `id_size`, `id_topping`, `quantity`, `price`) VALUES (?,?,?,?,?,?)");
-        $sql->bind_param("iiiiii", $id_bill, $idproduct, $id_size, $id_topping, $quantity, $price);
+        $sql = self::$connection->prepare("INSERT INTO `buy_products_history` (`id_bill`, `id_product`, `id_size`, `id_topping`, `quantity`) VALUES (?,?,?,?,?)");
+        $sql->bind_param("iiiii", $id_bill, $idproduct, $id_size, $id_topping, $quantity);
         return $sql->execute();
     }
 }

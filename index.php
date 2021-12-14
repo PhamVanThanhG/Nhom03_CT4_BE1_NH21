@@ -82,7 +82,7 @@ $menu = new Menu();
                 <a class="nav-link" href="book.php">Book Table</a>
               </li>
             </ul>
-            <div class="user_option">
+            <div class="user_option"><?php #Process seach product?>
               <form class="form-inline" method="get" action="menu.php">
                 <input type="search" name="key" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                 <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">

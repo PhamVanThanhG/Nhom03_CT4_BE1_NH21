@@ -12,12 +12,26 @@
     </div>
     <?php
      $Menu = new Menu;
+     $ProductType = new TypeProduct;
      $getAllMenu = $Menu->getAllMenu();
     ?>
     <ul class="filters_menu">
-      <li <?php if(!isset($_GET['type_id']) || (isset($_GET['type_id']) && $_GET['type_id'] == 0)){echo "class='active'";}?>><a href="index.php?type_id=0">All</a></li>
+      <li <?php if(!isset($_GET['type_id']) && !isset($_GET['key']) || (isset($_GET['type_id']) && $_GET['type_id'] == 0)){echo "class='active'";}?>><a href="menu.php?type_id=0">All</a></li>
       <?php foreach($getAllMenu as $menu):?>
-      <li <?php if(isset($_GET['type_id']) && $_GET['type_id'] == $menu['Type_Id']){echo "class='active'";} ?>><a href="menu.php?type_id=<?php echo $menu['Type_Id']?>"><?php echo $menu['Name']?></a></li>
+      <li 
+      <?php 
+        if(isset($_GET['key'])){
+          $getType = $ProductType->search($_GET['key']);
+          $type_id = $getType[0]['Type_Id'];
+          if($type_id == $menu['Type_Id']){
+            echo "class='active'";
+          }
+        }else if(isset($_GET['type_id']) && $_GET['type_id'] == $menu['Type_Id']){
+          echo "class='active'";
+        }
+      ?>>
+        <a href="menu.php?type_id=<?php echo $menu['Type_Id']?>"><?php echo $menu['Name']?></a>
+      </li>
       <?php endforeach;?>
     </ul>
 
@@ -37,20 +51,20 @@
 
         //Function: process when get type or not
         if(isset($_GET['key'])){
-          $ProductType = new TypeProduct;
           $getType = $ProductType->search($_GET['key']);
-
-          $type_id = $getType[0]['Type_Id'];
-          $getProductsByType = $Product->getProductsByType($type_id);
-
-          //total number of product
-          $total = count($getProductsByType);
-
-          //get link current
-          $url = $_SERVER['PHP_SELF']."?type_id=".$getType[0]['Type_Id'];
-
-          //get array product
-          $arrProducts = $Product->getProductsForPage($type_id,$page, $perPage);
+          if(sizeof($getType) > 0){
+            $type_id = $getType[0]['Type_Id'];
+            $getProductsByType = $Product->getProductsByType($type_id);
+  
+            //total number of product
+            $total = count($getProductsByType);
+  
+            //get link current
+            $url = $_SERVER['PHP_SELF']."?type_id=".$getType[0]['Type_Id'];
+  
+            //get array product
+            $arrProducts = $Product->getProductsForPage($type_id,$page, $perPage);
+          }
         }else if(!isset($_GET['type_id']) || $_GET['type_id'] == 0){
           $getAllproducts = $Product->getAllProducts();
 

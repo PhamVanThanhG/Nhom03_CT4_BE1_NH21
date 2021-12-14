@@ -39,7 +39,7 @@ if (isset($_GET['id_bill'])) {
     //get data from bill table
     $getProd = $BillProduct->getByID($_GET['id_bill']);
     foreach ($getProd as $prod) {
-        $addProduct = $ProdPurchaseHistory->add($id, $prod['id_product'], $prod['id_size'], $prod['id_topping'], $prod['quantity'], 100000);
+        $addProduct = $ProdPurchaseHistory->add($id, $prod['id_product'], $prod['id_size'], $prod['id_topping'], $prod['quantity']);
     }
     #remove bill
     $removeBill = $Bill->removeProduct($_GET['id_bill']);
