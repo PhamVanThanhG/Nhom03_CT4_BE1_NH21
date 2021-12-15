@@ -78,6 +78,13 @@ include "header.php"
 					$Rating = new Rating;
 					$Size = new Size;
 					$Topping = new Topping;
+					$History = new PurchaseHistory;
+					$check = 0;
+					if(sizeof($History->getByIDUser(2)) > 0){
+						$check = 1;
+					}else{
+						$check = 0;
+					}
 					$id = $_GET['id'];
 					$quantity = 1;
 					$countRating = $Rating->countRatingByID($id);
@@ -239,10 +246,10 @@ include "header.php"
 														</span>
 														<div class="rating-stars">
 															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star"></i>
-															<i class="fa fa-star-o"></i>
+															<i class="fa fa-star<?php if($average < 2){echo "-o";}?>"></i>
+															<i class="fa fa-star<?php if($average < 3){echo "-o";}?>"></i>
+															<i class="fa fa-star<?php if($average < 4){echo "-o";}?>"></i>
+															<i class="fa fa-star<?php if($average < 5){echo "-o";}?>"></i>
 														</div>
 													</div>
 													<ul class="rating">
@@ -255,9 +262,19 @@ include "header.php"
 																<i class="fa fa-star"></i>
 															</div>
 															<div class="rating-progress">
-																<div style="width: 80%;"></div>
+																<?php 
+																	$sumRating5 = 0;
+																	foreach($Rating->getRatingByIDProduct($id) as $rating){
+																		if($rating['rating_value'] == 5){
+																			$sumRating5++;
+																		}
+																	}
+																?>
+																<div style="width: <?php echo ($sumRating5/$countRating[0]['COUNT(id)'])*100?>%;"></div>
 															</div>
-															<span class="sum">3</span>
+															<span class="sum">
+																<?php echo $sumRating5;?>
+															</span>
 														</li>
 														<li>
 															<div class="rating-stars">
@@ -268,9 +285,17 @@ include "header.php"
 																<i class="fa fa-star-o"></i>
 															</div>
 															<div class="rating-progress">
-																<div style="width: 60%;"></div>
+																<?php 
+																	$sumRating4 = 0;
+																	foreach($Rating->getRatingByIDProduct($id) as $rating){
+																		if($rating['rating_value'] == 4){
+																			$sumRating4++;
+																		}
+																	}
+																?>
+																<div style="width: <?php echo ($sumRating4/$countRating[0]['COUNT(id)'])*100?>%;"></div>
 															</div>
-															<span class="sum">2</span>
+															<span class="sum"><?php echo $sumRating4;?></span>
 														</li>
 														<li>
 															<div class="rating-stars">
@@ -281,9 +306,17 @@ include "header.php"
 																<i class="fa fa-star-o"></i>
 															</div>
 															<div class="rating-progress">
-																<div></div>
+																<?php 
+																	$sumRating3 = 0;
+																	foreach($Rating->getRatingByIDProduct($id) as $rating){
+																		if($rating['rating_value'] == 3){
+																			$sumRating3++;
+																		}
+																	}
+																?>
+																<div style="width: <?php echo ($sumRating3/$countRating[0]['COUNT(id)'])*100?>%;"></div>
 															</div>
-															<span class="sum">0</span>
+															<span class="sum"><?php echo $sumRating3;?></span>
 														</li>
 														<li>
 															<div class="rating-stars">
@@ -294,9 +327,17 @@ include "header.php"
 																<i class="fa fa-star-o"></i>
 															</div>
 															<div class="rating-progress">
-																<div></div>
+																<?php 
+																	$sumRating2 = 0;
+																	foreach($Rating->getRatingByIDProduct($id) as $rating){
+																		if($rating['rating_value'] == 2){
+																			$sumRating2++;
+																		}
+																	}
+																?>
+																<div style="width: <?php echo ($sumRating2/$countRating[0]['COUNT(id)'])*100?>%;"></div>
 															</div>
-															<span class="sum">0</span>
+															<span class="sum"><?php echo $sumRating2;?></span>
 														</li>
 														<li>
 															<div class="rating-stars">
@@ -307,9 +348,17 @@ include "header.php"
 																<i class="fa fa-star-o"></i>
 															</div>
 															<div class="rating-progress">
-																<div></div>
+																<?php 
+																	$sumRating1 = 0;
+																	foreach($Rating->getRatingByIDProduct($id) as $rating){
+																		if($rating['rating_value'] == 1){
+																			$sumRating1++;
+																		}
+																	}
+																?>
+																<div style="width: <?php echo ($sumRating1/$countRating[0]['COUNT(id)'])*100?>%;"></div>
 															</div>
-															<span class="sum">0</span>
+															<span class="sum"><?php echo $sumRating1;?></span>
 														</li>
 													</ul>
 												</div>
@@ -321,7 +370,11 @@ include "header.php"
 												<div id="reviews">
 													<ul class="reviews">
 													<?php
-														foreach($Rating->getRatingByIDProduct($id) as $ra):
+														$total = $countRating[0]['COUNT(id)'];
+														$url = $_SERVER['PHP_SELF']."?id=".$id;
+														$page = isset($_GET['page'])?$_GET['page']:1;
+														$perPage = 3;
+														foreach($Rating->get3Comments($page, $perPage) as $ra):
 													?>
 														<li>
 															<div class="review-heading">
@@ -330,10 +383,10 @@ include "header.php"
 																<p class="date"><?php echo $ra['date']?></p>
 																<div class="review-rating">
 																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star-o empty"></i>
+																	<i class="fa fa-star<?php if($ra['rating_value'] < 2){echo "-o empty";}?>"></i>
+																	<i class="fa fa-star<?php if($ra['rating_value'] < 3){echo "-o empty";}?>"></i>
+																	<i class="fa fa-star<?php if($ra['rating_value'] < 4){echo "-o empty";}?>"></i>
+																	<i class="fa fa-star<?php if($ra['rating_value'] < 5){echo "-o empty";}?>"></i>
 																</div>
 															</div>
 															<div class="review-body">
@@ -343,11 +396,16 @@ include "header.php"
 													<?php endforeach;?>
 													</ul>
 													<ul class="reviews-pagination">
-														<li class="active">1</li>
+														<?php	
+															if($total > 3){
+															  echo $Rating->paginateComment($url, $total, $perPage);
+															}
+														?>
+														<!-- <li class="active">1</li>
 														<li><a href="#">2</a></li>
 														<li><a href="#">3</a></li>
 														<li><a href="#">4</a></li>
-														<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+														<li><a href="#"><i class="fa fa-angle-right"></i></a></li> -->
 													</ul>
 												</div>
 											</div>
@@ -356,8 +414,8 @@ include "header.php"
 											<!-- Review Form -->
 											<div class="col-md-3">
 												<div id="review-form">
-													<form class="review-form">
-														<textarea class="input" placeholder="Your Review"></textarea>
+													<form id="add-review" class="review-form" method="post" action="<?php if($check > 0){ echo "add_review.php?id_product=".$id;}?>">
+														<textarea class="input" name="comment" placeholder="Your Review"></textarea>
 														<div class="input-rating">
 															<span>Your Rating: </span>
 															<div class="stars">
@@ -368,7 +426,12 @@ include "header.php"
 																<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
 															</div>
 														</div>
-														<button class="primary-btn">Submit</button>
+														<button type="submit" class="primary-btn" <?php if($check == 0){ echo "disabled";}?>>Submit</button>
+														<?php
+															if($check == 0){
+																echo "<label style='color: #ff8484;'>You must purchase the product before write a review!</label>";
+															}
+														?>
 													</form>
 												</div>
 											</div>
@@ -460,7 +523,6 @@ include "header.php"
 		<!-- /container -->
 	</div>
 	<!-- /Section -->
-
 	<!-- jQuery Plugins -->
 	<script src="js/js/jquery.min.js"></script>
 	<script src="js/js/bootstrap.min.js"></script>
@@ -468,7 +530,6 @@ include "header.php"
 	<script src="js/js/nouislider.min.js"></script>
 	<script src="js/js/jquery.zoom.min.js"></script>
 	<script src="js/js/main.js"></script>
-
 </body>
 
 </html>

@@ -11,6 +11,7 @@ require "models/db_topping.php";
 require "models/db_cart.php";
 require "models/db_bill.php";
 require "models/db_bill_products.php";
+require "models/db_history.php";
 $menu = new Menu();
 ?>
 <!DOCTYPE html>
