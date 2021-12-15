@@ -236,7 +236,6 @@ a:focus {
   fill: #ffbe33;
 }
 
-
 .user_option .order_online {
   display: inline-block;
   padding: 8px 30px;
@@ -339,11 +338,11 @@ a:focus {
 
 .slider_section .detail-box {
   color: #ffffff;
-  margin-bottom: 48px;
+  margin-bottom: 145px;
 }
 
-.slider_section .detail-box h2{
-  color: white !important;
+.slider_section .detail-box h1 {
+  font-size: 3.5rem;
   font-weight: bold;
   margin-bottom: 15px;
 }
@@ -1525,16 +1524,14 @@ textarea.input {
   border-radius: 40px 0px 0px 40px;
 }
 
-.header-search form input {
+.header-search form .input {
   width: calc(100% - 260px);
   margin-right: -4px;
-  display: inline-block;
 }
 
-.header-search form button {
+.header-search form .search-btn {
   height: 40px;
   width: 100px;
-  display: inline-block;
   background: #D10024;
   color: #FFF;
   font-weight: 700;

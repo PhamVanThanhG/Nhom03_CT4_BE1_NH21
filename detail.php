@@ -193,7 +193,7 @@ include "header.php"
 								<ul class="tab-nav">
 									<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
 									<li><a data-toggle="tab" href="#tab2">Details</a></li>
-									<li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+									<li><a data-toggle="tab" href="#tab3">Reviews (<?php echo $countRating[0]['COUNT(id)']?>)</a></li>
 								</ul>
 								<!-- /product tab nav -->
 
@@ -226,7 +226,17 @@ include "header.php"
 											<div class="col-md-3">
 												<div id="rating">
 													<div class="rating-avg">
-														<span>4.5</span>
+														<span>
+															<?php
+																//average rating
+																$average = 0;
+																foreach($Rating->getRatingByIDProduct($id) as $rating){
+																	$average += $rating['rating_value'];
+																}
+																$average = $average/$countRating[0]['COUNT(id)'];
+																echo $average;
+															?>
+														</span>
 														<div class="rating-stars">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star"></i>
@@ -310,10 +320,14 @@ include "header.php"
 											<div class="col-md-6">
 												<div id="reviews">
 													<ul class="reviews">
+													<?php
+														foreach($Rating->getRatingByIDProduct($id) as $ra):
+													?>
 														<li>
 															<div class="review-heading">
-																<h5 class="name">John</h5>
-																<p class="date">27 DEC 2018, 8:0 PM</p>
+																<h5 class="name"><?php //lấy từ bảng customer name, cắt chuỗi và lấy end aray
+																echo "UNKNOWN";?></h5>
+																<p class="date"><?php echo $ra['date']?></p>
 																<div class="review-rating">
 																	<i class="fa fa-star"></i>
 																	<i class="fa fa-star"></i>
@@ -323,41 +337,10 @@ include "header.php"
 																</div>
 															</div>
 															<div class="review-body">
-																<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+																<p><?php echo $ra['comment']?></p>
 															</div>
 														</li>
-														<li>
-															<div class="review-heading">
-																<h5 class="name">John</h5>
-																<p class="date">27 DEC 2018, 8:0 PM</p>
-																<div class="review-rating">
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star-o empty"></i>
-																</div>
-															</div>
-															<div class="review-body">
-																<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-															</div>
-														</li>
-														<li>
-															<div class="review-heading">
-																<h5 class="name">John</h5>
-																<p class="date">27 DEC 2018, 8:0 PM</p>
-																<div class="review-rating">
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star-o empty"></i>
-																</div>
-															</div>
-															<div class="review-body">
-																<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-															</div>
-														</li>
+													<?php endforeach;?>
 													</ul>
 													<ul class="reviews-pagination">
 														<li class="active">1</li>
@@ -374,8 +357,6 @@ include "header.php"
 											<div class="col-md-3">
 												<div id="review-form">
 													<form class="review-form">
-														<input class="input" type="text" placeholder="Your Name">
-														<input class="input" type="email" placeholder="Your Email">
 														<textarea class="input" placeholder="Your Review"></textarea>
 														<div class="input-rating">
 															<span>Your Rating: </span>

@@ -513,7 +513,10 @@ $menu = new Menu();
       </div>
     </div>
   </section>
-
+  <form style="margin-left: 160px; margin-right: 160px; margin-bottom: 60px;">
+		<textarea class="input" placeholder="Add Your Comment..."></textarea>
+		<button class="primary-btn" style="margin-top: 12px;">Submit</button>
+	</form>
   <!-- end client section -->
 
   <?php
