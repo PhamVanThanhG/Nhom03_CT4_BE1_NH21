@@ -12,11 +12,13 @@
 
     //Check data exist or not
     if(isset($_POST)){
-        if(isset($_GET['id_product'])){
-            //process add review
-            $Rating = new Rating;
-            $date = $date = date("d-m-Y");
-            $Rating->addNewRating($_POST['rating'], 7, $_GET['id_product'], $_POST['comment'], $date);
+        if($_POST['rating'] != "" && $_POST['comment'] != ""){
+            if(isset($_GET['id_product'])){
+                //process add review
+                $Rating = new Rating;
+                $date = $date = date("d-m-Y");
+                $Rating->addNewRating($_POST['rating'], 7, $_GET['id_product'], $_POST['comment'], $date);
+            }
         }
     }else{
         echo "ERRO: CAN'T GET DATA!";
