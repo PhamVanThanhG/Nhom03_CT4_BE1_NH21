@@ -92,7 +92,7 @@ include("header.php");
                   <div style="width: 300px; height: 90px; overflow: scroll;"><?php echo $value['Decription'] ?></div>
                 </td>
                 <td>
-                  <img src="../images/<?php echo $value['image'] ?>" alt="" style="width: 150px;">
+                  <img src="../images/<?php echo $value['image'] ?>" alt="" style="width: 150px;object-fit: cover;">
                 </td>
                 <td>
                   <?php echo number_format($value['Price']) ?> VND

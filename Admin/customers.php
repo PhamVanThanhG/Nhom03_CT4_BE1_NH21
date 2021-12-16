@@ -86,7 +86,7 @@ include("header.php");
                     echo ("Customer have not added any pictures yet!");
                   } else {
                   ?>
-                    <img src="../images/<?php echo ($value['cus_img']); ?>" alt="Customer image" style="width: 170px; height: 150px;">
+                    <img src="../images/<?php echo ($value['cus_img']); ?>" alt="Customer image" style="width: 170px; height: 150px;object-fit: cover;">
                   <?php
                   }
                   ?>

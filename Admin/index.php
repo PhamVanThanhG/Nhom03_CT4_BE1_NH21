@@ -3,6 +3,10 @@ session_start();
 $title = "Dashboard";
 include("header.php");
 $getStore = $store->getStore();
+$getAllBuyHistory = $bills->getAllBuyHistory();
+
+
+
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -33,9 +37,12 @@ $getStore = $store->getStore();
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>150</h3>
-                
-              <p>New Orders</p>
+              <h3><?php
+                  $order = $bills->getOrder();
+                  echo ($order[0][0])
+                  ?></h3>
+
+              <p>Orders delivered successfully</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
@@ -48,14 +55,14 @@ $getStore = $store->getStore();
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
+              <h3><?php echo ($product->getSL()[0]['SL']) ?></h3>
 
-              <p>Bounce Rate</p>
+              <p>Products</p>
             </div>
             <div class="icon">
-              <i class="ion ion-stats-bars"></i>
+              <i class="fas fa-hamburger"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="products.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -63,14 +70,14 @@ $getStore = $store->getStore();
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>44</h3>
+              <h3><?php echo $customer->getSL()[0]['SL'] ?></h3>
 
               <p>User Registrations</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="customers.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -78,9 +85,9 @@ $getStore = $store->getStore();
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>65</h3>
+              <h3><?php echo $bills->getProductSold()[0]['SL'] ?></h3>
 
-              <p>Unique Visitors</p>
+              <p>Product solds</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -91,7 +98,11 @@ $getStore = $store->getStore();
         <!-- ./col -->
       </div>
       <!-- /.row -->
-      <!-- Main row -->
+
+      <div class="container">
+        <canvas id="myChart"></canvas>
+      </div>
+
       <div style="background-color: #17a2b854;">
         <h4 style="font-weight: bolder; padding-top: 10px;">STORE'S INFORMATION</h4><br>
         <form action="editstore.php" method="post">
@@ -172,12 +183,12 @@ $getStore = $store->getStore();
 include("footer.php");
 ?>
 <?php
-  if (isset($_SESSION['edit'])) {
-    unset($_SESSION['edit']);
-    ?>
-    <script>
-      alert("Thay đổi thông tin cửa hàng thành công!");
-    </script>
-    <?php
-  }
+if (isset($_SESSION['edit'])) {
+  unset($_SESSION['edit']);
+?>
+  <script>
+    alert("Thay đổi thông tin cửa hàng thành công!");
+  </script>
+<?php
+}
 ?>

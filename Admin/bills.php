@@ -1,4 +1,5 @@
 <?php
+session_start();
 $title = "Bills";
 include("header.php");
 ?>
@@ -89,7 +90,7 @@ include("header.php");
                     echo ("Customer have not added any pictures yet!");
                   } else {
                   ?>
-                    <img src="../images/<?php echo ($value['cus_img']); ?>" alt="Customer image" style="width: 140px; height: 140px;">
+                    <img src="../images/<?php echo ($value['cus_img']); ?>" alt="Customer image" style="width: 140px; height: 140px;object-fit: cover;">
                   <?php
                   }
                   ?>
@@ -104,12 +105,12 @@ include("header.php");
                   <?php echo ($value['state']); ?>
                 </td>
                 <td class="project-actions text-center">
-                  <a class="btn btn-info btn-sm" href="detailCustomer.php?id=<?php echo ($value['Cus_Id']) ?>" style="height: 30px; width: 90px;background-color: #353833;">
+                  <a class="btn btn-info btn-sm" href="detailBill.php?id=<?php echo ($value['id']) ?>" style="height: 30px; width: 90px;background-color: #353833;">
                     <i class="fas fa-info"></i>
                     <span style="padding-left: 5px;">Info</span>
                   </a>
                   <br>
-                  <a class="btn btn-info btn-sm" href="editcustomer.php?id=<?php echo ($value['Cus_Id']) ?>" style="height: 30px; width: 90px;">
+                  <a id="deliver" class="btn btn-info btn-sm" href="deliverBill.php?id=<?php echo ($value['id']) ?>" style="height: 30px; width: 90px;">
                     <i class="fas fa-truck"></i>
                     </i>
                     <span style="padding-left: 5px;">Deliver</span>
@@ -139,3 +140,13 @@ include("header.php");
 <?php
 include("footer.php");
 ?>
+<script>
+    <?php
+      if(isset($_SESSION['deliver'])){
+        ?>
+        alert("Đơn hàng đang được giao!");
+        <?php
+        unset($_SESSION['deliver']);
+      }
+    ?>
+</script>
