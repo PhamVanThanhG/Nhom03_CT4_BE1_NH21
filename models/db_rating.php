@@ -33,12 +33,12 @@ class Rating extends Db
         $sql->execute();
     }
     //Get 3 Comment of the top Products in database
-    public function get3Comments($page, $perPage)
+    public function get3Comments($id_prod, $page, $perPage)
     {
         //Quyery
         $firstLink = ($page - 1) * $perPage;
-        $sql = self::$connection->prepare("SELECT * FROM rating LIMIT ?,?");
-        $sql->bind_param("ii", $firstLink, $perPage);
+        $sql = self::$connection->prepare("SELECT * FROM `rating` WHERE id_product = ? ORDER BY id DESC LIMIT ?,?");
+        $sql->bind_param("iii", $id_prod, $firstLink, $perPage);
         $sql->execute();
         $items = array();//Var array items
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
@@ -54,12 +54,12 @@ class Rating extends Db
      	{
             if(isset($_GET['page'])){
                 if($_GET['page'] == $j){
-                    $link = $link."<li class='active'><a href='$url&page=$j'> $j </a></li>";
+                    $link = $link."<li class='active'><a href='$url&page=$j&review=1#tab3'> $j </a></li>";
                 }else{
-                    $link = $link."<li><a href='$url&page=$j'> $j </a></li>";
+                    $link = $link."<li><a href='$url&page=$j&review=1#tab3'> $j </a></li>";
                 }
             }else{
-                $link = $link."<li><a href='$url&page=$j'> $j </a></li>";
+                $link = $link."<li><a href='$url&page=$j&review=1#tab3'> $j </a></li>";
             }
      	}
         $arrayLink = explode("'",$link);
@@ -70,17 +70,17 @@ class Rating extends Db
             }
         }
         if($i == 0){
-            $link=""."<li class='active'><a href='$url&page=1'> 1 </a></li>";
+            $link=""."<li class='active'><a href='$url&page=1&review=1#tab3'> 1 </a></li>";
             for($j=2; $j <= $totalLinks ; $j++)
      	    {
                 if(isset($_GET['page'])){
                     if($_GET['page'] == $j){
-                        $link = $link."<li class='active'><a href='$url&page=$j'> $j </a></li>";
+                        $link = $link."<li class='active'><a href='$url&page=$j&review=1#tab3'> $j </a></li>";
                     }else{
-                        $link = $link."<li><a href='$url&page=$j'> $j </a></li>";
+                        $link = $link."<li><a href='$url&page=$j&review=1#tab3'> $j </a></li>";
                     }
                 }else{
-                    $link = $link."<li><a href='$url&page=$j'> $j </a></li>";
+                    $link = $link."<li><a href='$url&page=$j&review=1#tab3'> $j </a></li>";
                 }
      	    }
         }
