@@ -80,7 +80,7 @@ include "header.php"
 					$Topping = new Topping;
 					$History = new PurchaseHistory;
 					$check = 0;
-					if(sizeof($History->getByIDUser(2)) > 0){
+					if(sizeof($History->getByIDUser(1)) > 0){
 						$check = 1;
 					}else{
 						$check = 0;
@@ -148,7 +148,7 @@ include "header.php"
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star-o"></i>
 									</div>
-									<a class="review-link" href="#"><?php foreach ($countRating as $rating){echo $rating['COUNT(id)'];} ?> Review(s) | Add your review</a>
+									<a class="review-link" data-toggle="tab" href="#tab3"><?php foreach ($countRating as $rating){echo $rating['COUNT(id)'];} ?> Review(s) | Add your review</a>
 								</div>
 								<div>
 									<h3 class="product-price"><?php echo number_format($value['Price']) ?> đ <?php if ($value['Sale'] > 0) : ?><del class="product-old-price">$990.00 VND</del><?php endif; ?></h3>
@@ -198,9 +198,9 @@ include "header.php"
 							<div id="product-tab">
 								<!-- product tab nav -->
 								<ul class="tab-nav">
-									<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
+									<li <?php if(!isset($_GET['review'])){ echo "class='active'";}?>><a data-toggle="tab" href="#tab1">Description</a></li>
 									<li><a data-toggle="tab" href="#tab2">Details</a></li>
-									<li><a data-toggle="tab" href="#tab3">Reviews (<?php echo $countRating[0]['COUNT(id)']?>)</a></li>
+									<li <?php if(isset($_GET['review'])){ echo "class='active'";}?>><a data-toggle="tab" href="#tab3">Reviews (<?php echo $countRating[0]['COUNT(id)']?>)</a></li>
 								</ul>
 								<!-- /product tab nav -->
 
@@ -237,13 +237,42 @@ include "header.php"
 															<?php
 																//average rating
 																$average = 0;
-																foreach($Rating->getRatingByIDProduct($id) as $rating){
-																	$average += $rating['rating_value'];
+																if($countRating[0]['COUNT(id)'] == 0){
+																	echo 0;
+																}else{
+																	foreach($Rating->getRatingByIDProduct($id) as $rating){
+																		$average += $rating['rating_value'];
+																	}
+																	$average = $average/$countRating[0]['COUNT(id)'];
+																	$average = str_split(str_split($average, 4)[0]);
+																	if(sizeof($average)>3){
+																		if($average[3] > 5){
+																			$average[2]++;
+																		}
+																	}
+																	if(sizeof($average) == 1){
+																		echo "".$average[0];
+																	}else if(sizeof($average) == 2){
+																		echo "".$average[0].$average[1];
+																	}else if(sizeof($average) == 3){
+																		echo "".$average[0].$average[1].$average[2];
+																	}
 																}
-																$average = $average/$countRating[0]['COUNT(id)'];
-																echo $average;
 															?>
 														</span>
+														<?php
+															if($countRating[0]['COUNT(id)'] == 0):?>
+																<div class="rating-stars">
+																	<i class="fa fa-star-o"></i>
+																	<i class="fa fa-star-o"></i>
+																	<i class="fa fa-star-o"></i>
+																	<i class="fa fa-star-o"></i>
+																	<i class="fa fa-star-o"></i>
+																</div>
+															<?php endif;?>
+														<?php
+															if($countRating[0]['COUNT(id)'] > 0):														
+														?>
 														<div class="rating-stars">
 															<i class="fa fa-star"></i>
 															<i class="fa fa-star<?php if($average < 2){echo "-o";}?>"></i>
@@ -251,7 +280,82 @@ include "header.php"
 															<i class="fa fa-star<?php if($average < 4){echo "-o";}?>"></i>
 															<i class="fa fa-star<?php if($average < 5){echo "-o";}?>"></i>
 														</div>
+														<?php endif;?>
 													</div>
+													<?php
+														if($countRating[0]['COUNT(id)'] == 0):
+													?>
+													<ul class="rating">
+														<li>
+															<div class="rating-stars">
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+															</div>
+															<div class="rating-progress">
+																<div style="width: 0%;"></div>
+															</div>
+															<span class="sum">
+																0
+															</span>
+														</li>
+														<li>
+															<div class="rating-stars">
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star-o"></i>
+															</div>
+															<div class="rating-progress">
+																<div style="width: 0%;"></div>
+															</div>
+															<span class="sum">0</span>
+														</li>
+														<li>
+															<div class="rating-stars">
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star-o"></i>
+																<i class="fa fa-star-o"></i>
+															</div>
+															<div class="rating-progress">
+																<div style="width: 0%;"></div>
+															</div>
+															<span class="sum">0</span>
+														</li>
+														<li>
+															<div class="rating-stars">
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star-o"></i>
+																<i class="fa fa-star-o"></i>
+																<i class="fa fa-star-o"></i>
+															</div>
+															<div class="rating-progress">
+																<div style="width: 0%;"></div>
+															</div>
+															<span class="sum">0</span>
+														</li>
+														<li>
+															<div class="rating-stars">
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star-o"></i>
+																<i class="fa fa-star-o"></i>
+																<i class="fa fa-star-o"></i>
+																<i class="fa fa-star-o"></i>
+															</div>
+															<div class="rating-progress">
+																<div style="width: 0%;"></div>
+															</div>
+															<span class="sum">0</span>
+														</li>
+													</ul>
+													<?php endif;?>
+													<?php if($countRating[0]['COUNT(id)'] > 0):?>
 													<ul class="rating">
 														<li>
 															<div class="rating-stars">
@@ -361,6 +465,7 @@ include "header.php"
 															<span class="sum"><?php echo $sumRating1;?></span>
 														</li>
 													</ul>
+													<?php endif;?>
 												</div>
 											</div>
 											<!-- /Rating -->
@@ -368,13 +473,25 @@ include "header.php"
 											<!-- Reviews -->
 											<div class="col-md-6">
 												<div id="reviews">
+													<?php if($countRating[0]['COUNT(id)'] > 0):?>
 													<ul class="reviews">
 													<?php
+														
+														// $CheckForComment = 1;
+														// $quantityCmtToShow = 3;
+														// $arrayComment = $Rating->get3Comments($CheckForComment, $quantityCmtToShow);
+														// // function date_sort($a, $b) {
+														// // 	return strtotime($b['date']) - strtotime($a['date']);
+														// // }
+														// // usort($arrayComment, "date_sort");
+														// $dem = 0;
+														// foreach($arrayComment as $ra):
+														// 	$dem++;
 														$total = $countRating[0]['COUNT(id)'];
 														$url = $_SERVER['PHP_SELF']."?id=".$id;
 														$page = isset($_GET['page'])?$_GET['page']:1;
 														$perPage = 3;
-														foreach($Rating->get3Comments($page, $perPage) as $ra):
+														foreach($Rating->get3Comments($id, $page, $perPage) as $ra):
 													?>
 														<li>
 															<div class="review-heading">
@@ -407,6 +524,10 @@ include "header.php"
 														<li><a href="#">4</a></li>
 														<li><a href="#"><i class="fa fa-angle-right"></i></a></li> -->
 													</ul>
+													<?php endif;?>
+													<?php if($countRating[0]['COUNT(id)'] == 0):?>
+														<p>There are no comments yet!</p>
+													<?php endif;?>
 												</div>
 											</div>
 											<!-- /Reviews -->
@@ -523,6 +644,7 @@ include "header.php"
 		<!-- /container -->
 	</div>
 	<!-- /Section -->
+
 	<!-- jQuery Plugins -->
 	<script src="js/js/jquery.min.js"></script>
 	<script src="js/js/bootstrap.min.js"></script>
