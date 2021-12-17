@@ -17,7 +17,7 @@ class TypeProduct extends Db
     public function getNameTypeByID($id)
     {
         //Quyery
-        $sql = self::$connection->prepare("SELECT `product_type`.`Name` FROM `product_type`, `product` WHERE `product`.`Type_Id`=`product_type`.`Type_Id` && `product`.`Id` = ?");
+        $sql = self::$connection->prepare("SELECT `product_type`.`Type_Name` FROM `product_type`, `product` WHERE `product`.`Type_Id`=`product_type`.`Type_Id` && `product`.`Id` = ?");
         $sql->bind_param("i", $id);
         $sql->execute();
         $items = array();//Var array items

@@ -30,7 +30,7 @@
           echo "class='active'";
         }
       ?>>
-        <a href="menu.php?type_id=<?php echo $menu['Type_Id']?>"><?php echo $menu['Name']?></a>
+        <a href="menu.php?type_id=<?php echo $menu['Type_Id']?>"><?php echo $menu['Type_Name']?></a>
       </li>
       <?php endforeach;?>
     </ul>

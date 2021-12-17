@@ -54,7 +54,7 @@ include "header.php"
 					<ul class="breadcrumb-tree">
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Menu</a></li>
-						<li><a href="#"><?php $TypeProduct = new TypeProduct; if(isset($_GET['id'])){$getNameType = $TypeProduct->getNameTypeByID($_GET['id']);} foreach($getNameType as $value){echo $value['Name'];}  ?></a></li>
+						<li><a href="#"><?php $TypeProduct = new TypeProduct; if(isset($_GET['id'])){$getNameType = $TypeProduct->getNameTypeByID($_GET['id']);} foreach($getNameType as $value){echo $value['Type_Name'];}  ?></a></li>
 						<li class="active"><?php $Product = new ProductFood; if(isset($_GET['id'])){$getProductByID = $Product->getProductByID($_GET['id']);} foreach($getProductByID as $value){echo $value['Name'];}?></li>
 					</ul>
 				</div>
@@ -214,7 +214,13 @@ include "header.php"
 									<div id="tab1" class="tab-pane fade in active">
 										<div class="row">
 											<div class="col-md-12">
-												<h4><?php echo $value['Decription']?></h4>
+												<?php 
+													$arrStr = explode(".", $value['Decription']);
+													foreach($arrStr as $str):
+														if($str != ""):
+												?>
+												<p><?php echo " - ".$str."."?></p>
+												<?php endif;endforeach;?>
 											</div>
 										</div>
 									</div>

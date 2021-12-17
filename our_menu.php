@@ -14,7 +14,7 @@
     <ul class="filters_menu">
       <li <?php if(!isset($_GET['type_id']) || (isset($_GET['type_id']) && $_GET['type_id'] == 0)){echo "class='active'";}?>><a href="index.php?type_id=0">All</a></li>
       <?php foreach($getAllMenu as $menu):?>
-      <li <?php if(isset($_GET['type_id']) && $_GET['type_id'] == $menu['Type_Id']){echo "class='active'";} ?>><a href="index.php?type_id=<?php echo $menu['Type_Id']?>"><?php echo $menu['Name']?></a></li>
+      <li <?php if(isset($_GET['type_id']) && $_GET['type_id'] == $menu['Type_Id']){echo "class='active'";} ?>><a href="index.php?type_id=<?php echo $menu['Type_Id']?>"><?php echo $menu['Type_Name']?></a></li>
       <?php endforeach;?>
     </ul>
 
