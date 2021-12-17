@@ -21,7 +21,7 @@
         //update cart
         $Cart = new Cart;
         $updateCart = $Cart->updateProduct($_POST['size-'.$id], $_POST['topping-'.$id], $_POST['quantity-'.$id], $id);
-        header('location:http://localhost:89/Nhom03_CT4_BE1_NH21/cart.php');
+        header('location: cart.php');
     }else{
         echo "ERRO: CAN'T GET DATA!";
     }

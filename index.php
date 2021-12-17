@@ -522,14 +522,6 @@ $menu = new Menu();
 
   <?php
   include("footer.php");
-  if (isset($_SESSION['username'])) {
-  ?>
-    <script>
-      document.getElementById("login").style.display = 'none';
-      document.getElementById("logout").style.display = 'inline';
-    </script>
-  <?php
-  }
   ?>
     <?php
   //XU ly khi dang nhap thanh cong

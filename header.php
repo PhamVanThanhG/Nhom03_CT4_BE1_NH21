@@ -1,4 +1,5 @@
 <?php
+session_start();
 require "config.php";
 require "models/db.php";
 require "models/db_product.php";
@@ -69,12 +70,12 @@ $menu = new Menu();
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  mx-auto ">
-              <li class="nav-item">
-                <a class="nav-link" href="index.php">Home </a>
-              </li>
+            <ul class="navbar-nav  mx-auto " style="padding-left: 100px;">
               <li class="nav-item active">
-                <a class="nav-link" href="menu.php">Menu <span class="sr-only">(current)</span> </a>
+                <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="menu.php">Menu</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="about.php">About</a>
@@ -83,11 +84,22 @@ $menu = new Menu();
                 <a class="nav-link" href="book.php">Book Table</a>
               </li>
             </ul>
-            <!-- cart  -->
-            <div class="user_option">
-              <a href="" class="user_link">
-                <i class="fa fa-user" aria-hidden="true"></i>
-              </a>
+            <div class="user_option"><?php #Process seach product?>
+              <form class="form-inline" method="get" action="menu.php">
+                <input type="search" name="key" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>
+              <div class="dropdown">
+                <i class="fa fa-user user_link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Profile</a>
+                  <a class="dropdown-item" href="bill.php">My bill</a>
+                  <a class="dropdown-item" href="buy_history.php">Buy history</a>
+                  <a class="dropdown-item" href="#">Logout</a>
+                </div>
+              </div>
               <a class="cart_link" href="cart.php">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                   <g>
@@ -142,15 +154,14 @@ $menu = new Menu();
                   </g>
                 </svg>
               </a>
-              <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
-              <a href="" class="order_online">
-                Order Online
+              <a href="login.php" class="order_online" id="login">
+                Login
+              </a>
+              <a href="logout.php" class="order_online" id="logout" style="background-color: #33ff99; color: black; display: none;">
+                Logout
               </a>
             </div>
+
           </div>
         </nav>
       </div>

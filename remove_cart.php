@@ -13,6 +13,6 @@
     if(isset($_GET['id_product'])){
         $Cart = new Cart;
         $removeProduct = $Cart->removeProduct($_GET['id_product']);
-        header('location:http://localhost:89/Nhom03_CT4_BE1_NH21/cart.php');
+        header('location: cart.php');
     }
 ?>
