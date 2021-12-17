@@ -1,3 +1,19 @@
+<?php
+require "config.php";
+require "models/db.php";
+require "models/db_product.php";
+require "models/db_menu.php";
+require "models/db_arrayimg.php";
+require "models/db_rating.php";
+require "models/db_size.php";
+require "models/db_product_type.php";
+require "models/db_topping.php";
+require "models/db_cart.php";
+require "models/db_bill.php";
+require "models/db_bill_products.php";
+require "models/db_history.php";
+$menu = new Menu();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -54,24 +70,25 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  mx-auto ">
-              <li class="nav-item ">
+              <li class="nav-item">
                 <a class="nav-link" href="index.php">Home </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="menu.php">Menu</a>
-              </li>
               <li class="nav-item active">
-                <a class="nav-link" href="about.php">About <span class="sr-only">(current)</span> </a>
+                <a class="nav-link" href="menu.php">Menu <span class="sr-only">(current)</span> </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="about.php">About</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="book.php">Book Table</a>
               </li>
             </ul>
+            <!-- cart  -->
             <div class="user_option">
               <a href="" class="user_link">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
-              <a class="cart_link" href="#">
+              <a class="cart_link" href="cart.php">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                   <g>
                     <g>
@@ -140,42 +157,3 @@
     </header>
     <!-- end header section -->
   </div>
-
-  <!-- about section -->
-
-  <section class="about_section layout_padding">
-    <div class="container  ">
-
-      <div class="row">
-        <div class="col-md-6 ">
-          <div class="img-box">
-            <img src="images/about-img.png" alt="">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="detail-box">
-            <div class="heading_container">
-              <h2>
-                We Are Feane
-              </h2>
-            </div>
-            <p>
-              There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-              in some form, by injected humour, or randomised words which don't look even slightly believable. If you
-              are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in
-              the middle of text. All
-            </p>
-            <a href="">
-              Read More
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- end about section -->
-
-  <?php
-  include("footer.php");
-  ?>
