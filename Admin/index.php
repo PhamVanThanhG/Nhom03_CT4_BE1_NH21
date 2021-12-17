@@ -195,7 +195,7 @@ if (isset($_SESSION['edit'])) {
 ?>
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiiG2jJGAXOTQvhtwbj1GdThKPVXVJ-Xo&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=initMap" async defer></script>
 <script>
   function initMap() {
     var map = new google.maps.Map(document.getElementById("map"), {
