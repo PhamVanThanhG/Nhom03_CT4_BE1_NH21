@@ -99,7 +99,7 @@ $getAllBuyHistory = $bills->getAllBuyHistory();
       </div>
       <!-- /.row -->
 
-      <div class="container">
+      <div class="container" style="margin: 50px 0px;background-color: #a3d3a2;">
         <canvas id="myChart"></canvas>
       </div>
 
@@ -168,6 +168,7 @@ $getAllBuyHistory = $bills->getAllBuyHistory();
           </ul>
         </form>
       </div>
+      <div id="map" style="width:100%;height:400px;"></div>
       <div class="row">
         <!-- Left col -->
         <section class="col-lg-7 connectedSortable">
@@ -187,8 +188,22 @@ if (isset($_SESSION['edit'])) {
   unset($_SESSION['edit']);
 ?>
   <script>
-    alert("Thay đổi thông tin cửa hàng thành công!");
+    alert("Change store information succesfully!");
   </script>
 <?php
 }
 ?>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiiG2jJGAXOTQvhtwbj1GdThKPVXVJ-Xo&callback=initMap" async defer></script>
+<script>
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById("map"), {
+      center: {
+        lat: 21.0168864,
+        lng: 105.7855574
+      },
+      zoom: 15
+    });
+  }
+</script>

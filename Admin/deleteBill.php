@@ -7,11 +7,11 @@ $bills = new Bill();
 if(isset($_GET['id'])){
     $getBillByID = $bills->getBillById($_GET['id']);
     if ($getBillByID[0]['state'] == "Waiting for approval") {
-        $bills->deliverBill($_GET['id']);
+        $_SESSION['delete'] = "wai";
     }else if($getBillByID[0]['state'] == "Being processed"){
-        $_SESSION['deliver'] = "being";
+        $_SESSION['delete'] = "being";
     }else{
-        $_SESSION['deliver'] = "ed";
+        $bills->deleteBill($_GET['id']);
     }
 }
 header("location: bills.php")

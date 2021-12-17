@@ -24,7 +24,13 @@ class Bill extends Db{
         return $items;
     }
     public function deliverBill($id){
-        $sql = self::$connection->prepare("UPDATE `bill` SET `state`='Đang giao hàng' WHERE `id`= ?");
+        $sql = self::$connection->prepare("UPDATE `bill` SET `state`='Being processed' WHERE `id`= ?");
+        $sql->bind_param("i", $id);
+        return $sql->execute();
+    }
+
+    public function deleteBill($id){
+        $sql = self::$connection->prepare("DELETE FROM `bill` WHERE `id` = ?");
         $sql->bind_param("i", $id);
         return $sql->execute();
     }

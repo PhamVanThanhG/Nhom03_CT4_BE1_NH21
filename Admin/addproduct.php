@@ -56,7 +56,7 @@
                 </div>
                 <div class="form-group">
                   <label for="inputDescription">Description</label>
-                  <textarea id="inputDescription" class="form-control" name="desc" rows="4" required></textarea>
+                  <textarea id="summernote" id="inputDescription" class="form-control" name="desc" rows="4" required></textarea>
                 </div>
                 <div class="form-group">
                   <label for="inputClientCompany">Image</label>

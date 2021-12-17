@@ -116,7 +116,7 @@ include("header.php");
                     <span style="padding-left: 5px;">Deliver</span>
                   </a>
                   <br>
-                  <a class="btn btn-danger btn-sm" href="deletecus.php?id=<?php echo $value['Cus_Id'] ?>" style="height: 30px; width: 90px;">
+                  <a class="btn btn-danger btn-sm" href="deletebill.php?id=<?php echo $value['id'] ?>" style="height: 30px; width: 90px;">
                     <i class="fas fa-trash">
                     </i>
                     <span style="padding-left: 5px;">Delete</span>
@@ -140,13 +140,19 @@ include("header.php");
 <?php
 include("footer.php");
 ?>
-<script>
+  <script>
     <?php
-      if(isset($_SESSION['deliver'])){
-        ?>
-        alert("Đơn hàng đang được giao!");
-        <?php
-        unset($_SESSION['deliver']);
-      }
+    if (isset($_SESSION['deliver'])) {
+      if ($_SESSION['deliver'] == "being") {
     ?>
-</script>
+        alert("Orders are being delivered!");
+      <?php
+      } else {
+      ?>
+        alert("Order delivered successfully!");
+    <?php
+      }
+      unset($_SESSION['deliver']);
+    }
+    ?>
+  </script>
