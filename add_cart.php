@@ -11,12 +11,22 @@
     require "models/db_cart.php";
 
     if(isset($_GET['id_product'])){
-        $Cart = new Cart;
-        if(isset($_GET['quantity'])){
-            
+        if(isset($_POST['quantity'])){
+            $Cart = new Cart;
+            $addCart = $Cart->addProduct($_GET['id_product'],1,5,$_POST['quantity'],1);
+            if(isset($_GET['key'])){
+                if($_GET['key'] == 2){
+                    header('location: detail.php?id='.$_GET['id_product']);
+                }else if($_GET['key'] == 1){
+                    header('location: index.php');
+                }else{
+                    header('location: index.php');
+                }
+            }else{
+                header('location: index.php');
+            }
         }
-        $addCart = $Cart->addProduct($_GET['id_product'],1,5,1,1);
-        header('location:http://localhost:89/Nhom03_CT4_BE1_NH21/index.php');
-
+    }else{
+        echo "ERRO: CAN'T GET DATE!";
     }
 ?>

@@ -16,7 +16,6 @@
         $BillProduct = new BillProduct;
         $removeBill = $Bill->removeProduct($_GET['id_bill']);
         $removeProduct = $BillProduct->removeItem($_GET['id_bill']);
-        // header('location:http://localhost:89/Nhom03_CT4_BE1_NH21/cart.php');
-        echo "xóa thành công!";
+        header('location: cart.php');
     }
 ?>

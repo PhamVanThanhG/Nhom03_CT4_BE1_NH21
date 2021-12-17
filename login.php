@@ -21,7 +21,7 @@ if (isset($_POST['username'])) {
 	//Xu ly thong bao khi gmail da duoc tao tai khoan roi
 	if ($xet) {
 		$cus->insertAccountCustomer($user, $gmail, $pass, $phone, $birthday);
-		header("Location: http://localhost/Nhom03/register.php?user=" . $user);
+		header("Location: register.php?user=" . $user);
 	} else {
 		//Xuat form thong bao gmail da tao tai khoan roi
 ?>
@@ -86,7 +86,7 @@ if (isset($_POST['sub'])) {
 			if($_SESSION['admin']){
 				header("Location: http://localhost/Nhom03/Admin/index.php");
 			}else{
-				header("Location: http://localhost/Nhom03/index.php");
+				header("Location: http://localhost:89/master/Nhom03_CT4_BE1_NH21/index.php");
 			}
 		} else {
 		?>

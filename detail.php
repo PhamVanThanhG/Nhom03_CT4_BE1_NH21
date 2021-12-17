@@ -80,8 +80,12 @@ include "header.php"
 					$Topping = new Topping;
 					$History = new PurchaseHistory;
 					$check = 0;
-					if(sizeof($History->getByIDUser(1)) > 0){
-						$check = 1;
+					if(isset($_SESSION['cud_id'])){
+						if(sizeof($History->getByIDUser($_SESSION['cus_id'])) > 0){
+							$check = 1;
+						}else{
+							$check = 0;
+						}
 					}else{
 						$check = 0;
 					}
@@ -157,19 +161,19 @@ include "header.php"
 								<div class="product-options">
 
 								</div>
-
+								<form method="post" action="add_cart.php?id_product=<?php echo $value['Id']?>&key=2">	
 								<div class="add-to-cart">
 									<div class="qty-label">
 										Qty
 										<div class="input-number">
-											<input type="number" value="1">
+											<input type="number" name="quantity" value="1">
 											<span class="qty-up">+</span>
 											<span class="qty-down">-</span>
 										</div>
 									</div>
-									<a href="add_cart.php?id_product=<?php echo $value['Id']?>&quantity=<?php echo $quantity?>"><button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button></a>
+									<button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 								</div>
-
+								</form>	
 								<ul class="product-btns">
 									<li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
 									<li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
@@ -210,7 +214,7 @@ include "header.php"
 									<div id="tab1" class="tab-pane fade in active">
 										<div class="row">
 											<div class="col-md-12">
-												<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+												<h4><?php echo $value['Decription']?></h4>
 											</div>
 										</div>
 									</div>

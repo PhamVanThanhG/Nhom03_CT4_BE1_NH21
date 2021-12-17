@@ -39,7 +39,7 @@
         }
         //remove all products of cart
         $removeAllCart = $Cart->removeAllProducts();
-        header('location:http://localhost:89/Nhom03_CT4_BE1_NH21/bill.php');
+        header('location: bill.php');
     }else{
         echo "nothing!";
     }
