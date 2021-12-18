@@ -50,6 +50,34 @@ class ProductFood extends Db
         return $items;
 
     }
+
+    //Get 6 Products of the sale Products in database
+    public function getSixProductsSale($page, $perPage)
+    {
+        //Quyery
+        $firstLink = ($page - 1) * $perPage;
+        $sql = self::$connection->prepare("SELECT * FROM product WHERE Sale > 0 LIMIT ?,?");
+        $sql->bind_param("ii", $firstLink, $perPage);
+        $sql->execute();
+        $items = array();//Var array items
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
+        return $items;
+
+    }
+
+    //Get 6 Products of the sale Products by typeID in database
+    public function getProductsSaleForPage($type_id,$page, $perPage)
+    {
+        //Quyery
+        $firstLink = ($page - 1) * $perPage;
+        $sql = self::$connection->prepare("SELECT * FROM product WHERE Type_Id = ? && Sale > 0 LIMIT ?,?");
+        $sql->bind_param("iii", $type_id, $firstLink, $perPage);
+        $sql->execute();
+        $items = array();//Var array items
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
+        return $items;
+
+    }
     
     //Get Products by type: returns name, img, decr, price of product.
     public function getProductsByType($type_id)
@@ -62,6 +90,17 @@ class ProductFood extends Db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
         return $items;
     }
+     //Get Products Sale by type: returns name, img, decr, price of product.
+     public function getProductsSaleByType($type_id)
+     {
+         //Quyery
+         $sql = self::$connection->prepare("SELECT * FROM product WHERE product.Type_Id = ? && Sale > 0");
+         $sql->bind_param("i", $type_id);
+         $sql->execute();
+         $items = array();//Var array items
+         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
+         return $items;
+     }
 
     //Get Products by id
     public function getProductByID($id)
@@ -80,6 +119,26 @@ class ProductFood extends Db
         $sql = self::$connection->prepare("SELECT * FROM `product` WHERE `name` LIKE ?");
         $keyword = "%$keyword%";
         $sql->bind_param("s",$keyword);
+        $sql->execute(); //return an object
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items; //return an array
+    }
+
+    //get 2 products have top sale
+    public function get2TopSaleProd()
+    {
+        $sql = self::$connection->prepare("SELECT * FROM `product` ORDER BY Sale DESC LIMIT 0,2");
+        $sql->execute(); //return an object
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items; //return an array
+    }
+
+    //get all products are having sale
+    public function getAllSale()
+    {
+        $sql = self::$connection->prepare("SELECT * FROM `product` WHERE Sale > 0");
         $sql->execute(); //return an object
         $items = array();
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);

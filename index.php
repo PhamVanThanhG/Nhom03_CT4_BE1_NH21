@@ -225,18 +225,23 @@ $menu = new Menu();
     <div class="offer_container">
       <div class="container ">
         <div class="row">
+          <?php
+            $arr2ProdSale = $product->get2TopSaleProd();
+          ?>
           <div class="col-md-6  ">
             <div class="box ">
               <div class="img-box">
-                <img src="images/o1.jpg" alt="">
+                <img src="images/<?php echo $arr2ProdSale[0]['image']?>" alt="" width="175" height="165">
               </div>
               <div class="detail-box">
                 <h5>
-                  Tasty Thursdays
+                  <?php echo $arr2ProdSale[0]['Name']?>
                 </h5>
+              
                 <h6>
-                  <span>20%</span> Off
+                  <span><?php echo $arr2ProdSale[0]['Sale']?>%</span> Off
                 </h6>
+              
                 <a href="">
                   Order Now <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                     <g>
@@ -291,20 +296,21 @@ $menu = new Menu();
                     </g>
                   </svg>
                 </a>
+                <a href="menu_sale.php?type=<?php echo $arr2ProdSale[0]['Type_Id']?>" style="margin-left: 24px;"><i class="fa fa-share"></i></a>
               </div>
             </div>
           </div>
           <div class="col-md-6  ">
             <div class="box ">
               <div class="img-box">
-                <img src="images/o2.jpg" alt="">
+                <img src="images/<?php echo $arr2ProdSale[1]['image']?>" alt="" width="175" height="165">
               </div>
               <div class="detail-box">
                 <h5>
-                  Pizza Days
+                <?php echo $arr2ProdSale[1]['Name']?>
                 </h5>
                 <h6>
-                  <span>15%</span> Off
+                  <span><?php echo $arr2ProdSale[1]['Sale']?>%</span> Off
                 </h6>
                 <a href="">
                   Order Now <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
@@ -360,6 +366,7 @@ $menu = new Menu();
                     </g>
                   </svg>
                 </a>
+                <a href="menu_sale.php?type=<?php echo $arr2ProdSale[1]['Type_Id']?>" style="margin-left: 24px;"><i class="fa fa-share"></i></a>
               </div>
             </div>
           </div>
