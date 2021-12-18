@@ -9,6 +9,7 @@
     require "models/db_product_type.php";
     require "models/db_topping.php";
     require "models/db_cart.php";
+    session_start();
 
     if(isset($_GET['id_product']) && isset($_SESSION['cus_id'])){
         if(isset($_POST['quantity'])){

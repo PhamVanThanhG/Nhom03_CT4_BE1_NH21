@@ -31,4 +31,18 @@ class Customer extends Db{
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
         return $items;
     }
+    //get comment
+    public function getComment(){
+        $sql = self::$connection->prepare("SELECT Comment, Username, comment_date, cus_img FROM customer WHERE Comment IS NOT NULL ORDER BY comment_date DESC");
+        $sql->execute();
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items;
+    }
+    // add comment
+    public function addComment($comment, $comment_date, $idUser){
+        $sql = self::$connection->prepare("UPDATE `customer` SET `Comment` = ?, `comment_date` = ? WHERE `customer`.`Cus_Id` = ?");
+        $sql->bind_param("ssi", $comment, $comment_date, $idUser);
+        $sql->execute();
+    }
 }

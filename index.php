@@ -6,6 +6,7 @@ require "config.php";
 require "models/db.php";
 require "models/db_product.php";
 require "models/db_menu.php";
+require "models/customer.php";
 $menu = new Menu();
 // //get ID of Pizza in database
 // $name_Menu = "Pizaa";
@@ -203,9 +204,13 @@ $menu = new Menu();
         </div>
         <div class="container">
           <ol class="carousel-indicators">
-            <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
-            <li data-target="#customCarousel1" data-slide-to="1"></li>
-            <li data-target="#customCarousel1" data-slide-to="2"></li>
+            <?php
+              for($i = 0; $i < $dem; $i++):
+            ?>
+            <!-- <li data-target="#customCarousel1" data-slide-to="0" class="active"></li> -->
+            <li data-target="#customCarousel1" data-slide-to="<?php echo $i?>" <?php if($i == 0){ echo "class='active'";}?>></li>
+            <!-- <li data-target="#customCarousel1" data-slide-to="2"></li> -->
+            <?php endfor;?>
           </ol>
         </div>
       </div>
@@ -474,49 +479,51 @@ $menu = new Menu();
       </div>
       <div class="carousel-wrap row ">
         <div class="owl-carousel client_owl-carousel">
+          <?php
+            #process comment
+            $Customer = new Customer;
+            //get comment
+            $arrComment = $Customer->getComment();
+            for($i = 0; $i < (sizeof($arrComment) - 1); $i++){
+              if($arrComment[$i]['comment_date'] == $arrComment[$i + 1]['comment_date']){
+                $temp = $arrComment[$i];
+                $arrComment[$i] = $arrComment[$i + 1];
+                $arrComment[$i + 1] = $temp;
+              }
+            }
+            foreach($arrComment as $comment):
+          ?>
           <div class="item">
             <div class="box">
               <div class="detail-box">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                   <?php echo $comment['Comment']?>
                 </p>
                 <h6>
-                  Moana Michell
+                <?php echo $comment['Username']?>
                 </h6>
                 <p>
-                  magna aliqua
+                <?php echo $comment['comment_date']?>
                 </p>
               </div>
               <div class="img-box">
-                <img src="images/client1.jpg" alt="" class="box-img">
+                <img src="images/<?php echo $comment['cus_img']?>" alt="" class="box-img">
               </div>
             </div>
           </div>
-          <div class="item">
-            <div class="box">
-              <div class="detail-box">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
-                </p>
-                <h6>
-                  Mike Hamell
-                </h6>
-                <p>
-                  magna aliqua
-                </p>
-              </div>
-              <div class="img-box">
-                <img src="images/client2.jpg" alt="" class="box-img">
-              </div>
-            </div>
-          </div>
+          <?php endforeach;?>
         </div>
       </div>
     </div>
   </section>
-  <form style="margin-left: 160px; margin-right: 160px; margin-bottom: 60px;">
-		<textarea class="input" placeholder="Add Your Comment..."></textarea>
-		<button class="primary-btn" style="margin-top: 12px;">Submit</button>
+  <form style="margin-left: 160px; margin-right: 160px; margin-bottom: 60px;" method="post" action="add_comment_store.php">
+		<textarea name="comment" class="input" placeholder="Add Your Comment..."></textarea>
+		<button type="submit" class="primary-btn" style="margin-top: 12px;" <?php if(!isset($_SESSION['cus_id'])){ echo "disabled";}?>>Submit</button>
+    <?php
+      if(!isset($_SESSION['cus_id'])):
+    ?>
+    <p> You need to login first before write your comment!</p>
+    <?php endif;?>
 	</form>
   <!-- end client section -->
 

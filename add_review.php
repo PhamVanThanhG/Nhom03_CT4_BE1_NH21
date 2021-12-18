@@ -9,7 +9,7 @@
     require "models/db_product_type.php";
     require "models/db_topping.php";
     require "models/db_cart.php";
-
+    session_start();
     //Check data exist or not
     if(isset($_POST) && isset($_SESSION['cus_id'])){
         if($_POST['rating'] != "" && $_POST['comment'] != ""){

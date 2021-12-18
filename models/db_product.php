@@ -77,7 +77,7 @@ class ProductFood extends Db
     //search product
     public function search($keyword)
     {
-        $sql = self::$connection->prepare("SELECT * FROM `products` WHERE `name` LIKE ?");
+        $sql = self::$connection->prepare("SELECT * FROM `product` WHERE `name` LIKE ?");
         $keyword = "%$keyword%";
         $sql->bind_param("s",$keyword);
         $sql->execute(); //return an object

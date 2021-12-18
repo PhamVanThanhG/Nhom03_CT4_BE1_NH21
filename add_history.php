@@ -10,6 +10,7 @@ require "models/db_bill.php";
 require "models/db_bill_products.php";
 require "models/db_history.php";
 require "models/db_history_products.php";
+session_start();
 if (isset($_GET['id_bill']) && isset($_SESSION['cus_id'])) {
     #add new Purchase history
     $PurchaseHistory = new PurchaseHistory;

@@ -2,8 +2,14 @@
   include "header.php";?>
 
 <!-- food section -->
-
-<section class="food_section layout_padding-bottom">
+<?php
+  if(isset($_GET['key'])):
+    // $ProductType = new TypeProduct;
+    // echo var_dump($ProductType->search($_GET['key']));
+?>
+<h3 style="margin: 20px 0px 60px 480px;">search keyword is "<?php echo $_GET['key']?>"</h3>
+<?php endif;?>
+<section class="food_section layout_padding-bottom" style="margin-top: 20px;">
   <div class="container">
     <div class="heading_container heading_center">
       <h2>
@@ -22,8 +28,12 @@
       <?php 
         if(isset($_GET['key'])){
           $getType = $ProductType->search($_GET['key']);
-          $type_id = $getType[0]['Type_Id'];
-          if($type_id == $menu['Type_Id']){
+          if(sizeof($getType) > 0){
+            $type_id = $getType[0]['Type_Id'];
+            if($type_id == $menu['Type_Id']){
+            echo "class='active'";
+            }
+          }else if(isset($_GET['type_id']) && $_GET['type_id'] == $menu['Type_Id']){
             echo "class='active'";
           }
         }else if(isset($_GET['type_id']) && $_GET['type_id'] == $menu['Type_Id']){

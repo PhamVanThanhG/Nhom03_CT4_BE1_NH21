@@ -27,7 +27,7 @@ class TypeProduct extends Db
     //search product
     public function search($keyword)
     {
-        $sql = self::$connection->prepare("SELECT * FROM `product_type` WHERE `name` LIKE ?");
+        $sql = self::$connection->prepare("SELECT * FROM `product_type` WHERE `Type_Name` LIKE ?");
         $keyword = "%$keyword%";
         $sql->bind_param("s",$keyword);
         $sql->execute(); //return an object

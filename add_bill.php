@@ -11,6 +11,7 @@
     require "models/db_bill_products.php";
     require "models/db_bill.php";
     require "models/db_cart.php";
+    session_start();
     
     if(isset($_SESSION['cus_id'])){
         #add new bill
@@ -25,8 +26,8 @@
             }
         }
         $date = date("d-m-Y");
-        $state = "Đang chờ duyệt";
-        $addBill = $Bill->addItem($id, 1, $date, $state);
+        $state = "Waiting for approval";
+        $addBill = $Bill->addItem($id, $_SESSION['cus_id'], $date, $state);
 
         #add new bill product
         $BillProduct = new BillProduct;
