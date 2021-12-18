@@ -34,8 +34,9 @@
             <tbody>
                 <?php
                 //process cart
+                if(isset($_SESSION['cus_id'])):
                 $Cart = new Cart;
-                $getAllCart = $Cart->getCartByIIDUser(1);
+                $getAllCart = $Cart->getCartByIIDUser($_SESSION['cus_id']);
                 $priceCart = 0;// tp process total price of cart
                 $CountCart = 0;// to process NO.
                 $No = 0;
@@ -116,7 +117,7 @@
                         </a>
                         </td>
                     </tr>
-                <?php endforeach; ?>
+                <?php endforeach;?>
             </tbody>
             <tfoot>
                 <tr><?php // back to home?>
@@ -136,6 +137,7 @@
                     </td>
                 </tr>
             </tfoot>
+            <?php endif;?>
         </table>
     </div>
     <!-- <script src="js/jquery-1.11.1.min.js"></script> -->
@@ -166,10 +168,10 @@
                 if(!confirm("Cart can not save yet! Are you want to continue?")){
                     a.href = "";
                 }else{
-                    a.href = "add_bill.php?id_user=1";
+                    a.href = "add_bill.php";
                 }
             }else{
-                a.href = "add_bill.php?id_user=1";
+                a.href = "add_bill.php";
             }
         }
         //process when user back to page

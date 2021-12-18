@@ -2,7 +2,6 @@
 <html>
 <?php 
     include "header.php";
-    require "models/db_history.php";
     require "models/db_history_products.php";
 ?>
 </html>
@@ -23,8 +22,9 @@
     <h1 class="text-center">Purchase History</h1>
     <?php 
     //show all item of bill
+    if(isset($_SESSION['cus_id'])):
         $PurchaseHistory = new PurchaseHistory;
-        $getByIdUser = $PurchaseHistory->getByIDUser(1);//get all bill by id user
+        $getByIdUser = $PurchaseHistory->getByIDUser($_SESSION['cus_id']);//get all bill by id user
         foreach($getByIdUser as $bill):
     ?>
     <div class="container border rounded border-primary" style="margin-bottom: 60px; margin-top: 60px;">
@@ -102,7 +102,7 @@
             </tfoot>
         </table>
     </div>
-    <?php endforeach;?>
+    <?php endforeach; endif;?>
     <script src="js/jquery-1.11.1.min.js"></script>
 </body>
 

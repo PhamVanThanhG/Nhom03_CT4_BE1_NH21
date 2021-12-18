@@ -171,7 +171,7 @@ include "header.php"
 											<span class="qty-down">-</span>
 										</div>
 									</div>
-									<button type="submit" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+									<button type="submit" <?php if(!isset($_SESSION['cus_id'])){echo "disabled";}?> class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 								</div>
 								</form>	
 								<ul class="product-btns">

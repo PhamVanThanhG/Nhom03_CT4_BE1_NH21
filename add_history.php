@@ -10,7 +10,7 @@ require "models/db_bill.php";
 require "models/db_bill_products.php";
 require "models/db_history.php";
 require "models/db_history_products.php";
-if (isset($_GET['id_bill'])) {
+if (isset($_GET['id_bill']) && isset($_SESSION['cus_id'])) {
     #add new Purchase history
     $PurchaseHistory = new PurchaseHistory;
     $ProdPurchaseHistory = new ProductPurchaseHistory;
@@ -27,13 +27,13 @@ if (isset($_GET['id_bill'])) {
     }
     $date_create = "";
     $date_confirm = date("d-m-Y");
-    $getAllBill = $Bill->getBillByIDUser(1);
+    $getAllBill = $Bill->getBillByIDUser($_SESSION['cus_id']);
     foreach ($getAllBill as $bill) {
         if ($bill['id'] == $_GET['id_bill']) {
             $date_create = $bill['date_create'];
         }
     };
-    $addPurchaseHistory = $PurchaseHistory->add($id, 1, $date_create, $date_confirm);
+    $addPurchaseHistory = $PurchaseHistory->add($id, $_SESSION['cus_id'], $date_create, $date_confirm);
 
     #add new product of purchase history
     //get data from bill table
@@ -42,8 +42,8 @@ if (isset($_GET['id_bill'])) {
         $addProduct = $ProdPurchaseHistory->add($id, $prod['id_product'], $prod['id_size'], $prod['id_topping'], $prod['quantity']);
     }
     #remove bill
-    $removeBill = $Bill->removeProduct($_GET['id_bill']);
-    $removeProduct = $BillProduct->removeItem($_GET['id_bill']);
+    // $removeBill = $Bill->removeProduct($_GET['id_bill']);
+    // $removeProduct = $BillProduct->removeItem($_GET['id_bill']);
     header('location:http://localhost:89/Nhom03_CT4_BE1_NH21/index.php');
 } else {
     echo "nothing!";

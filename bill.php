@@ -19,6 +19,7 @@
     <h1 class="text-center">My Bill</h1>
     <?php 
     //show all item of bill
+    if(isset($_SESSION['cus_id'])):
         $Bill = new Bill;
         $getBillByIdUser = $Bill->getBillByIDUser(1);//get all bill by id user
         $idBill = 0;
@@ -105,35 +106,35 @@
             </tfoot>
         </table>
     </div>
-    <?php endforeach;?>
+    <?php endforeach; endif;?>
     <script src="js/jquery-1.11.1.min.js"></script>
 <script>
     <?php foreach($getBillByIdUser as $bill):?>
     function notify<?php echo $bill['id']?>(){
         var a = document.getElementById('remove<?php echo $bill['id']?>');
         var state = "<?php echo $bill['state']?>";
-        if(state === "Đang chờ duyệt"){
-            if(confirm("bạn đồng ý xóa bill <?php echo $bill['id']?> chứ?")){
+        if(state === "Waiting for approval"){
+            if(confirm("Are you agree to remove the order '<?php echo $bill['id']?>'?")){
                 a.href = "remove_bill.php?id_bill=<?php echo $bill['id']?>";
             }else{
                 a.href = "#";
             }
         }else{
-            alert("Sản phẩm đang được giao đến! hãy chờ thêm ít phút!");
+            alert("Products are being delivered! Please, wait a few more minutes!");
         }  
     }
     
     function confirmBill<?php echo $bill['id']?>(){
         var a = document.getElementById('confirm<?php echo $bill['id'];?>');
         var state = "<?php echo $bill['state'];?>";
-        if(state === "Đang giao hàng"){
-            if(confirm("bạn đồng ý xác nhận đơn hàng <?php echo $bill['id']?> chứ?")){
+        if(state === "Being processed"){
+            if(confirm("Are you agree to confirm the order '<?php echo $bill['id']?>'?")){
                 a.href = "add_history.php?id_bill=<?php echo $bill['id']?>";
             }else{
                 a.href = "#";
             }
         }else{
-            alert("Sản phẩm đang chờ admin kiểm duyệt! không thể xác nhận!");
+            alert("The product is waiting for admin to censor! You can't confirm!");
         }  
     }
     <?php endforeach;?>

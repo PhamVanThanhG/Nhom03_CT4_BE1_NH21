@@ -12,7 +12,7 @@
     require "models/db_bill.php";
     require "models/db_cart.php";
     
-    if(isset($_GET['id_user'])){
+    if(isset($_SESSION['cus_id'])){
         #add new bill
         $Bill = new Bill;
         $Count = $Bill->count();
@@ -33,7 +33,7 @@
         
         //get data from cart table
         $Cart = new Cart;
-        $getAllCart = $Cart->getCartByIIDUser(1);
+        $getAllCart = $Cart->getCartByIIDUser($_SESSION['cus_id']);
         foreach($getAllCart as $cart){
             $addProduct = $BillProduct->addItem($id, $cart['id_product'], $cart['id_size'], $cart['id_topping'], $cart['quantity']);
         }

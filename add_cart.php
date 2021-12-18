@@ -10,10 +10,10 @@
     require "models/db_topping.php";
     require "models/db_cart.php";
 
-    if(isset($_GET['id_product'])){
+    if(isset($_GET['id_product']) && isset($_SESSION['cus_id'])){
         if(isset($_POST['quantity'])){
             $Cart = new Cart;
-            $addCart = $Cart->addProduct($_GET['id_product'],1,5,$_POST['quantity'],1);
+            $addCart = $Cart->addProduct($_GET['id_product'],1,5,$_POST['quantity'],$_SESSION['cus_id']);
             if(isset($_GET['key'])){
                 if($_GET['key'] == 2){
                     header('location: detail.php?id='.$_GET['id_product']);
