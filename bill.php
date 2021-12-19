@@ -21,7 +21,7 @@
     //show all item of bill
     if(isset($_SESSION['cus_id'])):
         $Bill = new Bill;
-        $getBillByIdUser = $Bill->getBillByIDUser(1);//get all bill by id user
+        $getBillByIdUser = $Bill->getBillByIDUser($_SESSION['cus_id']);//get all bill by id user
         $idBill = 0;
         foreach($getBillByIdUser as $bill):
     ?>
@@ -58,7 +58,11 @@
                         $total = 0;
                         $getProductByID = $product->getProductByID($item['id_product']);
                         foreach($getProductByID as $prod):
-                            $total = $prod['Price'];
+                            if($prod['Sale'] > 0){
+                                $total = $prod['Price']*(100 - $prod['Sale'])/100;
+                            }else{
+                                $total = $prod['Price'];
+                            }
                     ?>
                     <td data-th="Product">
                         <div class="row">
@@ -147,5 +151,19 @@
         }
     });
 </script>
+    <!-- jQery -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="js/bootstrap.js"></script>
+  <?php
+  if (isset($_SESSION['username'])) {
+  ?>
+    <script>
+      document.getElementById("login").style.display = 'none';
+      document.getElementById("logout").style.display = 'inline';
+    </script>
+  <?php
+  }
+  ?>
 </body>
 </html>

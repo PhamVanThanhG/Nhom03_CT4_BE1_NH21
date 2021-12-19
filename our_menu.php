@@ -67,10 +67,17 @@
                 <div>
                   <div class="img-box">
                     <img src="images/<?php echo $value['image']; ?>" alt="">
+                    <?php if($value['Sale'] > 0):?>
+                    <div class="product-label">
+									    <span class="sale">-<?php echo $value['Sale']?>%</span>
+								    </div>
+                    <?php endif;?>
                   </div>
                   <div class="detail-box">
                     <h5>
+                      <a href="detail.php?id=<?php echo $value['Id']?>">
                       <?php echo $value['Name'] ?>
+                      </a>
                     </h5>
                     <p>
                       <?php
@@ -92,7 +99,17 @@
                     </p>
                     <div class="options">
                       <h6>
-                        <?php echo number_format($value['Price']); ?> VND
+                        <?php 
+                          if($value['Sale'] == 0){
+                            echo number_format($value['Price']);
+                          }else{
+                            echo number_format(($value['Price']*(100 - $value['Sale']))/100);
+                          }
+                        ?>
+                        đ
+                        <?php if($value['Sale'] > 0):?>
+									      <del style="font-size: 80%; font-weight: 400; color: #8D99AE;"><?php echo number_format($value['Price']);?> đ</del>
+                          <?php endif;?>
                       </h6>
                       <!-- khúc này là cái cart -->
                       <a href="<?php if(isset($_SESSION['cus_id'])){ echo "add_cart.php?id_product=" . $value['Id'];}?>">

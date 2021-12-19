@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-<?php include "header.php" ?>
+<?php 
+include "header.php" 
+?>
 
 </html>
 <html lang="en">
@@ -9,11 +11,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title></title>
     <link type="text/css" rel="stylesheet" href="css/style_cart.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/font-awesome.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
@@ -37,13 +40,11 @@
                 if(isset($_SESSION['cus_id'])):
                 $Cart = new Cart;
                 $getAllCart = $Cart->getCartByIIDUser($_SESSION['cus_id']);
-                $priceCart = 0;// tp process total price of cart
+                $priceCart = 0;// to process total price of cart
                 $CountCart = 0;// to process NO.
                 $No = 0;
                 //get total of number elements cart
-                foreach ($Cart->countCart() as $count) {
-                    $CountCart = $count['COUNT(*)'];
-                }
+                $CountCart = $Cart->countCart()[0]['COUNT(*)'];
                 //Browser element of cart 
                 foreach ($getAllCart as $value) :
                     $No++;
@@ -55,7 +56,11 @@
                         $product = new ProductFood;
                         $total = 0;
                         $getProductByID = $product->getProductByID($value['id_product']);
-                        $total = $getProductByID[0]['Price'];
+                        if($getProductByID[0]['Sale'] > 0){
+                            $total = $getProductByID[0]['Price']*(100 - $getProductByID[0]['Sale'])/100;
+                        }else{
+                            $total = $getProductByID[0]['Price'];
+                        }
                         ?>
                         <td data-th="Product">
                             <div class="row">
@@ -101,7 +106,12 @@
                                 <input name="quantity-<?php echo $value['id_product'] ?>" class="<?php echo $value['id_product'] ?> form-control text-center" value=<?php echo $value['quantity'] ?> type="number" disabled="disabled">
                             </td>
                             <?php //Price?>
-                            <td data-th="TotalPrice" class="text-center"><?php echo number_format($total * $value['quantity']);$priceCart = $priceCart + ($total * $value['quantity']); ?> đ</td>
+                            <td data-th="TotalPrice" class="text-center">
+                                <?php 
+                                    echo number_format($total * $value['quantity']);
+                                    $priceCart = $priceCart + ($total * $value['quantity']);
+                                ?> đ
+                            </td>
                             <td class="actions" data-th="Action">
                                 <?php //Button save?>
                                 <button id="save<?php echo $value['id_product'] ?>" type="submit" class="btn btn-warning" hidden>Save</button>
@@ -183,6 +193,20 @@
             }
         });
     </script>
+    <!-- jQery -->
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="js/bootstrap.js"></script>
+  <?php
+  if (isset($_SESSION['username'])) {
+  ?>
+    <script>
+      document.getElementById("login").style.display = 'none';
+      document.getElementById("logout").style.display = 'inline';
+    </script>
+  <?php
+  }
+  ?>
 </body>
 
 </html>

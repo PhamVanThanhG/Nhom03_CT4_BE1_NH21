@@ -182,7 +182,9 @@ $menu = new Menu();
                     <img src="images/<?php echo $prod['image']?>" alt="anh san pham" class="bd rounded" width="220px" style="margin-bottom: 20px; display: inline-block;">
                     <div style="display: inline-block; margin-left: 16px;">
                       <h2>
+                        <a style="color: while; background: none; padding: 0px; margin: 0px;" href="detail.php?id=<?php echo $prod['Id']?>">
                         <?php echo $prod['Name']?>
+                        </a>
                       </h2>
                       <h5 style="display: inline-block; margin-right: 30px; color: white;"><?php echo number_format($prod['Price'])?> đ</h5>
                     </div>
@@ -238,7 +240,9 @@ $menu = new Menu();
                 </h5>
               
                 <h6>
+                  <a href="menu_sale.php?type=<?php echo $arr2ProdSale[0]['Type_Id']?>" style="color: while; background: none; padding: 0px; margin: 0px;">
                   <span><?php echo $arr2ProdSale[0]['Sale']?>%</span> Off
+                  </a>
                 </h6>
               
                 <a href="">
@@ -295,7 +299,6 @@ $menu = new Menu();
                     </g>
                   </svg>
                 </a>
-                <a href="menu_sale.php?type=<?php echo $arr2ProdSale[0]['Type_Id']?>" style="margin-left: 24px;"><i class="fa fa-share"></i></a>
               </div>
             </div>
           </div>
@@ -309,7 +312,9 @@ $menu = new Menu();
                 <?php echo $arr2ProdSale[1]['Name']?>
                 </h5>
                 <h6>
+                  <a href="menu_sale.php?type=<?php echo $arr2ProdSale[0]['Type_Id']?>" style="color: while; background: none; padding: 0px; margin: 0px;">
                   <span><?php echo $arr2ProdSale[1]['Sale']?>%</span> Off
+                  </a>
                 </h6>
                 <a href="">
                   Order Now <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
@@ -365,7 +370,6 @@ $menu = new Menu();
                     </g>
                   </svg>
                 </a>
-                <a href="menu_sale.php?type=<?php echo $arr2ProdSale[1]['Type_Id']?>" style="margin-left: 24px;"><i class="fa fa-share"></i></a>
               </div>
             </div>
           </div>

@@ -194,14 +194,14 @@ class ProductFood extends Db
  	    $link ="";
     	for($j=1; $j <= $totalLinks ; $j++)
      	{
-            if(isset($_GET['page'])){
-                if($_GET['page'] == $j){
-                    $link = $link."<li class='active'><a href='$url&page=$j'> $j </a></li>";
+            if(isset($_GET['pager'])){
+                if($_GET['pager'] == $j){
+                    $link = $link."<li class='active'><a href='$url&pager=$j'> $j </a></li>";
                 }else{
-                    $link = $link."<li><a href='$url&page=$j'> $j </a></li>";
+                    $link = $link."<li><a href='$url&pager=$j'> $j </a></li>";
                 }
             }else{
-                $link = $link."<li><a href='$url&page=$j'> $j </a></li>";
+                $link = $link."<li><a href='$url&pager=$j'> $j </a></li>";
             }
      	}
         $arrayLink = explode("'",$link);
@@ -212,17 +212,17 @@ class ProductFood extends Db
             }
         }
         if($i == 0){
-            $link=""."<li class='active'><a href='$url&page=1'> 1 </a></li>";
+            $link=""."<li class='active'><a href='$url&pager=1'> 1 </a></li>";
             for($j=2; $j <= $totalLinks ; $j++)
      	    {
-                if(isset($_GET['page'])){
-                    if($_GET['page'] == $j){
-                        $link = $link."<li class='active'><a href='$url&page=$j'> $j </a></li>";
+                if(isset($_GET['pager'])){
+                    if($_GET['pager'] == $j){
+                        $link = $link."<li class='active'><a href='$url&pager=$j'> $j </a></li>";
                     }else{
-                        $link = $link."<li><a href='$url&page=$j'> $j </a></li>";
+                        $link = $link."<li><a href='$url&pager=$j'> $j </a></li>";
                     }
                 }else{
-                    $link = $link."<li><a href='$url&page=$j'> $j </a></li>";
+                    $link = $link."<li><a href='$url&pager=$j'> $j </a></li>";
                 }
      	    }
         }

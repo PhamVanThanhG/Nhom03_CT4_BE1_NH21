@@ -2,7 +2,6 @@
 <?php
 include "header.php"
 ?>
-
 </html>
 <html lang="en">
 
@@ -12,7 +11,7 @@ include "header.php"
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>Electro - HTML Ecommerce Template</title>
+	<title></title>
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -145,17 +144,60 @@ include "header.php"
 							<div class="product-details">
 								<h2 class="product-name"><?php echo $value['Name'] ?></h2>
 								<div>
-									<div class="product-rating">
+									<!-- <div class="product-rating">
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star-o"></i>
+									</div> -->
+									<?php
+										$average = 0;
+										if($countRating[0]['COUNT(id)'] > 0){
+											foreach($Rating->getRatingByIDProduct($id) as $rating){
+												$average += $rating['rating_value'];
+											}
+											$average = $average/$countRating[0]['COUNT(id)'];
+										}
+									?>
+									<?php
+										if($countRating[0]['COUNT(id)'] == 0):?>
+											<div class="product-rating">
+												<i class="fa fa-star-o"></i>
+												<i class="fa fa-star-o"></i>
+												<i class="fa fa-star-o"></i>
+												<i class="fa fa-star-o"></i>
+												<i class="fa fa-star-o"></i>
+											</div>
+										<?php endif;?>
+									<?php
+										if($countRating[0]['COUNT(id)'] > 0):														
+									?>
+									<div class="product-rating">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star<?php if($average < 2){echo "-o";}?>"></i>
+										<i class="fa fa-star<?php if($average < 3){echo "-o";}?>"></i>
+										<i class="fa fa-star<?php if($average < 4){echo "-o";}?>"></i>
+										<i class="fa fa-star<?php if($average < 5){echo "-o";}?>"></i>
 									</div>
+									<?php endif;?>
 									<a class="review-link" data-toggle="tab" href="#tab3"><?php foreach ($countRating as $rating){echo $rating['COUNT(id)'];} ?> Review(s) | Add your review</a>
 								</div>
 								<div>
-									<h3 class="product-price"><?php echo number_format($value['Price']) ?> đ <?php if ($value['Sale'] > 0) : ?><del class="product-old-price">$990.00 VND</del><?php endif; ?></h3>
+									<h3 class="product-price">
+										<?php 
+											if($value['Sale'] > 0){
+												echo number_format(($value['Price']*(100 - $value['Sale']))/100);
+											}else{
+												echo number_format($value['Price']) ;
+											}
+										?> đ 
+										<?php 
+											if ($value['Sale'] > 0) : 
+										?>
+										<del class="product-old-price" style="margin-left: 8px;"><?php echo number_format($value['Price'])?> đ</del>
+										<?php endif; ?>
+									</h3>
 								</div>
 								<p><?php echo $value['Decription'] ?></p>
 								<div class="product-options">
@@ -254,18 +296,18 @@ include "header.php"
 																		$average += $rating['rating_value'];
 																	}
 																	$average = $average/$countRating[0]['COUNT(id)'];
-																	$average = str_split(str_split($average, 4)[0]);
-																	if(sizeof($average)>3){
-																		if($average[3] > 5){
-																			$average[2]++;
+																	$showAverage = str_split(str_split($average, 4)[0]);
+																	if(sizeof($showAverage)>3){
+																		if($showAverage[3] > 5){
+																			$showAverage[2]++;
 																		}
 																	}
-																	if(sizeof($average) == 1){
-																		echo "".$average[0];
-																	}else if(sizeof($average) == 2){
-																		echo "".$average[0].$average[1];
-																	}else if(sizeof($average) == 3){
-																		echo "".$average[0].$average[1].$average[2];
+																	if(sizeof($showAverage) == 1){
+																		echo "".$showAverage[0];
+																	}else if(sizeof($showAverage) == 2){
+																		echo "".$showAverage[0].$showAverage[1];
+																	}else if(sizeof($showAverage) == 3){
+																		echo "".$showAverage[0].$showAverage[1].$showAverage[2];
 																	}
 																}
 															?>
@@ -598,16 +640,17 @@ include "header.php"
 				</div>
 				<?php
 				//products show in a page
-				$perPage = 4;
+				$perPager = 4;
 
 				//get current page
-				$page = isset($_GET['page']) ? $_GET['page'] : 1;
+				$pager = isset($_GET['pager']) ? $_GET['pager'] : 1;
 
 				$type_id = $TypeProduct->getTypeID($id);
-				$getProductsByTypeID = $Product->getProductsByType($type_id);
-				$total = count($getProductsByTypeID);
-				$url = $_SERVER['PHP_SELF']."?id=".$_GET['id'];
-				$arrProducts = $Product->getProductsForPage($type_id, $page, $perPage);
+				$getTypeName = $TypeProduct->getNameTypeByTypeID($type_id[0]['Type_Id']);
+				$getProductsByTypeID = $Product->getProductsByType($type_id[0]['Type_Id']);
+				$totalr = count($getProductsByTypeID);
+				$urlr = $_SERVER['PHP_SELF']."?id=".$_GET['id'];
+				$arrProducts = $Product->getProductsForPage($type_id[0]['Type_Id'], $pager, $perPager);
 				foreach ($arrProducts as $prod) :
 				?>
 					<!-- product -->
@@ -615,13 +658,15 @@ include "header.php"
 						<div class="product">
 							<div class="product-img">
 								<img src="./images/<?php echo $prod['image'] ?>" alt="">
+								<?php if($prod['Sale'] > 0):?>
 								<div class="product-label">
-									<span class="sale">-30%</span>
+									<span class="sale">-<?php echo $prod['Sale']?>%</span>
 								</div>
+								<?php endif;?>
 							</div>
 							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#"><?php echo $prod['Name'] ?></a></h3>
+								<p class="product-category"><?php echo $getTypeName[0]['Type_Name']?></p>
+								<h3 class="product-name"><a href="detail.php?id=<?php echo $prod['Id']?>"><?php echo $prod['Name'] ?></a></h3>
 								<h4 class="product-price">
 									<?php
 										if ($prod['Sale'] > 0) : 
@@ -653,8 +698,8 @@ include "header.php"
 				<div class="store-filter clearfix">
 					<ul class="store-pagination">
 						<?php
-						if ($total > 4) {
-							echo $Product->paginateForRelatedProducts($url, $total, $perPage);
+						if ($totalr > 4) {
+							echo $Product->paginateForRelatedProducts($urlr, $totalr, $perPager);
 						}
 						?>
 					</ul>
