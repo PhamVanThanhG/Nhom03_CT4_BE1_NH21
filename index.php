@@ -1,13 +1,13 @@
 <?php
-	require "config.php";
-	require "models/db.php";
-  require "models/store.php";
-  require "models/product.php";
-	$Product = new ProductFood;
-	$getAllproducts = $Product->getAllProducts();
-  $getNineProducts = $Product->getNineProducts(); 
-  $Store = new Store;
-  $getALLstore = $Store->getALLStore();
+require "config.php";
+require "models/db.php";
+require "models/store.php";
+require "models/product.php";
+$Product = new ProductFood;
+$getAllproducts = $Product->getAllProducts();
+$getNineProducts = $Product->getNineProducts();
+$Store = new Store;
+$getALLstore = $Store->getALLStore();
 
 ?>
 
@@ -402,85 +402,85 @@
       <div class="filters-content">
         <div class="row grid">
           <!-- process show 9 products -->
-          <?php foreach($getNineProducts as $value):?>
-          <div class="col-sm-6 col-lg-4 all pizza">
-            <div class="box">
-              <div>
-                <div class="img-box">
-                  <img src="images/<?php echo $value['image'];?>" alt="">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    <?php echo $value['Name']?>
-                  </h5>
-                  <p>
-                    <?php echo $value['Decription']?>
-                  </p>
-                  <div class="options">
-                    <h6>
-                      <?php echo $value['Price']?>
-                    </h6>
-                    <!-- khúc dưới này là cái cart -->
-                    <a href="">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
+          <?php foreach ($getNineProducts as $value) : ?>
+            <div class="col-sm-6 col-lg-4 all pizza">
+              <div class="box">
+                <div>
+                  <div class="img-box">
+                    <img src="images/<?php echo $value['image']; ?>" alt="">
+                  </div>
+                  <div class="detail-box">
+                    <h5>
+                      <?php echo $value['Name'] ?>
+                    </h5>
+                    <p>
+                      <?php echo $value['Decription'] ?>
+                    </p>
+                    <div class="options">
+                      <h6>
+                        <?php echo $value['Price'] ?>
+                      </h6>
+                      <!-- khúc dưới này là cái cart -->
+                      <a href="">
+                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                           <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
+                            <g>
+                              <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
                          c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
+                            </g>
                           </g>
-                        </g>
-                        <g>
                           <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
+                            <g>
+                              <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
                          C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
                          c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
                          C457.728,97.71,450.56,86.958,439.296,84.91z" />
+                            </g>
                           </g>
-                        </g>
-                        <g>
                           <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
+                            <g>
+                              <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
                          c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
+                            </g>
                           </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </a>
+                          <g>
+                          </g>
+                          <g>
+                          </g>
+                          <g>
+                          </g>
+                          <g>
+                          </g>
+                          <g>
+                          </g>
+                          <g>
+                          </g>
+                          <g>
+                          </g>
+                          <g>
+                          </g>
+                          <g>
+                          </g>
+                          <g>
+                          </g>
+                          <g>
+                          </g>
+                          <g>
+                          </g>
+                          <g>
+                          </g>
+                          <g>
+                          </g>
+                          <g>
+                          </g>
+                        </svg>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <?php endforeach;?>
+          <?php endforeach; ?>
         </div>
       </div>
       <div class="btn-box">
@@ -508,12 +508,15 @@
           <div class="detail-box">
             <div class="heading_container">
               <h2>
-                We Are Feane
+                We Are <?php echo $getALLstore[0]['Store_Name'] ?>
               </h2>
             </div>
             <?php
-              echo substr ("The chain's online food store has also been warmly welcomed by users and gradually spread to other provinces and cities across the country. The strength of the online food chain is that it has an extremely rich source of goods, the quality is thoroughly checked, the after-sales service is similar to that of an online grocery store, and especially the convenient location. ",0,220)."<br>";
-                 ?>
+            echo $getALLstore[0]['Short description']."<br>";
+            ?>
+            <br>
+            <h3>Location store</h3>
+            <div id="map" style="width:100%;height:400px;"></div>
             <a href="about.php">
               Read More
             </a>
@@ -640,6 +643,82 @@
 
   <!-- end client section -->
 
-<?php
-include("footer.php");
-?>
+  <?php
+  include("footer.php");
+  ?>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBadKqsUs8PQn8j7FtgvcxQvPekwu3PpzQ&callback=initMap" async defer></script>
+  <script>
+    function initMap() {
+      var map = new google.maps.Map(document.getElementById("map"), {
+        center: {
+          lat: 10.851795,
+          lng: 106.757491
+        },
+        zoom: 15
+      });
+
+      var latLng = {
+        lat: 10.8514411,
+        lng: 106.7575426
+      }
+
+      // create map with center is latLng
+      // code
+
+      // each marker define one point
+      var marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+      });
+
+      var latLng = {
+        lat: 21.0168864,
+        lng: 105.7855574
+      }
+      var markers = [];
+
+      // create map with center is latLng
+      // code
+
+      var geocoder = new google.maps.Geocoder;
+      var infowindow = new google.maps.InfoWindow();
+
+      map.addListener("click", function(e) {
+        // Clear all old markers after click
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(null)
+        }
+        markers = [];
+
+        // Create new marker with position is e.latLng
+        // code
+
+        geocoder.geocode({
+            "location": e.latLng
+          },
+          function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+              if (results[0]) {
+                infowindow.setContent(
+                  "<div>" +
+                  "<b>Address :</b> " + results[0].formatted_address + "<br>" +
+                  "<b>Latitude :</b> " + results[0].geometry.location.lat() + "<br>" +
+                  "<b>Longitude :</b> " + results[0].geometry.location.lng() +
+                  "</div>"
+                );
+                infowindow.open(map, marker);
+              } else {
+                console.log("No results found");
+              }
+            } else {
+              console.log("Geocoder failed due to: " + status);
+            }
+          }
+        );
+
+        map.panTo(marker.position); // Set new point to center of map
+
+        markers.push(marker); // add new marker to markers array
+      });
+    }
+  </script>

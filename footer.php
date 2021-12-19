@@ -10,19 +10,19 @@
             </h4>
             <?php foreach($getALLstore as $value):?>
             <div class="contact_link_box">
-              <a href="">
+              <a href="about.php" style="text-align: justify;">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                 <span  style="text-align: left;;">
                 <?php echo $value ['Location'] ?>
             </span>
               </a>
-              <a href="">
+              <a href="about.php" style="text-align: justify;">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <span  style="text-align:left ;">
               Call <?php echo $value ['Phone_Number'] ?><br>
                 </span>
               </a>
-              <a href="">
+              <a href="about.php" style="text-align: justify;">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span style="text-align:left ;">
                 <?php echo $value ['Email'] ?><br>
@@ -35,9 +35,9 @@
           <div class="footer_detail">
           <?php foreach($getALLstore as $value):?>
             <a href="" class="footer-logo">
-            Online Food Store
+            <?php echo $value['Store_Name'] ?>
             </a>
-            <p style="text-align:center;">
+            <p style="text-align:justify;">
               <?php echo $value['Short description'] ?><br><br>
           </p>
             <div class="footer_social"><br><br>
