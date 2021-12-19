@@ -540,7 +540,7 @@ $menu = new Menu();
   <!-- end client section -->
 
   <?php
-  include("footer.php");
+  require("footer.php");
   ?>
     <?php
   //XU ly khi dang nhap thanh cong
