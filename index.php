@@ -45,7 +45,6 @@ $menu = new Menu();
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
-
 </head>
 <body>
   <div class="hero_area">
@@ -523,15 +522,17 @@ $menu = new Menu();
       </div>
     </div>
   </section>
-  <form style="margin-left: 160px; margin-right: 160px; margin-bottom: 60px;" method="post" action="add_comment_store.php">
-		<textarea name="comment" class="input" placeholder="Add Your Comment..."></textarea>
-		<button type="submit" class="primary-btn" style="margin-top: 12px;" <?php if(!isset($_SESSION['cus_id'])){ echo "disabled";}?>>Submit</button>
+  <form class="review-form" style="margin-left: 160px; margin-right: 160px; margin-bottom: 60px;" method="post" action="add_comment_store.php">
+  <div class="form-group">
+    <textarea class="form-control" id="exampleFormControlTextarea1" name="comment" rows="3" placeholder="Add your comment..."></textarea>
+  </div>
+  <button type="submit" class="btn btn-danger" <?php if(!isset($_SESSION['cus_id'])){ echo "disabled";}?>>Submit</button>
     <?php
       if(!isset($_SESSION['cus_id'])):
     ?>
     <p> You need to login first before write your comment!</p>
     <?php endif;?>
-	</form>
+</form>
   <!-- end client section -->
 
   <?php

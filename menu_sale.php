@@ -77,6 +77,9 @@
                 <div>
                   <div class="img-box">
                     <img src="images/<?php echo $value['image']; ?>" alt="">
+                    <div class="product-label">
+									    <span class="sale">-<?php echo $value['Sale']?>%</span>
+								    </div>
                   </div>
                   <div class="detail-box">
                     <h5>
@@ -102,7 +105,8 @@
                     </p>
                     <div class="options">
                       <h6>
-                        <?php echo number_format($value['Price']); ?> VND
+                        <?php echo number_format(($value['Price']*(100 - $value['Sale']))/100); ?> đ
+									      <del style="font-size: 70%; font-weight: 400; color: #8D99AE;"><?php echo number_format($value['Price']);?> đ</del>
                       </h6>
                       <!-- khúc này là cái cart -->
                       <a href="add_cart.php?id_product=<?php echo $value['Id']?>">

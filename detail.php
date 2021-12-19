@@ -622,7 +622,18 @@ include "header.php"
 							<div class="product-body">
 								<p class="product-category">Category</p>
 								<h3 class="product-name"><a href="#"><?php echo $prod['Name'] ?></a></h3>
-								<h4 class="product-price"><?php echo number_format($prod['Price']) ?> VND <?php if ($prod['Sale'] > 0) : ?><del class="product-old-price">$990.00 VND</del><?php endif; ?></del></h4>
+								<h4 class="product-price">
+									<?php
+										if ($prod['Sale'] > 0) : 
+									?>
+									<?php
+										echo number_format(($prod['Price']*(100 - $prod['Sale']))/100);
+									?> đ
+									<del class="product-old-price"><?php echo number_format($prod['Price']);?> đ</del>
+									<?php else: echo number_format(($prod['Price']));?>
+										đ
+									<?php endif;?>
+								</h4>
 								<div class="product-rating">
 								</div>
 								<div class="product-btns">
