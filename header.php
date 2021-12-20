@@ -13,7 +13,10 @@ require "models/db_cart.php";
 require "models/db_bill.php";
 require "models/db_bill_products.php";
 require "models/db_history.php";
+require "models/db_store.php";
 $menu = new Menu();
+$store = new Store();
+$getALLstore = $store->getALlStore();
 ?>
 <!DOCTYPE html>
 <html>
