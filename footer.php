@@ -1,4 +1,3 @@
-
 <!-- footer section -->
 <footer class="footer_section">
   <div class="container">
@@ -105,10 +104,10 @@
 <?php
 if (isset($_SESSION['username'])) {
 ?>
-  <script>
-    document.getElementById("login").style.display = 'none';
-    document.getElementById("logout").style.display = 'inline';
-  </script>
+    <script>
+      document.getElementById("login").style.display = 'none';
+      document.getElementById("logout").style.display = 'inline';
+    </script>
 <?php
 }
 ?>

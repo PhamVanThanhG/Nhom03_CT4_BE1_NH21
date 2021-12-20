@@ -126,7 +126,7 @@
             if(confirm("Are you agree to remove the order '<?php echo $bill['id']?>'?")){
                 a.href = "remove_bill.php?id_bill=<?php echo $bill['id']?>";
             }else{
-                a.href = "#";
+                a.href = "";
             }
         }else{
             alert("Products are being delivered! Please, wait a few more minutes!");

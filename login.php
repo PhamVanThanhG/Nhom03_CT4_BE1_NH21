@@ -79,15 +79,12 @@ if (isset($_POST['sub'])) {
 			//Luu permission
 			if($getAccount[0]['Permission'] == "Admin"){
 				$_SESSION['admin'] = true;
+                $_SESSION['xet'] = 1;
+                header("Location: Admin/index.php");
 			}else{
-				$_SESSION['admin'] = false;
-			}
-			$_SESSION['xet'] = 1;
-			if($_SESSION['admin']){
-				header("Location: Admin/index.php");
-			}else{
-				header("Location: index.php");
-			}
+                $_SESSION['xet'] = 1;
+                header("Location: index.php");
+            }
 		} else {
 		?>
 			<html>

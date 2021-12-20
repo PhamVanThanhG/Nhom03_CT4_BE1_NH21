@@ -10,6 +10,9 @@ if (isset($_POST['username'])) {
 	$phone = $_POST['phone'];
 	$birthday = $_POST['birthday'];
 	$getPassword = $cus->getPassword($user, $gmail, $phone, $birthday);
+	if (sizeof($getPassword) > 0) {
+		$cus->resetPassword($user, $gmail, $phone, $birthday);
+	}
 }
 ?>
 <!DOCTYPE html>
@@ -108,9 +111,7 @@ if (isset($_POST['username'])) {
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
-
-</body>
-<?php
+	<?php
 //Xu ly khi nhap thong tin sai
 if (isset($_POST['sub'])) :
 	if (sizeof($getPassword) == 0) {
@@ -122,11 +123,12 @@ if (isset($_POST['sub'])) :
 	}else {
 		?>
 		<script>
-			alert("Your password is <?php echo $getPassword[0]['password'] ?>");
+			alert("Your password is 11111111");
 		</script>
 		<?php
 	}
 endif;
 ?>
 
+</body>
 </html>

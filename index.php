@@ -577,7 +577,7 @@ $getALLstore = $store->getALlStore();
   if (isset($_SESSION['username'])) {
     if (isset($_SESSION['xet'])) {
       //Xet quyen
-      if ($_SESSION['admin']) {
+      if (isset($_SESSION['admin'])) {
         $per = "admin ";
       } else {
         $per = "customer ";
