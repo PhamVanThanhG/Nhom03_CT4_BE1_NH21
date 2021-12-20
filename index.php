@@ -186,7 +186,22 @@ $menu = new Menu();
                         <?php echo $prod['Name']?>
                         </a>
                       </h2>
-                      <h5 style="display: inline-block; margin-right: 30px; color: white;"><?php echo number_format($prod['Price'])?> đ</h5>
+                      <h5 style="display: inline-block; margin-right: 30px; color: white;">
+                        <?php 
+                          if($prod['Sale'] == 0){
+                            echo number_format($prod['Price']);
+                          }else{
+                            echo number_format(($prod['Price']*(100 - $prod['Sale']))/100);
+                          }
+                        ?>
+                        đ
+                        <?php if($prod['Sale'] > 0):?>
+									      <del style="font-size: 80%; font-weight: 400; color: #8D99AE;"><?php echo number_format($prod['Price']);?> đ</del>
+                        <?php endif;?>
+                        <?php if($prod['Sale'] > 0):?>
+                        <span style="color: #D10024; font-size: 80%; font-weight: 600;">-<?php echo $prod['Sale']?>%</span>
+                        <?php endif;?>
+                      </h5>
                     </div>
                     <p style="height: 80px;">
                       <?php echo $prod['Decription']?>
