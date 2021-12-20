@@ -6,6 +6,19 @@ body {
   overflow-x: hidden;
 }
 
+h5 a {
+  color: white !important;
+}
+.store-pagination li a{
+  color: #000000 !important;
+}
+.filters_menu li a{
+  color: #000000 !important;
+}
+.filters_menu li a:hover{
+  color: #e69c00 !important;
+}
+
 .layout_padding {
   padding: 90px 0;
 }
@@ -506,8 +519,12 @@ a:focus {
 
 .food_section .filters_menu li.active {
   background-color: #222831;
-  color: #ffffff;
+  color: #ffffff !important;
 }
+.food_section .filters_menu li.active a {
+  color: #ffffff !important;
+}
+
 
 .filters-content .box .img-box{
   position: relative;

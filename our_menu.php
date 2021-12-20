@@ -109,7 +109,7 @@
                         đ
                         <?php if($value['Sale'] > 0):?>
 									      <del style="font-size: 80%; font-weight: 400; color: #8D99AE;"><?php echo number_format($value['Price']);?> đ</del>
-                          <?php endif;?>
+                        <?php endif;?>
                       </h6>
                       <!-- khúc này là cái cart -->
                       <a href="<?php if(isset($_SESSION['cus_id'])){ echo "add_cart.php?id_product=" . $value['Id'];}?>">
@@ -176,7 +176,7 @@
     </div>
     <!-- store bottom filter -->
     <div class="store-filter clearfix">
-      <ul class="store-pagination">
+      <ul class="store-pagination" style="margin-top: 40px;">
         <?php
         if($total > 6){
           echo $Product->paginateForMenu($url, $total, $perPage);

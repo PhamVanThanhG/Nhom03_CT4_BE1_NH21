@@ -69,7 +69,12 @@
                             <div class="col-sm-2 hidden-xs"><img src="./images/<?php echo $prod['image']?>" alt="Sản phẩm 1" class="img-responsive" width="100">
                             </div>
                             <div class="col-sm-10">
-                                <h4 class="nomargin"><?php echo $prod['Name']?></h4>
+                                <h4 class="nomargin">
+                                    <?php echo $prod['Name']?>
+                                    <?php if($getProductByID[0]['Sale'] > 0):?>
+                                    <span style="margin-left: 8px; color: #D10024; font-size: 70%; font-weight: 600; border: 2px solid; padding: 2px 4px; font-size: 10px;">- <?php echo $getProductByID[0]['Sale']?>%</span>
+                                    <?php endif;?>
+                                </h4>
                                 <p><?php echo $prod['Decription']?></p>
                             </div>
                         </div>

@@ -207,7 +207,7 @@ $menu = new Menu();
                       <?php echo $prod['Decription']?>
                     </p>
                     <div class="btn-box">
-                      <a href="add_cart.php?id_product=<?php echo $prod['Id']?>" class="btn1" style="display: inline-block;">
+                      <a href="<?php if(isset($_SESSION['cus_id'])){ echo "add_cart.php?id_product=" . $prod['Id'];}?>" class="btn1" style="display: inline-block;">
                         Order Now
                       </a>
                     </div>
@@ -259,8 +259,8 @@ $menu = new Menu();
                   <span><?php echo $arr2ProdSale[0]['Sale']?>%</span> Off
                   </a>
                 </h6>
-              
-                <a href="">
+                
+                <a href="<?php if(isset($_SESSION['cus_id'])){ echo "add_cart.php?id_product=" . $arr2ProdSale[0]['Id'];}?>">
                   Order Now <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                     <g>
                       <g>
@@ -331,7 +331,7 @@ $menu = new Menu();
                   <span><?php echo $arr2ProdSale[1]['Sale']?>%</span> Off
                   </a>
                 </h6>
-                <a href="">
+                <a href="<?php if(isset($_SESSION['cus_id'])){ echo "add_cart.php?id_product=" . $arr2ProdSale[1]['Id'];}?>">
                   Order Now <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                     <g>
                       <g>
