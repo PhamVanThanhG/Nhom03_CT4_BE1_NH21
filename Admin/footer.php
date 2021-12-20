@@ -57,6 +57,7 @@
     var size = document.getElementById('Sizes');
     var topping = document.getElementById('Toppings');
     var bills = document.getElementById('Bills');
+    var orders = document.getElementById('Successful orders');
     dss.classList.remove('active');
     products.classList.remove('active');
     type.classList.remove('active');
@@ -64,6 +65,7 @@
     size.classList.remove('active');
     topping.classList.remove('active');
     bills.classList.remove('active');
+    orders.classList.remove('active');
     var hientai = document.getElementById('<?php echo $title ?>');
     hientai.classList.toggle('active');
   </script>

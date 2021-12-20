@@ -13,6 +13,7 @@ require("models/store.php");
 require("models/sizes.php");
 require("models/toppings.php");
 require("models/bill.php");
+require("models/order.php");
 $product_type = new ProductType();
 $product = new ProductFood();
 $customer = new Customer();
@@ -20,6 +21,7 @@ $store = new Store();
 $size = new Sizes();
 $toppings = new Topping();
 $bills = new Bill();
+$od = new Order();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -278,6 +280,11 @@ $bills = new Bill();
                 <li class="nav-item">
                   <a href="bills.php" class="nav-link" id="Bills">
                     <p style="padding-left: 35px;">Bills</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="successorders.php" class="nav-link" id="Successful orders">
+                    <p style="padding-left: 35px;">Successful orders</p>
                   </a>
                 </li>
               </ul>
