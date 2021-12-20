@@ -196,6 +196,7 @@ include "header.php"
 											if ($value['Sale'] > 0) : 
 										?>
 										<del class="product-old-price" style="margin-left: 8px;"><?php echo number_format($value['Price'])?> đ</del>
+										<span style="color: #D10024; font-size: 80%; font-weight: 400;">-<?php echo $value['Sale']?>%</span>
 										<?php endif; ?>
 									</h3>
 								</div>

@@ -116,7 +116,9 @@
                   </div>
                   <div class="detail-box">
                     <h5>
+                      <a href="detail.php?id=<?php echo $value['Id']?>">
                       <?php echo $value['Name'] ?>
+                      </a>
                     </h5>
                     <p>
                       <?php

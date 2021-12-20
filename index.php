@@ -197,8 +197,6 @@ $menu = new Menu();
                         đ
                         <?php if($prod['Sale'] > 0):?>
 									      <del style="font-size: 80%; font-weight: 400; color: #8D99AE;"><?php echo number_format($prod['Price']);?> đ</del>
-                        <?php endif;?>
-                        <?php if($prod['Sale'] > 0):?>
                         <span style="color: #D10024; font-size: 80%; font-weight: 600;">-<?php echo $prod['Sale']?>%</span>
                         <?php endif;?>
                       </h5>
