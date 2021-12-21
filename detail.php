@@ -79,7 +79,7 @@ include "header.php"
 					$Topping = new Topping;
 					$History = new PurchaseHistory;
 					$check = 0;
-					if(isset($_SESSION['cud_id'])){
+					if(isset($_SESSION['cus_id'])){
 						if(sizeof($History->getByIDUser($_SESSION['cus_id'])) > 0){
 							$check = 1;
 						}else{
@@ -589,15 +589,34 @@ include "header.php"
 											<div class="col-md-3">
 												<div id="review-form">
 													<form id="add-review" class="review-form" method="post" action="<?php if($check > 0){ echo "add_review.php?id_product=".$id;}?>">
-														<textarea class="input" name="comment" placeholder="Your Review"></textarea>
+														<textarea class="input" name="comment" placeholder="<?php
+															if(sizeof($Rating->checkRatingExisted($_SESSION['cus_id'], $_GET['id'])) > 0){
+																echo $Rating->checkRatingExisted($_SESSION['cus_id'], $_GET['id'])[0]['comment'];
+															}else{
+																echo "Your Review";
+															}
+														?>"></textarea>
 														<div class="input-rating">
 															<span>Your Rating: </span>
 															<div class="stars">
-																<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
+																<?php
+																	for($i = 5; $i > 0; $i--){
+																		if(sizeof($Rating->checkRatingExisted($_SESSION['cus_id'], $_GET['id'])) > 0){
+																			if($Rating->checkRatingExisted($_SESSION['cus_id'], $_GET['id'])[0]['rating_value'] == $i){
+																				echo "<input id='star".$i."' name='rating' value='".$i."' type='radio' checked><label for='star".$i."'></label>";
+																			}else{
+																				echo "<input id='star".$i."' name='rating' value='".$i."' type='radio'><label for='star".$i."'></label>";
+																			}
+																		}else{
+																			echo "<input id='star".$i."' name='rating' value='".$i."' type='radio'><label for='star".$i."'></label>";
+																		}
+																	}
+																?>
+																<!-- <input id="star5" name="rating" value="5" type="radio" checked><label for="star5"></label>
 																<input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
 																<input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
 																<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
-																<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+																<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label> -->
 															</div>
 														</div>
 														<button type="submit" class="primary-btn" <?php if($check == 0){ echo "disabled";}?>>Submit</button>
@@ -689,14 +708,15 @@ include "header.php"
 								</div>
 							</div>
 							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+							<a href="<?php if (isset($_SESSION['cus_id'])) {echo "add_cart.php?id_product=" . $prod['Id']."&key=2";} ?>"><button class="add-to-cart-btn" <?php if(!isset($_SESSION['cus_id'])){ echo "disabled";}?>><i class="fa fa-shopping-cart"></i> add to cart</button></a>
 							</div>
 						</div>
 					</div>
 					<!-- /product -->
 				<?php endforeach; ?>
 				<!-- store bottom filter -->
-				<div class="store-filter clearfix">
+				<div class="col-md-12">
+					<div class="store-filter clearfix">
 					<ul class="store-pagination">
 						<?php
 						if ($totalr > 4) {
@@ -704,7 +724,17 @@ include "header.php"
 						}
 						?>
 					</ul>
+					</div>
 				</div>
+				<!-- <div class="store-filter clearfix">
+					<ul class="store-pagination text-center">
+						<?php
+						// if ($totalr > 4) {
+						// 	echo $Product->paginateForRelatedProducts($urlr, $totalr, $perPager);
+						// }
+						?>
+					</ul>
+				</div> -->
 			</div>
 			<!-- /row -->
 		</div>

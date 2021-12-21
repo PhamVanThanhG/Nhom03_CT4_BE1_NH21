@@ -13,6 +13,25 @@ class Rating extends Db
         $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
         return $items;
     }
+    //Get rating by id_product and iduser:
+    public function checkRatingExisted($id_user, $id_prod)
+    {
+        //Quyery
+        $sql = self::$connection->prepare("SELECT * FROM `rating` WHERE id_user = ? AND id_product = ?");
+        $sql->bind_param("ii", $id_user, $id_prod);
+        $sql->execute();
+        $items = array();//Var array items
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);//Get array Products
+        return $items;
+    }
+    //Update data
+    public function updateRating($rating_value, $comment, $date, $id_user, $id_product)
+    {
+        //Quyery
+        $sql = self::$connection->prepare("UPDATE `rating` SET `rating_value` = ?, `comment` = ?, `date` = ? WHERE id_user = ? AND id_product = ?");
+        $sql->bind_param("issii", $rating_value, $comment, $date, $id_user, $id_product);
+        return $sql->execute();
+    }
     //count rating by id_product:
     public function countRatingByID($id)
     {

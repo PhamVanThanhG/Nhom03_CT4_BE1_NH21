@@ -17,7 +17,13 @@
                 //process add review
                 $Rating = new Rating;
                 $date = $date = date("d-m-Y");
-                $Rating->addNewRating($_POST['rating'], $_SESSION['cus_id'], $_GET['id_product'], $_POST['comment'], $date);
+                if(sizeof($Rating->checkRatingExisted($_SESSION['cus_id'], $_GET['id_product'])) == 0){
+                    $Rating->addNewRating($_POST['rating'], $_SESSION['cus_id'], $_GET['id_product'], $_POST['comment'], $date);
+                    header('location: detail.php?id='.$_GET['id_product']);
+                }else{
+                    $Rating->updateRating($_POST['rating'], $_POST['comment'], $date, $_SESSION['cus_id'], $_GET['id_product']);
+                    header('location: detail.php?id='.$_GET['id_product']);
+                }
             }
         }
     }else{

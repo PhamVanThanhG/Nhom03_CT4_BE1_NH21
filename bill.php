@@ -106,10 +106,10 @@
                     <td colspan="3" class="hidden-xs"></td>
                     <td colspan="2" class="hidden-xs text-center"><strong>Total price: <?php echo number_format($totalPrice)?> đ</strong></td>
                     <td>
-                        <a href="#" id="remove<?php echo $bill['id']?>" class="btn btn-danger btn-block" onclick="notify<?php echo $bill['id']?>()">Countermand <i class="fa fa-times"></i></a>
+                        <a href="#" <?php if($bill['state'] == "Deliver successfully"){ echo "hidden";}?> id="remove<?php echo $bill['id']?>" class="btn btn-danger btn-block" onclick="notify<?php echo $bill['id']?>()">Countermand <i class="fa fa-times"></i></a>
                     </td>
                     <td>
-                        <a href="#" id="confirm<?php echo $bill['id']?>" class="btn btn-success btn-block" onclick="confirmBill<?php echo $bill['id']?>()">Confirm <i class="fa fa-check"></i></a>
+                        <a href="#" <?php if($bill['state'] == "Deliver successfully"){ echo "hidden";}?> id="confirm<?php echo $bill['id']?>" class="btn btn-success btn-block" onclick="confirmBill<?php echo $bill['id']?>()">Confirm <i class="fa fa-check"></i></a>
                     </td>
                 </tr>
             </tfoot>

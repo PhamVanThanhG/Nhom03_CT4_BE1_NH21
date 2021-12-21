@@ -338,7 +338,7 @@ $getALLstore = $store->getALlStore();
                   <?php echo $arr2ProdSale[1]['Name'] ?>
                 </h5>
                 <h6>
-                  <a href="menu_sale.php?type=<?php echo $arr2ProdSale[0]['Type_Id'] ?>" style="color: while; background: none; padding: 0px; margin: 0px;">
+                  <a href="menu_sale.php?type=<?php echo $arr2ProdSale[1]['Type_Id'] ?>" style="color: while; background: none; padding: 0px; margin: 0px;">
                     <span><?php echo $arr2ProdSale[1]['Sale'] ?>%</span> Off
                   </a>
                 </h6>

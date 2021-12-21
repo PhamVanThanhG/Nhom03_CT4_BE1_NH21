@@ -46,9 +46,29 @@
             $check = $Cart->checkExistedProd($_GET['id_product']);
             if(sizeof($check) == 0){
                 $addCart = $Cart->addProduct($_GET['id_product'],1,5,1,$_SESSION['cus_id']);
-                header('location: index.php');
+                if(isset($_GET['key'])){
+                    if($_GET['key'] == 2){
+                        header('location: detail.php?id='.$_GET['id_product']);
+                    }else if($_GET['key'] == 1){
+                        header('location: index.php');
+                    }else{
+                        header('location: index.php');
+                    }
+                }else{
+                    header('location: index.php');
+                }
             }else{
-                header('location: index.php');
+                if(isset($_GET['key'])){
+                    if($_GET['key'] == 2){
+                        header('location: detail.php?id='.$_GET['id_product']);
+                    }else if($_GET['key'] == 1){
+                        header('location: index.php');
+                    }else{
+                        header('location: index.php');
+                    }
+                }else{
+                    header('location: index.php');
+                }
             }
         }
     }else{

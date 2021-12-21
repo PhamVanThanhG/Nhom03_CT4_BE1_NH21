@@ -44,6 +44,12 @@ class Bill extends Db
         $sql->bind_param("iiss", $id, $id_user, $date_create, $state);
         return $sql->execute();
     }
+    //change state bill
+    public function deliverBill($id){
+        $sql = self::$connection->prepare("UPDATE `bill` SET `state`='Deliver successfully' WHERE `id`= ?");
+        $sql->bind_param("i", $id);
+        return $sql->execute();
+    }
     //Insert data to table cart in database
     public function removeItem($id_product)
     {

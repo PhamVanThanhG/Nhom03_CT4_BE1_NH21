@@ -43,6 +43,17 @@ class Cart extends Db
         $sql->bind_param("iiiii", $id_product,$id_size,$id_topping,$quantity, $id_user);
         return $sql->execute();
     }
+    public function getCartItem($id_product, $id_size, $id_topping)
+    {
+        //Quyery
+        $sql = self::$connection->prepare("SELECT *, `size`.`price` as 'sizePrice', `topping`.`price` as 'topppingPrice' FROM `cart`, `product`, `size`, `topping` WHERE `id_product` = `product`.`Id` and `size`.`id` = `cart`.`id_size` and `topping`.`id` = `cart`.`id_topping` AND `product`.`Id` = ? AND `size`.`id` = ? AND `topping`.`id` = ?");
+        $sql->bind_param("iii", $id_product, $id_size, $id_topping);
+        $sql->execute();
+        $items = array(); //Var array items
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC); //Get array Products
+        return $items;
+    }
+
     //Remove a product inside table cart in database
     public function removeProduct($id_product)
     {

@@ -25,11 +25,11 @@ class BillProduct extends Db
     }
 
     //Insert data to table cart in database
-    public function addItem($id_bill, $idproduct, $id_size, $id_topping, $quantity)
+    public function addItem($id_bill, $idproduct, $id_size, $id_topping, $quantity, $price)
     {
         //Quyery
-        $sql = self::$connection->prepare("INSERT INTO `bill_products` (`id_bill`, `id_product`, `id_size`, `id_topping`, `quantity`) VALUES (?,?,?,?,?)");
-        $sql->bind_param("iiiii", $id_bill, $idproduct, $id_size, $id_topping, $quantity);
+        $sql = self::$connection->prepare("INSERT INTO `bill_products` (`id_bill`, `id_product`, `id_size`, `id_topping`, `quantity`, `price`) VALUES (?,?,?,?,?,?)");
+        $sql->bind_param("iiiiii", $id_bill, $idproduct, $id_size, $id_topping, $quantity, $price);
         return $sql->execute();
     }
     //Remove a product inside table bill product in database
