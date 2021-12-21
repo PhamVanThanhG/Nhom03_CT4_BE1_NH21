@@ -58,6 +58,7 @@
     var topping = document.getElementById('Toppings');
     var bills = document.getElementById('Bills');
     var orders = document.getElementById('Successful orders');
+    var ratings = document.getElementById('Ratings');
     dss.classList.remove('active');
     products.classList.remove('active');
     type.classList.remove('active');
@@ -66,6 +67,7 @@
     topping.classList.remove('active');
     bills.classList.remove('active');
     orders.classList.remove('active');
+    ratings.classList.remove('active');
     var hientai = document.getElementById('<?php echo $title ?>');
     hientai.classList.toggle('active');
   </script>
@@ -91,8 +93,8 @@
               $tong = 0;
               foreach ($getAllBuyHistory as $value) {
                 $date = date_create_from_format("d-m-Y", $value['date_confirm']);
-                if ((int)date_format($date, "Y") == $year && (int)date_format($date, "m ") == $i) {
-                  $tong = $value['price'];
+                if ((int)date_format($date, "Y") == $year && (int)date_format($date, "m") == $i) {
+                  $tong += $value['price'];
                 }
               }
               echo $tong;
@@ -167,7 +169,7 @@
     }
     ?>
   </script>
-    <script>
+  <script>
     <?php
     if (isset($_SESSION['delete'])) {
       if ($_SESSION['delete'] == "wai") {
@@ -184,17 +186,17 @@
     ?>
   </script>
   <script>
-  $(function () {
-    // Summernote
-    $('#summernote').summernote()
+    $(function() {
+      // Summernote
+      $('#summernote').summernote()
 
-    // CodeMirror
-    CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-      mode: "htmlmixed",
-      theme: "monokai"
-    });
-  })
-</script>
+      // CodeMirror
+      CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+        mode: "htmlmixed",
+        theme: "monokai"
+      });
+    })
+  </script>
   </body>
 
   </html>

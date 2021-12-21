@@ -65,8 +65,12 @@ $getCustomerById = $cus->getCustomerById($_SESSION['cus_id']);
               <input type="text" id="inputName" class="form-control" name="addAd" value="<?php echo ($getCustomerById[0]['add_Address']) ?>" required>
             </div>
             <div class="form-group">
-              <label for="inputStatus" style="font-weight: bolder;">Rank:</label> <?php echo $getCustomerById[0]['rank'] ?> <br>
-              <label for="inputStatus" style="font-weight: bolder;">Day created:</label> <?php echo $getCustomerById[0]['DayCreate'] ?> <br>
+              <label for="inputStatus" style="font-weight: bolder;">Rank:</label> <?php echo $getCustomerById[0]['rank'] ?> <br><br>
+              <label for="inputStatus" style="font-weight: bolder;">Day created:</label> <?php echo $getCustomerById[0]['DayCreate'] ?> <br><br>
+              <label for="inputStatus" style="font-weight: bolder;">Total amount purchased:</label> <?php
+              $getMoney = $cus->getMoneyAmoutByCusID($_SESSION['cus_id']);
+              echo " ".number_format($getMoney[0]['Money'])." VND";
+              ?> <br>
             </div>
           </div>
         </div>

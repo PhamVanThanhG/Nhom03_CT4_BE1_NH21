@@ -77,4 +77,22 @@ class Customer extends Db
         $sql->bind_param("ssssssssssi", $username, $email, $cus_img, $birthday, $phone, $city, $district, $wards, $addAd, $rank, $id);
         return $sql->execute();
     }
+    //Get tong tien khach hang da mua
+    public function getMoneyAmoutByCusID($Cus_Id)
+    {
+        $sql = self::$connection->prepare("SELECT SUM(`buy_products_history`.`price`) as 'Money', `customer`.`rank` FROM `buy_products_history`, `buy_history`, `customer` WHERE `buy_products_history`.`id_bill` = `buy_history`.`id` and `buy_history`.`id_user` = `customer`.`Cus_Id` and `buy_history`.`id_user` = ?");
+        $sql->bind_param("i", $Cus_Id);
+        $sql->execute();
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items;
+    }
+
+    //Edit customer by ID
+    public function editRank($id, $rank)
+    {
+        $sql = self::$connection->prepare("UPDATE `customer` SET `rank`= ? WHERE `Cus_Id`= ?");
+        $sql->bind_param("si", $rank, $id);
+        return $sql->execute();
+    }
 }

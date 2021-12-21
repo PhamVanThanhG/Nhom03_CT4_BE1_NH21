@@ -1,9 +1,8 @@
 <?php
 session_start();
-/*
 if (!isset($_SESSION['admin'])) {
   header("Location: ../login.php");
-}*/
+}
 require("config.php");
 require("models/db.php");
 require("models/product.php");
@@ -14,6 +13,7 @@ require("models/sizes.php");
 require("models/toppings.php");
 require("models/bill.php");
 require("models/order.php");
+require("models/rating.php");
 $product_type = new ProductType();
 $product = new ProductFood();
 $customer = new Customer();
@@ -22,6 +22,7 @@ $size = new Sizes();
 $toppings = new Topping();
 $bills = new Bill();
 $od = new Order();
+$rating = new Rating();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -217,11 +218,12 @@ $od = new Order();
       <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <?php $getCus = $customer->getCustomerById($_SESSION['cus_id']) ?>
           <div class="image">
-            <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <img src="../images/<?php echo $getCus[0]['cus_img'] ?>" class="img-circle elevation-2" alt="User Image" style="object-fit: cover;width: 50px;height: 50px;">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Alexander Pierce</a>
+            <a href="#" class="d-block" style="font-size: large;"><?php echo $getCus[0]['Username'] ?></a>
           </div>
         </div>
 
@@ -285,6 +287,11 @@ $od = new Order();
                 <li class="nav-item">
                   <a href="successorders.php" class="nav-link" id="Successful orders">
                     <p style="padding-left: 35px;">Successful orders</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="ratings.php" class="nav-link" id="Ratings">
+                    <p style="padding-left: 35px;">Ratings</p>
                   </a>
                 </li>
               </ul>

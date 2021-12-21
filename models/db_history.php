@@ -5,7 +5,7 @@ class PurchaseHistory extends Db
     public function getByIDUser($id_user)
     {
         //Quyery
-        $sql = self::$connection->prepare("SELECT * FROM buy_history WHERE id_user = ?");
+        $sql = self::$connection->prepare("SELECT * FROM buy_history WHERE id_user = ? ORDER BY `buy_history`.`id` DESC");
         $sql->bind_param("i", $id_user);
         $sql->execute();
         $items = array(); //Var array items

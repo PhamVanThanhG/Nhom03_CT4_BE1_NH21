@@ -10,6 +10,7 @@ require "models/db_bill.php";
 require "models/db_bill_products.php";
 require "models/db_history.php";
 require "models/db_history_products.php";
+require("models/customer.php");
 session_start();
 if (isset($_GET['id_bill']) && isset($_SESSION['cus_id'])) {
     #add new Purchase history
@@ -47,10 +48,25 @@ if (isset($_GET['id_bill']) && isset($_SESSION['cus_id'])) {
     // $removeProduct = $BillProduct->removeItem($_GET['id_bill']);
     //change state bill
     $changeState = $Bill->deliverBill($_GET['id_bill']);
+    //Xep rank cho khach hang
+    //Xep rank cho khach hang
+$cus = new Customer();
+$rank = "bb";
+$getMoney = $cus->getMoneyAmoutByCusID($_SESSION['cus_id']);
+if (($getMoney[0]['Money'] > 500000 && $getMoney[0]['Money'] < 1000000) && $getMoney['0']['rank'] != "Silver") {
+    $rank = "Silver";
+    $cus->editRank($_SESSION['cus_id'], $rank);
+} else if (($getMoney[0]['Money'] > 1000000 && $getMoney[0]['Money'] < 2000000) && $getMoney['0']['rank'] != "Gold") {
+    $rank = "Gold";
+    $cus->editRank($_SESSION['cus_id'], $rank);
+} else if (($getMoney[0]['Money'] > 2000000 && $getMoney[0]['Money'] < 5000000) && $getMoney['0']['rank'] != "Plantium") {
+    $rank = "Plantium";
+    $cus->editRank($_SESSION['cus_id'], $rank);
+}else if ($getMoney[0]['Money'] > 5000000 && $getMoney['0']['rank'] != "Diamond") {
+    $rank = "Diamond";
+    $cus->editRank($_SESSION['cus_id'], $rank);
+}
     header('location: bill.php');
 } else {
     echo "nothing!";
 }
-?>
-
-
