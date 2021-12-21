@@ -118,6 +118,21 @@
     <?php endforeach; endif;?>
     <script src="js/jquery-1.11.1.min.js"></script>
 <script>
+    // function loadXMLDoc() {
+    //     var xhttp = new XMLHttpRequest();
+    //     xhttp.onreadystatechange = function() {
+    //         if (this.readyState == 4 && this.status == 200) {
+    //             document.getElementById("link-wrapper").innerHTML =
+    //             this.responseText;
+    //         }   
+    //     };
+    //     xhttp.open("GET", "bill_sever.php", true);
+    //     xhttp.send();
+    // }
+    // setInterval(function(){
+    //     loadXMLDoc();
+    // }, 1000)
+    // window.onload = loadXMLDoc;
     <?php foreach($getBillByIdUser as $bill):?>
     function notify<?php echo $bill['id']?>(){
         var a = document.getElementById('remove<?php echo $bill['id']?>');
