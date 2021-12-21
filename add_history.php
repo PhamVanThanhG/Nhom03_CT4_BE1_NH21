@@ -45,6 +45,7 @@ if (isset($_GET['id_bill']) && isset($_SESSION['cus_id'])) {
     #remove bill
     // $removeBill = $Bill->removeProduct($_GET['id_bill']);
     // $removeProduct = $BillProduct->removeItem($_GET['id_bill']);
+    
     header('location:http://localhost:89/Nhom03_CT4_BE1_NH21/index.php');
 } else {
     echo "nothing!";

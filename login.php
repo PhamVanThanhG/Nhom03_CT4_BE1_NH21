@@ -80,10 +80,10 @@ if (isset($_POST['sub'])) {
 			if($getAccount[0]['Permission'] == "Admin"){
 				$_SESSION['admin'] = true;
                 $_SESSION['xet'] = 1;
-                header("Location: Admin/index.php");
+                header("location: Admin/index.php");
 			}else{
                 $_SESSION['xet'] = 1;
-                header("Location: index.php");
+                header("location: index.php");
             }
 		} else {
 		?>

@@ -14,8 +14,10 @@ require "models/db_bill.php";
 require "models/db_bill_products.php";
 require "models/db_history.php";
 require "models/db_store.php";
+require "models/customer.php";
 $menu = new Menu();
 $store = new Store();
+$cus = new Customer();
 $getALLstore = $store->getALlStore();
 ?>
 <!DOCTYPE html>
@@ -50,6 +52,14 @@ $getALLstore = $store->getALlStore();
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
 
+  <style>
+    .form-input img {
+      width: 150px;
+      display: none;
+      margin-bottom: 30px;
+      height: 150px;
+    }
+  </style>
 </head>
 
 <body class="sub_page">
@@ -87,7 +97,7 @@ $getALLstore = $store->getALlStore();
                 <a class="nav-link" href="about.php">About</a>
               </li>
               <li class="nav-item <?php if(end($arrLink) == "book.php"){echo "active";}?>">
-                <a class="nav-link" href="book.php">Book Table</a>
+                <a class="nav-link" href="book.php">My personal</a>
               </li>
             </ul>
             <div class="user_option"><?php #Process seach product?>

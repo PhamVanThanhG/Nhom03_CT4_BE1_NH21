@@ -60,4 +60,21 @@ class Customer extends Db
         $sql->bind_param("ssss", $username, $gmail, $phone, $birthday);
         $sql->execute();
     }
+    //Get detail customer
+    public function getCustomerById($Cus_Id)
+    {
+        $sql = self::$connection->prepare("SELECT * FROM `customer` WHERE `Cus_Id` = ?");
+        $sql->bind_param("i", $Cus_Id);
+        $sql->execute();
+        $items = array();
+        $items = $sql->get_result()->fetch_all(MYSQLI_ASSOC);
+        return $items;
+    }
+    //Edit customer by ID
+    public function editCustomerById($id, $username, $email, $cus_img, $birthday, $phone, $city, $district, $wards, $addAd, $rank)
+    {
+        $sql = self::$connection->prepare("UPDATE `customer` SET `Username`=?,`Email`=?,`cus_img`=?,`Birthday`=?,`Phone`=?,`province/city`=?,`district`=?,`wards`=?,`add_Address`=?,`rank`=? WHERE `Cus_Id`=?");
+        $sql->bind_param("ssssssssssi", $username, $email, $cus_img, $birthday, $phone, $city, $district, $wards, $addAd, $rank, $id);
+        return $sql->execute();
+    }
 }
