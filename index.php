@@ -484,7 +484,7 @@ $getALLstore = $store->getALlStore();
                   </p>
                 </div>
                 <div class="img-box">
-                  <img src="images/<?php echo $comment['cus_img'] ?>" alt="" class="box-img">
+                  <img src="images/<?php echo $comment['cus_img'] ?>" alt="" class="box-img" style="width: 100px;height: 100px;object-fit: cover;">
                 </div>
               </div>
             </div>

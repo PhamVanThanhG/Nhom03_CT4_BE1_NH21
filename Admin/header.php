@@ -297,6 +297,7 @@ $rating = new Rating();
               </ul>
             </li>
           </ul>
+          <a href="logout.php">Logout</a>
         </nav>
         <!-- /.sidebar-menu -->
       </div>
